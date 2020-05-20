@@ -2,12 +2,13 @@
 // Copyright 2020 Mukunda Johnson <mukunda@mukunda.com>
 ///////////////////////////////////////////////////////////////////////////////
 
-import context from "./context.js"
-
-function Init( canvasId, options ) {
-   context.Init( canvasId, options );
-}
+import Context, {gl} from "./context.js";
+import Buffer from "./buffer.js";
+import Packer from "./packer.js";
+import Shader from "./shader.js";
 
 export default {
-   Init
+   Init : Context.Init,
+   Buffer, Packer, Shader, Context,
+   get gl() { return gl; }
 }

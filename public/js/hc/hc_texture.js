@@ -39,3 +39,6 @@ HC_Texture.prototype.OnImageLoaded = function( image ) {
 HC_Texture.prototype.Bind = function() {
 	hc_gl.bindTexture( hc_gl.TEXTURE_2D, this.texture );
 };
+
+///////////////////////////////////////////////////////////////////////////////
+export default Texture;

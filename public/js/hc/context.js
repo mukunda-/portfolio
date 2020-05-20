@@ -76,7 +76,7 @@ export {gl};
 
 //-----------------------------------------------------------------------------
 export default {
-   Init, Resize, EnableVertexAttribArray, DisableVertexAttribArray,
+   Init, Resize, EnableVertexAttribArrays, DisableVertexAttribArrays,
    GetCanvas     : () => mainCanvas,
    GetCanvasSize : () => canvas
 };
