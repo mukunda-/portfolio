@@ -1,5 +1,5 @@
 // HC
-// Copyright 2020 mukunda
+// Copyright 2020 Mukunda Johnson <mukunda@mukunda.com>
 ///////////////////////////////////////////////////////////////////////////////
 import gl from "./context.js"
 

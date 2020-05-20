@@ -1,9 +1,6 @@
-/*! [[HC]] 
- *
- * A WebGL utility library.
- *
- * Copyright 2014 mukunda
- */
+// HC
+// Copyright 2020 Mukunda Johnson <mukunda@mukunda.com>
+///////////////////////////////////////////////////////////////////////////////
 
 import context from "./context.js"
 

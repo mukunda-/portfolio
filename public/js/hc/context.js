@@ -1,9 +1,6 @@
-/*! [[HC]] 
- *
- * A WebGL utility library.
- *
- * Copyright 2020 mukunda
- */
+// HC, a WebGL utility library.
+// Copyright 2020 Mukunda Johnson <mukunda@mukunda.com>
+///////////////////////////////////////////////////////////////////////////////
  
 let gl = null; // WebGL context
 let mainCanvas = null; // Canvas object
