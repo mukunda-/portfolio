@@ -1,0 +1,39 @@
+1998-2004 the beginning
+  super mario clone (without knowing what super mario is)
+  jetpack 1, 3, 4
+  visual basic directx/directdraw
+2004 jetpack 2 for gba (which is really jetpack 4 ported)
+      maxplay classic games vol. 1
+2005 Adventurer
+2007 XMSNES
+2007 S3M2NSF
+2007 FastSand ( falling sand game, hand optimized assembly )
+2007 3D rendering engine for DOS
+2008 Maxmod
+2008 Super Wings
+2009 EXCITING WINTERY ADVENTURE 0.57
+2009 IT2NSF
+2009 Skipp and Friends
+2009 AsFlit
+2010 PCMNSF NES sound driver
+2010 SuperNSF NES Sound Driver
+2011 The Unbound Project - C++ Game Engine
+2012 Diablo III Inferno 100K
+2012 SourceMod Plugins & CS:GO Mapping
+2013 SourceMod Entertainment System
+2014 ServerTools
+
+2014 RXG Store
+2014 RXG Demos
+2014 WhatIsMySteamID
+2014 matbox
+2014 wordex
+2014 SteamIDParser
+
+2014 Minecraft Plugins
+ learned java in 3 days
+ cancelled server project due to Bukkit legal issues
+ 
+2018 Cross RP
+2020 My Career, Handled!
+2020 Registration Site
