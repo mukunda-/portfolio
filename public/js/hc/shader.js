@@ -1,7 +1,7 @@
 // HC
 // Copyright 2020 mukunda
 ///////////////////////////////////////////////////////////////////////////////
-import gl from "./context.js"
+import {gl} from "./context.js"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -11,6 +11,7 @@ import gl from "./context.js"
 //     type - "fragment" or "vertex"
 //     code - Shader source code.
 //
+/*
 function ShaderSource( source ) {
    if( typeof source === "string" ) {
       source = HC_ReadShaderScript( source );
@@ -33,6 +34,47 @@ function ShaderSource( source ) {
                      + gl.getShaderInfoLog( this.shader ));  
       throw new Error( "Shader compilation error" );
    }
+}*/
+
+class ShaderSource {
+   constructor( id, content, type ) {
+      this.id = id;
+
+      if( type == "fragment" ) {
+         type = gl.FRAGMENT_SHADER;
+      } else if( type == "vertex" ) {
+         type = gl.VERTEX_SHADER;
+      } else {
+         throw new Error( "Invalid shader type." );
+      }
+
+      this.shader = gl.createShader( type );
+      gl.shaderSource( this.shader, content );
+      gl.compileShader( this.shader );
+      
+      if( !gl.getShaderParameter( this.shader, gl.COMPILE_STATUS ) ) {
+         throw new Error( "Error compiling shader \"" + this.id + "\":\n" 
+                          + gl.getShaderInfoLog( this.shader ) );
+      }
+   }
+
+   static FromURL( url, type ) {
+      if( type === undefined ) {
+         // todo: urls with query strings
+         if( url.match( /\.v\.glsl$/ )) {
+            type = "vertex";
+         } else if( url.match( /\.f\.glsl$/ )) {
+            type = "fragment";
+         }
+      }
+      
+      return fetch( url ).then( response => {
+         if( !response.ok ) throw Error( "Couldn't fetch shader source. " + url );
+         return response.text();
+      }).then( text => {
+         return new ShaderSource( url, text, type );
+      });
+   }
 }
 
 //-----------------------------------------------------------------------------
@@ -44,15 +86,17 @@ class Shader {
    }
 
    //--------------------------------------------------------------------------
-   // Attach a shader source. `source` is a `ShaderSource` or a string. If it's
-   //  a string, a new `ShaderSource` is created with it.
+   // Attach a shader source. `source` is a `ShaderSource`.
    //
    Attach( source ) {
-      if( typeof source === "string" ) {
-         source = new ShaderSource( source );
-      }
       gl.attachShader( this.program, source.shader );
    };
+
+   AttachFromURL( url, type ) {
+      return ShaderSource.FromURL( url, type ).then( source => {
+         this.Attach( source );
+      });
+   }
 
    //--------------------------------------------------------------------------
    // Link the program.

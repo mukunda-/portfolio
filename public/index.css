@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Squada+One&display=swap');
+
 body {
    background-color: black;
    color: white;
@@ -11,4 +13,21 @@ body {
    left: 0px;
    top: 0px;
    z-index: -1;
+}
+
+#bottomleft {
+   position: fixed;
+   left: 4px;
+   bottom: 4px;
+   font-size: 12px;
+   font-family: Squada One;
+   color: #909090;
+   opacity: 1;
+   --showtime: 2.5s;
+   transition: opacity 1s var(--showtime), bottom 1s var(--showtime);
+}
+
+#bottomleft.hide {
+   opacity: 0;
+   bottom: 0px;
 }

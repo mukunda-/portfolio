@@ -5,10 +5,12 @@
 import Context, {gl} from "./context.js";
 import Buffer from "./buffer.js";
 import Packer from "./packer.js";
-import Shader from "./shader.js";
+import Shader, {ShaderSource} from "./shader.js";
 
-export default {
+const hc = {
    Init : Context.Init,
-   Buffer, Packer, Shader, Context,
+   Buffer, Packer, Shader, ShaderSource, Context,
    get gl() { return gl; }
-}
+};
+
+export default hc;
