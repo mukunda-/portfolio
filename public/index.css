@@ -4,6 +4,7 @@ body {
    background-color: black;
    color: white;
    font-family: sans-serif;
+   margin: 0;
 }
 
 #background {
@@ -30,4 +31,21 @@ body {
 #bottomleft.hide {
    opacity: 0;
    bottom: 0px;
+}
+
+.cubeclicker {
+   width: 20vh;
+   height: 20vh;
+   top: 40vh;
+   position: relative;
+   margin: auto;
+   cursor: pointer;
+   background-color: transparent;
+   border-radius: 10vh;
+}
+
+.panel {
+   width: 20vh;
+   height: 20vh;
+   font-family: Squada One;
 }

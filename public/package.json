@@ -1,0 +1,14 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "my portfolio",
+  "main": "js/index.js",
+  "scripts": {
+    "test": "js/test.js"
+  },
+  "author": "Mukunda Johnson",
+  "license": "MIT",
+  "dependencies": {
+    "gl-matrix": "^3.3.0"
+  }
+}

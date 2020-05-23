@@ -1,21 +1,67 @@
 import hc from "./hc/hc.js";
+import Smath from "./smath.js";
+import Camera from "./camera.js";
+import Cube from "./cube.js";
+import App from "./app.js";
+import Animate from "./animate.js";
 ///////////////////////////////////////////////////////////////////////////////
 
 let currentScreenSize = [0, 0];
 
+let appState = "startup";
+
+const renderState = {
+   cubeBuffer : null,
+   cubeShader : null,
+};
+
 console.log( "%cwondering how this puppy works? 😏", 
    "background-color:#222; color:white; font-size: 1.4em" );
 
+   ///////////////////////////////////////////////////////////////////
+   /*
+const testp = mat4.create();
+mat4.perspective( testp, 45 * Math.PI / 180, 1, 1, 100 );
+
+const test2 = getProjection( 45, 1, 1, 100 );
+
+let point = [5, 5, 0, 1];
+let point2 = [];
+
+console.log(testp);
+console.log(test2);
+
+console.log( "MINE",  multiplyMatrixAndPoint( test2, point ));
+vec4.transformMat4( point2, point, testp );
+console.log( "YOURS", point2 );
+
+const ctest1 = mat4.create();
+mat4.lookAt( ctest1, [35,22,1], [33,22,11], [0,1,0] );
+const ctest2 = lookAt( [35,22,1], [33, 22, 11], [0,1,0] );
+console.log( "MINE", ctest2 );
+console.log( "YOURS", ctest1 );
+
+const result1 = mat4.create();
+const result2 = multiplyMatrices( test2, ctest2 );
+mat4.multiply( result1, testp, ctest1 );
+
+console.log( "YOURS", result1 );
+console.log("MINE", result2);
+
+
+//debugger;*/
+///////////////////////////////////////////////////////////////////
+
 //-----------------------------------------------------------------------------
 // Returns the pixel dimensions of the user's client area.
-function getDeviceDimensions() {
+function GetDeviceDimensions() {
    return [Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
            Math.max( document.documentElement.clientHeight, window.innerHeight || 0 )];
 }
 
 function ResizeViewport() {
    // The device/client viewport rectangle.
-   const [vw, vh] = getDeviceDimensions();
+   const [vw, vh] = GetDeviceDimensions();
    
    if( vw !== currentScreenSize[0] || vh !== currentScreenSize[1] ) {
       currentScreenSize = [vw, vh];
@@ -29,51 +75,64 @@ function OnResize() {
    ResizeViewport();
 }
 
+let cameraAngle = 0.0;
+
+function Render() {
+
+   let projMatrix  = Smath.MakeProjectionMatrix(
+            45.0, currentScreenSize[0] / currentScreenSize[1], 0.1, 1000.0 );
+   let modelMatrix = Smath.IdentityMatrix();
+   
+   let viewMatrix = Camera.GetViewMatrix();
+   
+   let projview = Smath.MultiplyMatrices( projMatrix, viewMatrix );
+   
+   hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
+   Cube.Render( projview, currentScreenSize );
+
+}
+
+function Update() {
+   requestAnimationFrame( Update );
+
+   App.Update();
+   Animate.Update();
+   Render();
+}
+
+//-----------------------------------------------------------------------------
 async function Setup() {
    hc.Init( "background", {
       premultipliedAlpha : false,
-   
       alpha   : false,
       depth   : false,
       stencil : false
    });
 
-   document.getElementsByTagName("body")[0].addEventListener( "onresize", e => {
+   window.addEventListener( "resize", e => {
       OnResize();
    });
+
+   window.addEventListener( "click", e => {
+      console.log( "CLICKED" );
+   });
+
    ResizeViewport();
    
    hc.gl.clearColor( 0.01, 0.01, 0.05, 1.0 );
    hc.gl.disable( hc.gl.DEPTH_TEST );
    hc.gl.enable( hc.gl.BLEND );
+   hc.gl.blendFunc( hc.gl.ONE, hc.gl.ONE );
    hc.gl.disable( hc.gl.CULL_FACE );
-   
-   let packer = new hc.Packer( "ff bbbb" );
-   packer.Push( [0.0, 0.0, 255, 0, 0, 255] );
-   packer.Push( [0.0, 1.0, 0, 255, 0, 255] );
-   packer.Push( [1.0, -1.0, 0, 0, 255, 255] );
-   
-   let buffer = new hc.Buffer();
-   buffer.Load( packer.Buffer(), hc.gl.STATIC_DRAW );
-   
-   let shader = new hc.Shader();
-   await Promise.all( [
-      shader.AttachFromURL( "shaders/vertex.glsl", "vertex" ),
-      shader.AttachFromURL( "shaders/fragment.glsl", "fragment" ),
-   ]);
-   shader.Link();
-   shader.Use();
 
-   hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
-
-   const a_position = shader.GetAttribute( "a_position" );
-   const a_color    = shader.GetAttribute( "a_color" );
-   hc.Context.EnableVertexAttribArrays( [ a_position, a_color ] );
-   buffer.Bind();
-   hc.gl.vertexAttribPointer( a_position, 2, hc.gl.FLOAT, false, 12, 0 );
-   hc.gl.vertexAttribPointer( a_color, 4, hc.gl.UNSIGNED_BYTE, true, 12, 8 );
-   hc.gl.drawArrays( hc.gl.TRIANGLES, 0, 3 );
-   hc.Context.DisableVertexAttribArrays( [ a_position, a_color ] );
+   await Cube.Setup();
+   Cube.color[0] = 1.0;
+   Cube.color[1] = 0.7;
+   Cube.color[2] = 1.0;
+   Cube.intensity = 0.2;
+   App.Setup();
+   
+   requestAnimationFrame( Update );
 }
 
 Setup();
