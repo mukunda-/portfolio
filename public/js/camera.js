@@ -2,19 +2,22 @@ import Smath from "./smath.js";
 
 let cameraEye    = [];
 let cameraTarget = [];
+let cameraUp     = [0, 1, 0];
 
 function GetViewMatrix() {
-   return Smath.LookAt( cameraEye, cameraTarget );
+   return Smath.LookAt( cameraEye, cameraTarget, cameraUp );
 }
 
 function Get() {
-   return [cameraEye.slice(), cameraTarget.slice()];
+   return [cameraEye.slice(), cameraTarget.slice(), cameraUp.slice()];
 }
 
-function Set( position, target ) {
+function Set( position, target, up ) {
+   up = up || [0,1,0];
    for( let i = 0; i < 3; i++ ) {
       cameraEye[i]    = position[i];
       cameraTarget[i] = target[i];
+      cameraUp[i]     = up[i];
    }
 }
 

@@ -1,6 +1,8 @@
 import Camera from "./camera.js";
 import Cube from "./cube.js";
 import Animate from "./animate.js";
+import Smath from "./smath.js";
+import Roller from "./roller.js";
 
 let m_state = {
    name : "",
@@ -39,12 +41,12 @@ let m_state_handlers = {
                [0, 0, 0] );
          });
 
-         let panel = document.createElement("div");
-         panel.className = "panel";
-         panel.style.width = "20vh";
-         panel.style.height = "20vh";
+   //      let panel = document.createElement("div");
+   //      panel.className = "panel";
+   //      panel.style.width = "20vh";
+   //      panel.style.height = "20vh";
 
-         document.body.appendChild( panel );
+   //      document.body.appendChild( panel );
 
       },
 
@@ -60,15 +62,29 @@ let m_state_handlers = {
    zoom: {
       Start() {
          let [oldEye, oldTarget] = Camera.Get();
-         const newEye = [0, 0, -4];
+         // distance to one of the points, 0,0,4 -> 1,1,1
          const originalDistance = m_state.cameraDistance;
          const originalAngle = m_state.cameraAngle % (Math.PI * 2);
          let desiredAngle = 0;
          if( desiredAngle < originalAngle ) {
             desiredAngle += Math.PI * 2;
          }
+         
+         // Slide the cube ZScale parameters to make the back of the cube
+         //  fade into the background.
+         Cube.SetZScale( 0, 10, 1.0, 1.0 );
+         let originalCubeZscale = Cube.GetZScale();
+         let newCubeZscale = [
+            Smath.Distance( [0,0,4], [1,1,1] ), 
+            Smath.Distance( [0,0,4], [1,1,0] ),
+            1.0, 0.05 ];
+            
          Animate.Start( "cube_zoom", ( time, elapsed ) => {
             //m_state.cameraAngle += elapsed * 0.0006;
+
+            const cubeZscale = Animate.Slide( originalCubeZscale, newCubeZscale, "ease", time, 1000, 1500 );
+            Cube.SetZScale( cubeZscale[0], cubeZscale[1], cubeZscale[2], cubeZscale[3] );
+
             m_state.cameraAngle = Animate.Slide( originalAngle, desiredAngle, "ease", time, 0, 1500 );
             let distanceH = Animate.Slide( originalDistance, 4, "fall", time, 0, 1500 );
             let distanceV = Animate.Slide( originalDistance, 0, "fall", time, 0, 1500 );
@@ -80,6 +96,21 @@ let m_state_handlers = {
                   Math.sin(m_state.cameraAngle) * distanceH
                ],
                [0, 0, 0] );
+
+            if( time >= 1600 ) {
+               SetState( "ready" );
+               return true;
+            }
+            //Cube.SetColor( [1, Math.sin(m_state.cameraAngle), 1] );
+         });
+      }
+   },
+
+   ready: {
+      Start() {
+         Roller.Start();
+         Animate.Start( "ttest1", ( time ) => {
+            //Roller.SetScroll( time * 0.01 * 8 - 50 );//Math.sin(time *0.01) * 50 );
          });
       }
    }

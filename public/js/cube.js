@@ -1,15 +1,24 @@
 import hc from "./hc/hc.js";
 import Smath from "./smath.js";
 import Camera from "./camera.js";
+///////////////////////////////////////////////////////////////////////////////
 
 let m_packer, m_buffer, m_shader;
 
 let m_intensity = 0;
 let m_color = [0, 0, 0];
 
+let m_zNear          = 0.0;
+let m_zFar           = 1000.0;
+let m_zNearIntensity = 1.0;
+let m_zFarIntensity  = 1.0;
+
+
+//-----------------------------------------------------------------------------
 async function Setup() {
    m_packer = new hc.Packer( "ff" );
 
+   // Full screen geometry.
    const vertexes = [
       [-1.0,  1.0],
       [-1.0, -1.0],
@@ -33,10 +42,12 @@ async function Setup() {
    m_shader.Link();
 }
 
+//-----------------------------------------------------------------------------
 function SetColor( color ) {
    Smath.Copy( m_color, color );
 }
 
+//-----------------------------------------------------------------------------
 function Render( matProjView, screenSize ) {
    m_shader.Use();
 
@@ -61,15 +72,24 @@ function Render( matProjView, screenSize ) {
       [ 1,  1, -1]
    ];
 
+   const [cameraEye] = Camera.Get();
+
    let geometryT = [];
    for( const g of geometry ) {
       const [x, y, z, w] = Smath.MultiplyMatrixAndPoint( matProjView, g );
-      geometryT.push( x / w, y / w );
+      let d = Smath.Distance( g, cameraEye );
+      d -= m_zNear;
+      d /= (m_zFar - m_zNear);
+      d = d < 0 ? 0 : d;
+      d = d > 1 ? 1 : d;
+      d = m_zNearIntensity + (m_zFarIntensity - m_zNearIntensity) * d;
+      
+      geometryT.push( x / w, y / w, d );
    }
 
    {
       const points = m_shader.GetUniform( "points" );
-      hc.gl.uniform2fv( points, geometryT, 0, 8 );
+      hc.gl.uniform3fv( points, geometryT, 0, 8 );
       const u_aspect = m_shader.GetUniform( "aspect" );
       hc.gl.uniform1f( u_aspect, screenSize[0] / screenSize[1] );
 
@@ -101,6 +121,22 @@ export default {
    },
    set intensity( i ) {
       m_intensity = i;
-   }
+   },
+   SetZScale( near, far, near_i, far_i ) {
+      m_zNear          = near;
+      m_zFar           = far;
+      m_zNearIntensity = near_i;
+      m_zFarIntensity  = far_i;
+   },
+   GetZScale() {
+      return [
+         m_zNear,
+         m_zFar,
+         m_zNearIntensity,
+         m_zFarIntensity
+      ];
+   },
+   SetColor
+
 };
 

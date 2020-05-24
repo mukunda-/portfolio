@@ -1,4 +1,25 @@
 // shitmath
+function RotateAroundAxis( axis, angle ) {
+   //http://ksuweb.kennesaw.edu/~plaval//math4490/rotgen.pdf
+   let C = Math.cos( angle );
+   let S = Math.sin( angle );
+   let t = 1 - C;
+   let [ux, uy, uz] = axis;
+   
+   return [
+      t * ux**2 + C, t*ux*uy - S*uz, t*ux*uz + S*uy,
+      t*ux*uy+S*uz, t*uy**2+C, t*uy*uz - S*ux,
+      t*ux*uz - S*uy, t*uy*uz + S*ux, t*uz**2 + C
+   ];
+}
+
+function MultiplyVec3ByMatrix3( vec, matrix ) {
+   return [
+      matrix[0] * vec[0] + matrix[1] * vec[1] + matrix[2] * vec[2],
+      matrix[3] * vec[0] + matrix[4] * vec[1] + matrix[5] * vec[2],
+      matrix[6] * vec[0] + matrix[7] * vec[1] + matrix[8] * vec[2]
+   ];
+}
 
 function MultiplyMatrixAndPoint(matrix, point) {
    // Give a simple variable name to each part of the matrix, a column and row number
@@ -121,8 +142,50 @@ function Copy( vectorDest, vectorSource ) {
    }
 }
 
+function Distance( vec1, vec2, vectorSize ) {
+   vectorSize = vectorSize || vec1.length;
+   let d = 0;
+   for( let i = 0; i < vectorSize; i++ ) {
+      let a = vec1[i] - vec2[i];
+
+      d += a*a;
+   }
+   return Math.sqrt( d );
+}
+
+//-----------------------------------------------------------------------------
+// Snaps a vector to a single axis. `magnitude` is how long it should be
+//  after the snap.
+function Snap( vector, magnitude ) {
+   let max = Number.MIN_VALUE;
+   let bestMax;
+   for( let i = 0; i < vector.length; i++ ) {
+      if( Math.abs(vector[i]) > max ) {
+         max = Math.abs(vector[i]);
+         bestMax = i;
+      }
+   }
+
+   for( const i in vector ) {
+      vector[i] = 0;
+   }
+
+   if( max < 0 ) {
+      vector[bestMax] = -magnitude;
+   } else {
+      vector[bestMax] = magnitude;
+   }
+}
+
+function Clamp( a, min, max ) {
+   if( a < min ) return min;
+   if( a > max ) return max;
+   return a;
+}
+
 export default {
    LookAt, SubtractVectors, IdentityMatrix, Cross, Normalize,
    MultiplyMatrixAndPoint, MultiplyMatrices, MakeProjectionMatrix,
-   Copy
+   Copy, Distance, Snap, RotateAroundAxis, MultiplyVec3ByMatrix3,
+   Clamp
 }
