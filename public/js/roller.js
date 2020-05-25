@@ -21,6 +21,16 @@ let m_keyNav = 0;
 const KEYNAV_UP = 1;
 const KEYNAV_DOWN = 2;
 
+let m_panelMode = false;
+let m_panel = 0;
+let m_panelFraction = 0; // this is 0 when scrolling is activated
+
+let m_panelTurn       = 0;
+let m_panelTurnOrigin = 0; // Which panel we started on, where angle 0 is that.
+let m_panelRotateStart      = 0;
+let m_panelRotateUp         = [0, 1, 0];
+let m_panelRotateStartPanel = 0;
+
 function Start() {
     let [eye] = Camera.Get();
     m_cam = eye;
@@ -36,10 +46,12 @@ function Start() {
     content.style.display = "block";
 
     LoadContent( "panel1" );
-    Animate.Start( "roller", OnAnimate );
 
     StartFlicker();
 
+    //StartPanelRotate();
+
+    Animate.Start( "roller", OnAnimate );
     document.addEventListener( "wheel", ( e ) => {
         if( e.deltaY > 0 ) {
             Scroll( 5 );
@@ -72,6 +84,28 @@ function Start() {
             m_keyNav &= ~KEYNAV_UP;
         }
     });
+
+    UpdateLeftRightArrows( m_panel );
+}
+
+function UpdateLeftRightArrows( currentPanel ) {
+    const numPanels = GetNumPanels();
+    if( currentPanel > 0 ) {
+        Arrows.SetAction( "left", () => {
+            PanelLeft();
+        });
+    } else {
+        Arrows.SetAction( "left", null );
+    }
+
+    if( currentPanel < numPanels - 1 && numPanels != 0 ) {
+        
+        Arrows.SetAction( "right", () => {
+            PanelRight();
+        });
+    } else {
+        Arrows.SetAction( "right", null );
+    }
 }
 
 function StartFlicker() {
@@ -88,9 +122,7 @@ function StartFlicker() {
     });
 }
 
-function OnAnimate( time, elapsed ) {
-    // Rotate camera "down" by desired angle.
-    
+function GetRotatedCam() {
     let angle = m_scrollAngle * Math.PI / 180;
     //let angle = (Math.sin( time*0.001 )) * 1.9;
     let camdir = Smath.Normalize( m_cam );
@@ -101,7 +133,19 @@ function OnAnimate( time, elapsed ) {
     tcam[0] = tcam[0] * 4;
     tcam[1] = tcam[1] * 4;
     tcam[2] = tcam[2] * 4;
-    Camera.Set( tcam, [0, 0, 0], tup );
+
+    return {
+        eye: tcam,
+        right: axis,
+        up: tup
+    };
+}
+
+function OnAnimate( time, elapsed ) {
+    // Rotate camera "down" by desired angle.
+    let cam = GetRotatedCam();
+    
+    Camera.Set( cam.eye, [0, 0, 0], cam.up );
 
     if( m_keyNav & KEYNAV_UP ) {
         Scroll( -2 * 16 / elapsed );
@@ -330,6 +374,72 @@ function SetScroll( vh ) {
     
     divider = 1 - divider;
     m_scrollAngle = (pi.index + divider) * 90;
+}
+
+function GetNumPanels() {
+    return document.getElementsByClassName( "panel" ).length;
+}
+
+function StartPanelRotate() {
+    if( m_panelMode ) return;
+
+    let startingAngle = m_scrollAngle;
+    let snapAngle = Math.round(m_scrollAngle / 90) * 90;
+
+    let startingCam = GetRotatedCam();
+    m_scrollAngle = snapAngle;
+    let normalCam = GetRotatedCam();
+
+    //Smath.Copy( m_panelRotateStart, cam.eye );
+    //Smath.Snap( m_panelRotateStart, 1.0 );
+    Smath.Copy( m_panelRotateUp, normalCam.up );
+    Smath.Snap( m_panelRotateUp );
+    //m_panelRotateUp = Smath.Normalize( Smath.Cross( m_panelRotateStart, cam.right) );
+
+    m_panelMode = true;
+    m_panelTurnOrigin = m_panel;
+    m_panelTurn = 0;
+    //m_cam.
+
+    Animate.Start( "roller", ( time, elapsed ) => {
+        // When the animations start, the camera tilts down (relative down) until perpendicular
+        //  with the up axis. Meanwhile it rotates around that axis when panels are changed.
+        // 8 panels to the right is not cancelled out to zero, it's two full circle turns.
+
+        let newCam;
+        if( time < 500 ) {
+            // 500
+            m_scrollAngle = Animate.Slide( startingAngle, snapAngle, "ease", time, 0, 500 );
+            newCam = GetRotatedCam();
+        } else {
+            newCam = normalCam;
+        }
+
+        let desiredTurn = (m_panel - m_panelTurnOrigin) * 90;
+        
+        let d = 0.4 ** (elapsed / 250);
+        m_panelTurn = m_panelTurn * d + desiredTurn * (1-d);
+        let rotation = Smath.RotateAroundAxis( m_panelRotateUp, m_panelTurn * Math.PI / 180 );
+        let tcam = Smath.MultiplyVec3ByMatrix3( newCam.eye, rotation );
+
+        Camera.Set( tcam, [0, 0, 0], newCam.up );
+        
+    });
+}
+
+function PanelRight() {
+    StartPanelRotate();
+    if( m_panel < GetNumPanels() ) {
+        m_panel++;
+    }
+
+}
+
+function PanelLeft() {
+    StartPanelRotate();
+    if( m_panel > 0 ) {
+        m_panel--;
+    }
 }
 
 

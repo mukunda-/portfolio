@@ -157,11 +157,13 @@ function Distance( vec1, vec2, vectorSize ) {
 // Snaps a vector to a single axis. `magnitude` is how long it should be
 //  after the snap.
 function Snap( vector, magnitude ) {
-   let max = Number.MIN_VALUE;
+   if( magnitude === undefined ) magnitude = 1;
+
+   let max = 0;//Number.MIN_VALUE;
    let bestMax;
    for( let i = 0; i < vector.length; i++ ) {
-      if( Math.abs(vector[i]) > max ) {
-         max = Math.abs(vector[i]);
+      if( Math.abs(vector[i]) > Math.abs(max) ) {
+         max = vector[i];
          bestMax = i;
       }
    }
