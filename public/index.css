@@ -145,3 +145,55 @@ body {
 #content .page p:last-child {
    margin-bottom: 0;
 }
+
+.arrow {
+   position: fixed;
+   width:    10vh;
+   height:   10vh;
+   opacity:  0;
+   pointer-events: none;
+   transition: opacity 0.5s;
+}
+
+
+.arrow.enabled {
+   pointer-events: auto;
+   opacity: 1.0;
+   cursor: pointer;
+}
+.arrow:active {
+   opacity: 0.25;
+   transition: none;
+}
+
+#leftArrow, #rightArrow {
+   bottom: calc( 50% - 5vh );
+   transition: bottom 1.0s;
+}
+
+#upArrow, #downArrow {
+   left: calc( 50% - 5vh );
+}
+
+
+#leftArrow {
+   left: 0vh;
+}
+
+#rightArrow {
+   right: 0vh;
+}
+
+#upArrow {
+   top: 0vh;
+}
+
+#downArrow {
+   bottom: 0vh;
+}
+
+@media screen and (max-width: 76vh) {
+   #leftArrow, #rightArrow {
+      bottom: 0vh;
+   }
+}

@@ -5,6 +5,7 @@ import Cube from "./cube.js";
 import App from "./app.js";
 import Animate from "./animate.js";
 import Roller from "./roller.js";
+import Arrows from "./arrows.js";
 ///////////////////////////////////////////////////////////////////////////////
 
 let currentScreenSize = [0, 0];
@@ -133,7 +134,7 @@ async function Setup() {
    Cube.color[2] = 1.0;
    Cube.intensity = 0.2;
    App.Setup();
-
+   Arrows.Setup();
    
    let content = document.getElementById( "content" )
    content.style.display = "none";

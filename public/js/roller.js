@@ -1,6 +1,7 @@
 import Camera from "./camera.js";
 import Smath from "./smath.js";
 import Animate from "./animate.js";
+import Arrows from "./arrows.js";
 
 // Camera angle (vector pointing outward from center).
 let m_cam;
@@ -13,6 +14,8 @@ let m_scrollAngle = 0;
 
 let m_currentScroll = 0;
 let m_desiredScroll = 0;
+let m_pageScroll    = 0; // TODO, different scrolling for the page
+let m_maxVSpeed     = 0;
 
 let m_keyNav = 0;
 const KEYNAV_UP = 1;
@@ -43,7 +46,6 @@ function Start() {
         } else {
             Scroll( -5 );
         }
-        
     });
 
     document.addEventListener( "keydown", ( e ) => {
@@ -102,13 +104,20 @@ function OnAnimate( time, elapsed ) {
     Camera.Set( tcam, [0, 0, 0], tup );
 
     if( m_keyNav & KEYNAV_UP ) {
-        Scroll( -2 );
+        Scroll( -2 * 16 / elapsed );
     } else if( m_keyNav & KEYNAV_DOWN ) {
-        Scroll( 2 );
+        Scroll( 2 * 16 / elapsed );
     }
 
     if( m_currentScroll != m_desiredScroll ) {
-        let d = 0.1 ** (elapsed / 250);
+        let d = 0.4 ** (elapsed / 250);
+        //let d2 = 0.9 ** (elapsed / 250);
+        //let scrolld = (m_currentScroll * d + m_desiredScroll * (1-d)) - m_currentScroll;
+        //if( scrolld < 0 && m_maxVSpeed > 0 || scrolld > 0 && m_maxVSpeed < 0 )
+        //    m_maxVSpeed = 0;
+        //m_maxVSpeed = m_maxVSpeed * d2 + scrolld * (1-d2);
+        //if( scrolld < 0 ) scrolld = Math.max( scrolld, m_maxVSpeed );
+        //if( scrolld > 0 ) scrolld = Math.min( scrolld, m_maxVSpeed );
         m_currentScroll = m_currentScroll * d + m_desiredScroll * (1-d);
         SetScroll( m_currentScroll );
     }
@@ -147,7 +156,7 @@ function SetupContentPadding() {
         page.style.paddingBottom = `${padding}vh`;
     }
     content.scrollTop = st;
-    m_desiredScroll = content.scrollTop / GetDeviceHeight() * 100;
+    //m_desiredScroll = content.scrollTop / GetDeviceHeight() * 100;
     SetScroll( m_desiredScroll );
 }
 
@@ -157,18 +166,102 @@ function GetDeviceHeight() {
     return Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
 }
 
+function VHToPixels( vh ) {
+    return vh * GetDeviceHeight() / 100;
+}
+
+function PixelsToVH( pixels ) {
+    return pixels / GetDeviceHeight() * 100;
+}
+
 // Returns max scroll value in vh units.
 function MaxScroll() {
     const content = document.getElementById( "content" );
     return (content.scrollHeight - content.offsetHeight) / GetDeviceHeight() * 100;
 }
 
-function ScrollDownPage() {
+//-----------------------------------------------------------------------------
+// Get the page dimension info for the given scroll position. `scroll` is in
+//  vh units, but can be left undefined to default to the content window's
+//  scroll position.
+//
+// Output units are in pixels, not vh.
+function GetPagingInfo( scroll ) {
+    if( scroll === undefined ) {
+        scroll = content.scrollTop;
+    } else {
+        scroll = VHToPixels( scroll );
+    }
+    const pages = content.getElementsByClassName("page");
 
+    let i = 0;
+    for( i = 0; i < pages.length; i++ ) {
+        let page = pages[i];
+        let bottom = page.offsetTop + page.offsetHeight - scroll;
+        if( bottom > 0.001 ) break;
+    }
+    if( i == pages.length ) i--;
+    let pageIndex  = i;
+    let pageTop    = pages[i].offsetTop - scroll;
+    let pageBottom = pages[i].offsetTop + pages[i].offsetHeight - scroll;
+
+    return {
+        count: pages.length,
+        index: pageIndex,
+        top: pageTop,
+        bottom: pageBottom,
+        displayHeight: content.offsetHeight
+    }
+}
+
+function ScrollDownPage() {
+    // ALL VERY DELICATE STUFF
+    const pi = GetPagingInfo( m_desiredScroll );
+    
+   // let scrollPixels = VHToPixels( m_desiredScroll );
+
+    if( (pi.bottom / pi.displayHeight) >= 1.05 ) {
+        // Too far to reach next page.
+        let scrollAmount = pi.displayHeight * 0.6;
+        if( scrollAmount > pi.bottom - pi.displayHeight )
+            scrollAmount = pi.bottom - pi.displayHeight;
+        //if( toBottom > pi.displayHeight * 0.9 ) toBottom = pi.displayHeight * 0.9
+        m_desiredScroll += PixelsToVH( scrollAmount );//toBottom );
+        if( scrollAmount / pi.displayHeight < 0.1 && pi.index > 0 )
+            return ScrollDownPage();
+    } else {
+        m_desiredScroll += PixelsToVH( pi.bottom );
+        if( pi.bottom / pi.displayHeight < 0.1 && pi.index < pi.count - 1 )
+            ScrollDownPage();
+    }
+
+    m_desiredScroll = Smath.Clamp( m_desiredScroll, 0, MaxScroll() );
 }
 
 function ScrollUpPage() {
 
+    const pi = GetPagingInfo( m_desiredScroll );
+    
+   // let scrollPixels = VHToPixels( m_desiredScroll );
+
+    if( (pi.top / pi.displayHeight) <= -0.05 ) {
+        // Too far to reach next page.
+        let scrollAmount = pi.displayHeight * 0.6;
+        if( scrollAmount > -pi.top )
+            scrollAmount = -pi.top;
+        //if( toBottom > pi.displayHeight * 0.9 ) toBottom = pi.displayHeight * 0.9
+        m_desiredScroll -= PixelsToVH( scrollAmount );//toBottom );
+        if( scrollAmount / pi.displayHeight < 0.1 && pi.index > 0 )
+            return ScrollUpPage();
+    } else {
+        let amount = -pi.top + pi.displayHeight;
+        m_desiredScroll -= PixelsToVH( amount );
+        
+        if( amount / pi.displayHeight < 0.1 && pi.index > 0 )
+            return ScrollUpPage();
+    }
+
+    m_desiredScroll = Smath.Clamp( m_desiredScroll, 0, MaxScroll() );
 }
 
 function Scroll( amount ) {
@@ -189,11 +282,23 @@ function SetScroll( vh ) {
     vh = Smath.Clamp( vh, 0, MaxScroll() );
     m_currentScroll = vh;
     let content = document.getElementById( "content" );
-    let pixels = vh * GetDeviceHeight() / 100;
+    let pixels = Math.round(vh * GetDeviceHeight() / 100);
     
 
     // The input will be clamped to the content height.
     content.scrollTop = pixels;
+    
+    if( m_desiredScroll > 1 ) {
+        Arrows.SetAction( "up", ScrollUpPage );
+    } else {
+        Arrows.SetAction( "up", null );
+    }
+    
+    if( m_desiredScroll < MaxScroll() - 1 ) {
+        Arrows.SetAction( "down", ScrollDownPage );
+    } else {
+        Arrows.SetAction( "down", null );
+    }
 
     // go through page bottoms and find out which one is on the screen.
     // lock the horizontal bar of the cube on that.
@@ -202,6 +307,8 @@ function SetScroll( vh ) {
 
     const pages = content.getElementsByClassName("page");
 
+    const pi = GetPagingInfo();
+    /*
     let currentPage = 0;
     let dividerPoint = 1;
     for( let i = 0; i < pages.length - 1; i++ ) {
@@ -216,8 +323,13 @@ function SetScroll( vh ) {
         dividerPoint = point;
     }
     if( dividerPoint < 0 ) dividerPoint = 0;
-    dividerPoint = 1 - dividerPoint;
-    m_scrollAngle = (currentPage + dividerPoint) * 90;
+    dividerPoint = 1 - dividerPoint;*/
+    let divider = pi.bottom / pi.displayHeight;
+    if( divider < 0 ) divider = 0;
+    if( divider > 1 ) divider = 1;
+    
+    divider = 1 - divider;
+    m_scrollAngle = (pi.index + divider) * 90;
 }
 
 
