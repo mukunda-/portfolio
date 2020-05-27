@@ -90,7 +90,7 @@ function Render() {
    
    let projview = Smath.MultiplyMatrices( projMatrix, viewMatrix );
    
-   //hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
+   hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
    Cube.Render( projview, currentScreenSize );
 
 }

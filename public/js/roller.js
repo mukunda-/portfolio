@@ -30,6 +30,8 @@ let m_panelTurnOrigin = 0; // Which panel we started on, where angle 0 is that.
 let m_panelRotateStart      = 0;
 let m_panelRotateUp         = [0, 1, 0];
 let m_panelRotateStartPanel = 0;
+let m_panelAnimateTime      = 0;
+let m_panelTouchTime        = 0;
 
 function Start() {
     let [eye] = Camera.Get();
@@ -45,13 +47,11 @@ function Start() {
     content.style.bottom = (vrange - cubesize/2) * 50 / vrange + "vh";
     content.style.display = "block";
 
-    LoadContent( "panel1" );
-
     StartFlicker();
+    //LoadContent( "panel1" );
 
-    //StartPanelRotate();
 
-    Animate.Start( "roller", OnAnimate );
+    // Replace this with native scrolling of element.
     document.addEventListener( "wheel", ( e ) => {
         if( e.deltaY > 0 ) {
             Scroll( 5 );
@@ -60,8 +60,8 @@ function Start() {
         }
     });
 
+    // Replace this with native scrolling of element.
     document.addEventListener( "keydown", ( e ) => {
-        console.log(e);
         if( !e.repeat ) {
             if( e.key == "ArrowDown" ) {
                 // down
@@ -76,7 +76,6 @@ function Start() {
             }
         }
     });
-
     document.addEventListener( "keyup", ( e ) => {
         if( e.key == "ArrowDown" ) {
             m_keyNav &= ~KEYNAV_DOWN;
@@ -86,6 +85,49 @@ function Start() {
     });
 
     UpdateLeftRightArrows( m_panel );
+    StartPanelRotate();
+
+    //Animate.Start( "roller", OnAnimate );
+    
+
+}
+
+function StartPanelDisplay() {
+    {
+        const [eye, , up] = Camera.Get();
+        m_cam = eye;
+        Smath.Snap( m_cam, 1.0 );
+        m_up = up; //[0, 1, 0];
+        Smath.Snap( m_up, 1.0 );
+    }
+
+    const panel = GetPanelContent( m_panel );
+
+    const content = document.getElementById( "content" );
+    content.innerHTML = panel.html;
+    
+    for( const page of content.getElementsByClassName( "page" )) {
+        page.innerHTML = `<div class="inner">${page.innerHTML}</div>`;
+    }
+
+    for( const a of content.getElementsByTagName( "a" )) {
+        a.setAttribute( "target", "_blank" );
+    }
+
+    content.classList.add( "show" );
+    SetupContentPadding();
+
+    m_panelMode = false;
+    UpdateBigText();
+
+    m_currentScroll = 0;
+    m_desiredScroll = 0;
+    m_scrollAngle   = 0;
+    content.scrollTop = 0;
+
+    UpdateUpDownArrows();
+
+    Animate.Start( "roller", OnAnimate );
 }
 
 function UpdateLeftRightArrows( currentPanel ) {
@@ -106,6 +148,27 @@ function UpdateLeftRightArrows( currentPanel ) {
     } else {
         Arrows.SetAction( "right", null );
     }
+}
+
+function UpdateUpDownArrows() {
+    if( m_panelMode ) {
+        Arrows.SetAction( "up", null );
+        Arrows.SetAction( "down", null );
+        return;
+    }
+
+    if( m_desiredScroll > 1 ) {
+        Arrows.SetAction( "up", ScrollUpPage );
+    } else {
+        Arrows.SetAction( "up", null );
+    }
+    
+    if( m_desiredScroll < MaxScroll() - 1 ) {
+        Arrows.SetAction( "down", ScrollDownPage );
+    } else {
+        Arrows.SetAction( "down", null );
+    }
+
 }
 
 function StartFlicker() {
@@ -167,20 +230,19 @@ function OnAnimate( time, elapsed ) {
     }
 }
 
-function LoadContent( tag ) {
+function LoadContent( panel ) {
+
     
-
-    const content = document.getElementById( "content" );
-    content.innerHTML = document.getElementById( "panel1" ).innerHTML;
-
-    SetupContentPadding();
 }
 
 function SetupContentPadding() {
     const content = document.getElementById( "content" );
+    if( !content.classList.contains( "show" )) return;
+    
     let windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
     const pages = content.getElementsByClassName( "page" );
     let st = content.scrollTop;
+    /*
     for( let index = 0; index < pages.length; index++ ) {
         const page = pages[index];
        
@@ -198,7 +260,7 @@ function SetupContentPadding() {
         }
         page.style.paddingTop    = `${padding}vh`;
         page.style.paddingBottom = `${padding}vh`;
-    }
+    }*/
     content.scrollTop = st;
     //m_desiredScroll = content.scrollTop / GetDeviceHeight() * 100;
     SetScroll( m_desiredScroll );
@@ -331,18 +393,8 @@ function SetScroll( vh ) {
 
     // The input will be clamped to the content height.
     content.scrollTop = pixels;
-    
-    if( m_desiredScroll > 1 ) {
-        Arrows.SetAction( "up", ScrollUpPage );
-    } else {
-        Arrows.SetAction( "up", null );
-    }
-    
-    if( m_desiredScroll < MaxScroll() - 1 ) {
-        Arrows.SetAction( "down", ScrollDownPage );
-    } else {
-        Arrows.SetAction( "down", null );
-    }
+
+    UpdateUpDownArrows();
 
     // go through page bottoms and find out which one is on the screen.
     // lock the horizontal bar of the cube on that.
@@ -383,6 +435,9 @@ function GetNumPanels() {
 function StartPanelRotate() {
     if( m_panelMode ) return;
 
+    let content = document.getElementById( "content" );
+    content.classList.remove( "show" );
+
     let startingAngle = m_scrollAngle;
     let snapAngle = Math.round(m_scrollAngle / 90) * 90;
 
@@ -401,7 +456,17 @@ function StartPanelRotate() {
     m_panelTurn = 0;
     //m_cam.
 
+    m_desiredScroll = 0;
+    m_currentScroll = 0;
+
+    UpdateBigText();
+    UpdateUpDownArrows();
+
+    m_panelAnimateTime = 0;
+    m_panelTouchTime   = 0;
+
     Animate.Start( "roller", ( time, elapsed ) => {
+        m_panelAnimateTime = time;
         // When the animations start, the camera tilts down (relative down) until perpendicular
         //  with the up axis. Meanwhile it rotates around that axis when panels are changed.
         // 8 panels to the right is not cancelled out to zero, it's two full circle turns.
@@ -423,23 +488,57 @@ function StartPanelRotate() {
         let tcam = Smath.MultiplyVec3ByMatrix3( newCam.eye, rotation );
 
         Camera.Set( tcam, [0, 0, 0], newCam.up );
-        
+
+        if( time > m_panelTouchTime + 1800 ) {
+            StartPanelDisplay();
+        }
     });
+
+}
+
+function UpdateBigText() {
+    const bigtext = document.getElementById( "bigtext_container" );
+    const bigtext_string = document.getElementById( "bigtext" );
+    if( !m_panelMode ) {
+        bigtext.classList.remove( "show" );
+        return;
+    }
+    
+    bigtext.classList.add( "show" );
+
+    const panel = GetPanelContent( m_panel );
+    bigtext_string.innerText = panel.year;
+
+    const bigtext_subtitle = document.getElementById( "bigtext_subtitle" );
+    bigtext_subtitle.innerText = panel.title;
+}
+
+function GetPanelContent( index ) {
+    const panels = document.getElementsByClassName( "panel" );
+    return {
+        id    : panels[index].id,
+        year  : panels[index].dataset.year,
+        title : panels[index].dataset.title,
+        html  : panels[index].innerHTML
+    };
+}
+
+function PanelTurn( offset ) {
+    let newPanel = Smath.Clamp( m_panel + offset, 0, GetNumPanels() - 1 );
+    if( newPanel == m_panel ) return;
+    StartPanelRotate();
+    m_panel = newPanel;
+    UpdateLeftRightArrows( m_panel );
+    UpdateBigText();
+    m_panelTouchTime = m_panelAnimateTime;
 }
 
 function PanelRight() {
-    StartPanelRotate();
-    if( m_panel < GetNumPanels() ) {
-        m_panel++;
-    }
-
+    PanelTurn( 1 );
 }
 
 function PanelLeft() {
-    StartPanelRotate();
-    if( m_panel > 0 ) {
-        m_panel--;
-    }
+    PanelTurn( -1 );
 }
 
 

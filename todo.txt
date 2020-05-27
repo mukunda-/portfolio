@@ -1,0 +1,14 @@
+listen for changes to page sizes and redo padding for them.
+make sure the up/down arrows are not visible when at the top/bottom
+make sure up/down work properly:
+   scroll up one page if touching the gutter, otherwise 60% of a page, clipped to the gutter
+   
+make sure that content squishes properly when the window is slimmer than the box width
+
+change the cube to use one lit side?
+
+pause video elements when out of range.
+
+move templates to different file
+
+change .page to html5 section

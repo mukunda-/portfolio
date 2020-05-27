@@ -107,6 +107,7 @@ function Normalize( a ) {
    if( len > 0.000001 ) {
       return [ a[0] / len, a[1] / len, a[2] / len ];
    } else {
+      throw "Normalizing zero-length vector.";
       console.warn( "Normalized zero-length vector." );
       return [0, 0, 0];
    }
