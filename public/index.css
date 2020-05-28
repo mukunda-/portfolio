@@ -7,6 +7,10 @@ body {
    margin: 0;
 }
 
+a {
+   text-decoration: none;
+}
+
 #background {
    width: 100%;
    height: 100%;
@@ -151,8 +155,24 @@ body {
       black 90%,
       transparent 98%
    );
+
+   user-select: none;
 }
 
+#content.slideleft {
+   transform: translateX( -50vh );
+   transition: opacity 1s, transform 1s;
+}
+
+#content.slideright {
+   transform: translateX( 50vh );
+   transition: opacity 1s, transform 1s;
+}
+
+#content h2.header {
+   text-align: center;
+   width: 100%;
+}
 
 #content.show {
    opacity: 1;
@@ -190,6 +210,9 @@ body {
    transform: translateY( -50% ); /* I can't believe I'm doing this. */
    display: table-cell;
    vertical-align: middle;
+}
+#content .page:first-child .inner {
+   padding-top: 4vh;
 }
 
 #content .centered {

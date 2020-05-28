@@ -78,6 +78,10 @@ function Update( time ) {
    }
 }
 
+class Slider {
+   
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 export default {
    Start, Stop, Update, GetTime, Slide

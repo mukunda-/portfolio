@@ -2,11 +2,15 @@
 <html>
    <head>
       <meta charset="utf-8">
+      <!-- Prevent search engine indexing. -->
+      <meta name="robots" content="noindex">
       <link rel="stylesheet" type="text/css" href="index.css"/>
       <script src="js/index.js" type="module"></script>
       
 <!-- ////////////////////////////////////////////////////////////////////// -->
-<template id="panel1" class="panel" data-year="1998" data-title="Day Zero">
+<template id="panel1" class="panel"
+          data-year="1998" data-title="Day Zero"
+          data-color="ffb2ff">
    <div class="page">
       <p>
          My first line of code was a conditional statement for a Fahrenheit to
@@ -19,7 +23,6 @@
       <p style="text-align:center">
          That's when my trial by fire began.
       </p>
-      
    </div>
 
    <div class="page">
@@ -55,10 +58,12 @@
    </div>
 </template>
 
-<template id="panel_jp4" class="panel" data-year="2003-2004" data-title="Jetpack">
+<template id="panel_jp4" class="panel"
+          data-year="2003-2004" data-title="Jetpack"
+          data-color="fffd62">
    <div class="page">
       <p>
-         When I was 14 I sold my first game. It was a GameBoy Advance console port
+         When I was 14, I sold my first game. It was a GameBoy Advance console port
          of one of my PC Games, Jetpack 4, published in MaxPlay Classic Games Volume 1.
          Read more about the story below if you want, or just watch the review on it.
       </p>
@@ -119,7 +124,9 @@
    </div>
 </template>
 
-<template id="panel_adventurer" class="panel" data-year="2005" data-title="Adventurer">
+<template id="panel_adventurer" class="panel"
+          data-year="2005" data-title="Adventurer"
+          data-color="101bff">
    <div class="page">
       <p>
          Similar to Lode Runner, this is a GameBoy Advance puzzle platformer
@@ -162,7 +169,10 @@
    </div>
 </template>
 
-<template id="panel_x86" class="panel" data-year="2007" data-title="x86 Study">
+<template id="panel_x86" class="panel"
+          data-year="2007" data-title="The Great x86"
+          data-color="b8b8b8"
+          data-linkcolor="61e7ff">
    <div class="page">
       <p>
          I missed the era of early 90s programming and made up for that here, sort of.
@@ -198,7 +208,9 @@
    </div>
 </template>
 
-<template id="panel_maxmod" class="panel" data-year="2008" data-title="Maxmod">
+<template id="panel_maxmod" class="panel"
+          data-year="2008" data-title="Maxmod"
+          data-color="12fcff">
    <div class="page">
       <p>
          A commercial quality music and sound engine written entirely in ARM assembly code.
@@ -216,28 +228,32 @@
          software mixing.
       </p>
       <p>
-         The library targets both the GameBoy Advance and the Nintendo DS. Unfortunately due to
-         strict licensing restrictions (you are not allowed to run code on the ARM7 co-processor,
-         which was where my driver was installed), it could not be used in commercial Nintendo DS
-         games.
+         The library targets both the GameBoy Advance and the Nintendo DS. Check out the
+         <a href="https://maxmod.devkitpro.org/ref/index.html">documentation</a>.
+      </p>
+      <p>
+         Being written completely in assembly, the binary size on the GameBoy Advance is
+         only around 10KB.
       </p>
    </div>
    <div class="page">
-      <h2>AsFlit</h2>
+      <h2>Bringing it to Flash</h2>
       <p>
-         A brief mention here. With all of my work done on tracker-based
+         With all of my work done on tracker-based
          sound solutions, an individual contracted me to build a solution
          for the Flash platform.
       </p>
       <p>
          I put the latest Flash standard to the test, leveraging the
          JIT-optimized ActionScript 3 engine to mix dynamic PCM channels
-         realtime. Too bad that Flash died.
+         realtime. Too bad that Flash died. 
       </p>
    </div>
 </template>
 
-<template id="panel_superwings" class="panel" data-year="2008" data-title="Super Wings">
+<template id="panel_superwings" class="panel"
+          data-year="2008" data-title="Super Wings"
+          data-color="f10000">
    <div class="page">
       <p>
          Directly after writing Maxmod, I employed it in a game I wrote for a
@@ -311,16 +327,20 @@
    </div>
 </template>
 -->
-<template id="panel_nes" class="panel" data-year="2007-2010" data-title="Making the NES Sing">
+<template id="panel_nes" class="panel"
+          data-year="2007-2010" data-title="Making the NES Sing"
+          data-color="72e45b">
    <div class="page">
       <p>
          I had my fair share of fun making the Nintendo Entertainment
          System do very strange things.
       </p>
       <p>
-         Below is a video of SuperNSF, a crazy audio driver I wrote
-         that has the ability to combine software-mixed PCM and NES
-         hardware waveforms.
+         Below is a video of 
+         <a href="https://github.com/mukunda-/supernsf">SuperNSF</a>,
+         a crazy audio driver I wrote that has the ability to combine
+         software-mixed PCM and NES hardware waveforms (which is quite
+         difficult).
       </p>
       <iframe src="https://www.youtube.com/embed/QOq9Icu2GQs" 
          frameborder="0"
@@ -340,22 +360,23 @@
          a time.
       </p>
       <p>
-         I used an array of dummy instructions to manually insert cycle delays
+         For example (and forgive me for not remembering exact numbers), the NES
+         has a 1.79 MHz computer. Divide that speed by 10,000 for a 10KHz sampling
+         rate, and you have 179 cycles to mix PCM channels, output a single sample,
+         and then process the music sequence. A few uncounted cycles means a pitch shift
+         in the output.
+      </p>
+      <p>
+         I used an array of no-op instructions to manually insert cycle delays
          and line everything up.
       </p>
    </div>
    <div class="page">
       <p>
-         I'm amazed that emulators even support it, as cycle-accuracy
-         is required for proper execution. A funny quirk was that the pitch of
-         the mixed output shifts slightly if you played channels at high frequencies.
-         The memory page-crossing code was too complex to account for, so it made
-         tiny delays in the output stream.
+         I'm impressed that most emulators are cycle-accurate and support
+         SuperNSF.
       </p>
-      
-      <p class="centered">
-         <a href="https://github.com/mukunda-/supernsf">Source Code on GitHub</a>
-      </p>
+      <p>Any slight inaccuracy in emulation would result in massive pitch shifts.</p>
    </div>
    <div class="page">
       <h2>PCMNSF</h2>
@@ -373,11 +394,13 @@
          music.
       </p>
       <p>
-         I had been fascinated by music and sound drivers for a while,
-         and even tried my hand at making some amateur music compositions.
+         I had been fascinated by music and sound drivers for a while
+         and even tried my hand at making music compositions myself.
+      </p>
+      <p>
          #mod_shrine regularly hosts one-hour music competitions, even
          today, where people create music for an hour using a given
-         sample set, and then listen together. I did around 350 of these
+         sample set and then listen together. I did around 350 of these
          some ten years ago.
       </p>
       <p>
@@ -389,7 +412,8 @@
    <div class="page">
       <h2>it2nsf</h2>
       <p>
-         Nostalgic blurb aside, a less abusive tool I wrote was it2nsf.
+         A less abusive tool I wrote was
+         <a href="https://github.com/mukunda-/it2nsf">it2nsf</a>.
          It supports MML (music macro language) techniques to create
          unique instrument sounds while providing a tracker-friendly
          method for composition.
@@ -403,26 +427,18 @@
          <img src="res/it2nsf1.png" title="A part of the user manual."><!--
       --><img src="res/it2nsf2.png" title="Another part of the user manual.">
       </p>
-   </div>
-   <div class="page">
       <p>
          The NES sound driver is written in 6502 assembly, and the tool
          side is written in C++.
-      </p>
-      <p class="centered">
-         <a href="https://github.com/mukunda-/it2nsf">
-            Source Code on GitHub
-         </a>
-      </p>
-      <p class="centered">
-         <img src="res/it2nsf3.png" title="Credits.">
       </p>
    </div>
    
    <div class="page">
       <h2>s3m2nsf</h2>
       <p>
-         The precursor to it2nsf, s3m2nsf is a simpler version that
+         The precursor to it2nsf, 
+         <a href="https://github.com/mukunda-/s3m2nsf">s3m2nsf</a> is
+         a simpler version that
          supports basic waveforms and allows tracker fans to easily
          write music that plays on the NES. The conversion software was
          coded by the amazing
@@ -436,22 +452,20 @@
       --><img src="res/s3m2nsf3.png" title="The vibrato effect."><!--
       --><img src="res/s3m2nsf4.png" title="Portamento, or pitch-slide code.">
       </p>
-      <p class="centered">
-         <a href="https://github.com/mukunda-/s3m2nsf">
-            Source Code on GitHub
-         </a>
-      </p>
    </div>
 </template>
 
-<template id="panel_skipp" class="panel" data-year="2009" data-title="Skipp and Friends">
+<template id="panel_skipp" class="panel"
+          data-year="2009" data-title="Skipp and Friends"
+          data-color="d490ff">
    <div class="page">
       <p class="centered">
          <img src="res/skipp1.png" title="The title screen.">
       </p>
       <p>
          The 1st place winner of PDRoms competition #4.01. I'm proud to
-         be one of very few developers to create a Super Nintendo game from scratch.
+         be one of very few developers to create a complete Super Nintendo
+         game from scratch.
       </p>
       <p>
          I found out recently that someone even wrote a
@@ -545,7 +559,9 @@
    </div>
 </template>
 
-<template id="panel_unbound" class="panel" data-year="2011-" data-title="The Unbound Project">
+<template id="panel_unbound" class="panel" 
+          data-year="2011-" data-title="The Unbound Project"
+          data-color="feff81">
    <div class="page">
       <p>
          This is a game engine I've been writing in C++. I'll get around
@@ -573,12 +589,14 @@
    </div>
 </template>
 
-<template id="panel_diablo3" class="panel" data-year="By the way" data-title="I'm a Gamer">
+<template id="panel_diablo3" class="panel"
+         data-year="By the way" data-title="I'm a Gamer"
+         data-color="ff0000">
    <div class="page">
       <p>
          I was one of few demon hunters in the
          world to tackle early patch (HARD) Inferno with an extremely
-         weak gearset (even a little spider would one-shot me, while
+         weak gearset (even a little spider would one-shot me while
          everything took forever to kill). I livestreamed a complete
          clear. Ghom was a nearly impossible boss.
       </p>
@@ -607,7 +625,9 @@
    </div>
 </template>
 
-<template id="panel_sourcemodding" class="panel" data-year="2012-2014" data-title="Source Modding">
+<template id="panel_sourcemodding" class="panel"
+          data-year="2012-2014" data-title="Source Modding"
+          data-color="7dbef5">
    <div class="page">
       <p>
          When CS:GO was released, I became a part of
@@ -627,18 +647,23 @@
       <p>
          This is one of the maps I made, designed for the Arms Race game mode.
          It has a curious red button that offers some insight on the Source engine's
-         flexibility. See the video below for what happens when you push it.
+         flexibility.
       </p>
       <p class="centered">
          <img src="res/csgomap1.jpg" title="RXG Gravity Arms Race map."><!--
       --><img src="res/csgomap2.jpg" title="Tested some water effects, too."><!--
       --><img src="res/csgomap3.jpg" title="Lighting effects."><!--
       --><img src="res/csgomap4.jpg" title="A curious button."><!--
-      --><img src="res/gravity_overview.png" title="Loading screen." class="large">
+      --><img src="res/gravity_overview.png" title="Loading screen." class="large"><!--
+      --><img src="res/hammer1.jpg" title="Editing the map in Hammer." class="large">
          
       </p>
    </div>
    <div class="page">
+      <p>
+         What happens when you push the red button? All players get sucked into
+         the anti-gravity well!
+      </p>
       <p class="centered">
          <video controls width="100%">
             <source src="res/gravity.mp4" type="video/mp4">
@@ -658,7 +683,7 @@
    <div class="page">
       <h2>Pirate Wars</h2>
       <p>
-         This was an event that I hosted, complete with a custom map,
+         This was an event that I hosted with a custom map,
          ridiculously modified elements, and completely destroyble ships.
       </p>
       <p class="centered">
@@ -694,7 +719,9 @@
    </div>
 </template>
 
-<template id="panel_smes" class="panel" data-year="2013" data-title="SMES">
+<template id="panel_smes" class="panel"
+          data-year="2013" data-title="Games in your Games"
+          data-color="f5be16">
    <div class="page">
       <p class="centered">
          <a href="https://kotaku.com/1596972618#!">
@@ -709,7 +736,7 @@
       </p>
       <p>
          Real gamers play games inside their games. This mod was covered
-         by several gaming news sites, a unique feat that featured a
+         by several news sites, a unique feat that featured a
          complete video game console inside of Counter-Strike.
       </p>
       <iframe src="https://www.youtube.com/embed/5pMQ7oBHdPE" 
@@ -761,19 +788,22 @@
    </div>
 </template>
 
-<template id="panel_rxg" class="panel" data-year="2013-2014" data-title="RXG Sites">
+<template id="panel_rxg" class="panel"
+          data-year="2013-" data-title="Web Apps"
+          data-color="ed3434">
    <div class="page">
       <p>
-         @WhiteThunder and I put together a store site for our community.
+         In 2014, <a href="https://github.com/WheteThunger">@WhiteThunder</a> and I put
+         together a <a href="https://store.reflex-gamers.com">store site</a> for our community.
          I built most of the PayPal integration while he worked on a fantastic frontend.
       </p>
       <p class="centered">
          <img src="res/rxgstore1.png" title="RXG Store landing page." class="large">
       </p>
       <p>
-         I designed the interface between the site and our game servers, and then created
+         I designed the interface between the site and our game-servers, and then created
          several virtual items that can be bought on the store and then used in-game via
-         custom plugins.
+         <a href="https://github.com/mukunda-/rxg-plugins">custom plugins</a>.
       </p>
    </div>
    <div class="page">
@@ -785,32 +815,88 @@
          <img src="res/rxgstore2.png" title="Nuke item description."><!--
       --><img src="res/rxgstore3.png" title="Positive customer review.">
       </p>
-      <p>
-         Source code is
-         <a href="https://github.com/ReflexGamers/rxgstore">available on GitHub</a>.
-         So are <a href="https://github.com/mukunda-/rxg-plugins">all of our server plugins</a>.
-      </p>
    </div>
    <div class="page">
       <h2>RXG Demos</h2>
       <p>
-         Another service I created for our gameservers was an automatic demo
-         recorder. Source games typically have the ability to record gameplay,
+         Another service I created for our game-servers was an automatic demo
+         recorder.
+      </p>
+      <p>
+         Source games typically have the ability to record gameplay,
          and I wrote a server modification to automatically transfer those gameplay
-         files to a publicly viewable repository, complete with meta information.
+         files to a <a href="http://demos.reflex-gamers.com">publicly viewable repository</a>,
+         complete with meta information.
       </p>
       <p class="centered">
          <img src="res/rxgdemos.png" title="RXG demos repository." class="large">
       </p>
       <p>
          The web side is written in PHP, with a sort of REST API exposed to upload
-         and register demos. 
-         <a href="https://github.com/mukunda-/rxgdemos">The source code is public here</a>.
+         and register demos.
       </p>
    </div>
+   
+   <div class="page">
+      <h2>A Fancy Application</h2>
+      <p>
+         This year, for one of the communities I'm a part of, I designed an
+         application site.
+      </p>
+      <p class="centered">
+         <img src="res/tfrapp.jpg" class="large" title="The application page.">
+      </p>
+      <p>
+         I felt like the Google Forms aesthetic was unappealing, so I had some fun implementing
+         this solution.
+      </p>
+   </div>
+   
+   <div class="page">
+      <p>The front-end is HTML/CSS and JavaScript + jQuery, with
+         a back-end written in Python and JavaScript, using Google Apps Scripts
+         to generate and modify Google Documents for record keeping.
+      </p>
+      <p class="centered">
+         <img src="res/tfrapp3.jpg" class="large" title="Google Apps Scripts.">
+      </p>
+   </div>
+   
+   <div class="page">
+      <p>
+         It also supports
+         Discord integration to post notifications whenever an application is submitted
+         or changed.
+      </p>
+      <p class="centered">
+         <img src="res/tfrapp2.jpg" class="large" title="Code to build a Discord embed object.">
+      </p>
+   </div>
+   <!--
+   <div class="page">
+      <h2>Google Groups Discord Integration</h2>
+      <p>
+         A notable mention of a tiny project. How to integrate Google Groups with
+         something, when Google Groups doesn't have any flexible notifications API?
+         Simple, I added my webserver as a subscriber, and then parsed the emails
+         that it received, forwarding a formatted 
+         sent
+         subscribed my webserver While I was at it, I wrote a bunch of other neat integrations, like linking
+         Google Groups to Discord (by parsing )a handful of Python to integrate
+         Google Groups with Discord 
+         And why make it simple? This thing uses a JavaScript and
+         Google Apps Script backend to generate Google Documents from the input
+         and then notify our Discord when an application is submitted or modified.
+         This year, I felt like Google Forms looked rather primitive, so I
+         had some fun with implementing my own solution. It used a JavaScript and HTML
+         frontend 
+      </p>
+   </div>-->
 </template>
 
-<template id="panel_java" class="panel" data-year="2014" data-title="Java">
+<template id="panel_java" class="panel"
+          data-year="2014" data-title="I Wrote Some Java"
+          data-color="ededed">
    <div class="page">
       <p class="centered">
          <img src="res/javalogo.png" title="Java!">
@@ -841,10 +927,14 @@
    </div>
 </template>
 
-<template id="panel_myhome" class="panel" data-year="2016" data-title="My Home">
+<template id="panel_myhome" class="panel"
+          data-year="2016" data-title="My Home"
+          data-color="76c876">
    <div class="page">
       <p>
          I might be a huge geek, but I have some stories away from computers, too.
+      </p>
+      <p>
          Construction is my family's trade, and I live in this home that I built
          with my family. The entire thing.
       </p>
@@ -893,7 +983,9 @@
    </div>
 </template>
 
-<template id="panel_crossrp" class="panel" data-year="2018" data-title="Cross RP and WoW">
+<template id="panel_crossrp" class="panel"
+          data-year="2018" data-title="Cross RP and WoW"
+          data-color="19fcff">
    <div class="page">
       <p>
          This is a picture of over a thousand players in
@@ -956,24 +1048,29 @@
       </p>
    </div>
    <div class="page">
+      <h2>It's Part of the Game Now</h2>
       <p>
-         Some months later, Blizzard patched the game and incidentally removed the API Cross RP was
-         depending on. They said that it was an unfortunate side effect, and introduced the
-         Elixir of Tongues item to compensate, which essentially provides
-         the same functionality of Cross RP, all without requiring an addon.
-         Thanks Blizzard!
+         Some months later, Blizzard changed the API Cross RP was
+         depending on, permanently breaking it. They said that it was an
+         unfortunate side effect of addressing security concerns and then
+         introduced the <a href="https://wow.gamepedia.com/Elixir_of_Tongues">Elixir of Tongues</a>
+         to compensate, essentially a means to provide Cross RP's
+         functionality officially. Thanks Blizzard!
       </p>
    </div>
    <div class="page">
       <p>
          I still had to rework my code to transfer role-play character profiles across the
-         faction divide, basically doing the impossible. I'll spare you the details unless
+         faction divide, basically doing the impossible.
+      </p>
+      <p>
+         I'll spare you the details unless
          you ask, but I essentially built a peer-to-peer network and protocol, turning some
          of my userbase into routers to pass data where it needs to go.
       </p>
    </div>
    <div class="page">
-      <h2>Other Modifications</h2>
+      <h2>I Love UI Tinkering</h2>
       <p>
          I've written <a href="https://www.curseforge.com/members/tammymg/projects">multiple popular addons</a>
          that their users can't live without, as well as 
@@ -995,6 +1092,73 @@
       </p>
    </div>
 </template>
+<template id="panel_thisdemo" class="panel"
+          data-year="2020" data-title="This Demo"
+          data-color="ff80bf">
+   <div class="page">
+      <p>
+         It's pretty cool, isn't it? The background is WebGL with custom shaders,
+         all powered by vanilla JavaScript.
+      </p>
+      <p>
+         That's right, this isn't using any libraries or frameworks. It was all
+         written by me from scratch. Have a look at the code - I didn't minify
+         or webpack it.
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         The math was <a href="https://math.stackexchange.com/questions/3688837/find-the-rotation-of-a-box-to-project-a-corner-to-a-point-on-a-line">especially tedious</a>, for a mathematics amateur like me at least.
+      </p>
+      <p class="centered">
+         <img src="res/math.png" class="large" title="Lining the cube edges with the content.">
+      </p>
+      <p class="centered">
+         <video width="100%" autoplay loop>
+            <source src="res/earlydemo.mp4" type="video/mp4">
+         </video>
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         UX design isn't my specialization, but this feels pretty smooth, doesn't
+         it?
+      </p>
+      <p>
+         Having worked so long with software and computers, I have a good feel
+         for how things should behave. There's a lot of attention to detail here.
+      </p>
+   </div>
+</template>
+<template id="panel_andnow" class="panel" 
+         data-year="And Now" data-title="I'm ready for more."
+         data-color="303030">
+   <div class="page">
+      <p>
+         It's been a long, fun journey, through C, C++, assembly code, JavaScript,
+         Python, PHP, Lua, Basic, HTML/CSS...
+      </p>
+      <p>
+         But I have so much more to learn about - too much, in fact.
+      </p>
+   </div>
+   <div class="page">
+      <h2>Raising the Bar</h2>
+      <p>
+         Where do I go from here? Well, one person can only do so much.
+      </p>
+      <p>
+         What really impresses me is when people combine their efforts. 
+         A single movie for instance - people take for granted the
+         one million plus man-hours to create it. About two and a half
+         entire lives. It's amazing.
+      </p>
+      <p>
+         I've done a lot of my projects solo, but I think it's time to change
+         that. Perhaps we'll be working together sometime?
+      </p>
+   </div>
+</template>
 <!-- ////////////////////////////////////////////////////////////////////// -->
    </head>
    <body>
@@ -1009,7 +1173,7 @@
          <div id="bigtext"></div>
          <div id="bigtext_subtitle"></div>
       </div>
-      
+
       <div id="scanlines"></div>
    </body>
 </html>

@@ -2,6 +2,7 @@ import Camera from "./camera.js";
 import Smath from "./smath.js";
 import Animate from "./animate.js";
 import Arrows from "./arrows.js";
+import Color from "./color.js";
 
 // Camera angle (vector pointing outward from center).
 let m_cam;
@@ -104,9 +105,18 @@ function StartPanelDisplay() {
     const panel = GetPanelContent( m_panel );
 
     const content = document.getElementById( "content" );
+
+    const header_element = `<h2 class="header">${panel.title}</h2>`
+
     content.innerHTML = panel.html;
+
+    let firstPage = true;
     
     for( const page of content.getElementsByClassName( "page" )) {
+        if( firstPage ) {
+            page.innerHTML = header_element + page.innerHTML;
+            firstPage = false;
+        }
         page.innerHTML = `<div class="inner">${page.innerHTML}</div>`;
     }
 
@@ -114,7 +124,11 @@ function StartPanelDisplay() {
         a.setAttribute( "target", "_blank" );
     }
 
+
+    content.classList.remove( "slideleft" );
+    content.classList.remove( "slideright" );
     content.classList.add( "show" );
+    
     SetupContentPadding();
 
     m_panelMode = false;
@@ -432,11 +446,55 @@ function GetNumPanels() {
     return document.getElementsByClassName( "panel" ).length;
 }
 
-function StartPanelRotate() {
+function UpdateColorTheme( panelIndex, fraction ) {
+    const page1 = GetPanelContent( panelIndex );
+    const page2 = GetPanelContent( panelIndex + 1 ) || page1;
+
+    let color = Color.Lerp(
+                    Color.FromHex( page1.color ), 
+                    Color.FromHex( page2.color ), 
+                    fraction );
+    let linkcolor = Color.Lerp(
+                       Color.FromHex( page1.linkcolor ),
+                       Color.FromHex( page2.linkcolor ),
+                       fraction );
+
+    Color.Set( color, linkcolor );
+}
+
+// Applies the difference times factor or a constant amount
+//  if less than.
+function ApplyFactorOrConstSlide( from, to, delta, linearSpeed, time ) {
+
+    let diff = (to - from) * (1-delta);
+    linearSpeed *= time;
+    if( Math.abs(diff) < linearSpeed ) {
+        // Use linear speed
+        if( from < to ) {
+            from += linearSpeed;
+            if( from > to ) from = to;
+        } else {
+            from -= linearSpeed;
+            if( from < to ) from = to;
+        }
+        return from;
+    } else {
+        return from + diff * delta;
+    }
+}
+
+function StartPanelRotate( startDirection ) {
     if( m_panelMode ) return;
 
     let content = document.getElementById( "content" );
     content.classList.remove( "show" );
+
+    if( startDirection == "left" ) {
+        content.classList.add( "slideright" );
+    } else if( startDirection == "right" ) {
+        content.classList.add( "slideleft" );
+    }
+
 
     let startingAngle = m_scrollAngle;
     let snapAngle = Math.round(m_scrollAngle / 90) * 90;
@@ -444,6 +502,7 @@ function StartPanelRotate() {
     let startingCam = GetRotatedCam();
     m_scrollAngle = snapAngle;
     let normalCam = GetRotatedCam();
+    m_scrollAngle = startingAngle;
 
     //Smath.Copy( m_panelRotateStart, cam.eye );
     //Smath.Snap( m_panelRotateStart, 1.0 );
@@ -465,29 +524,47 @@ function StartPanelRotate() {
     m_panelAnimateTime = 0;
     m_panelTouchTime   = 0;
 
+
     Animate.Start( "roller", ( time, elapsed ) => {
         m_panelAnimateTime = time;
-        // When the animations start, the camera tilts down (relative down) until perpendicular
-        //  with the up axis. Meanwhile it rotates around that axis when panels are changed.
-        // 8 panels to the right is not cancelled out to zero, it's two full circle turns.
+        // When the animations start, the camera tilts down (relative down)
+        //  until perpendicular with the up axis. Meanwhile it rotates around
+        //  that axis when panels are changed.
+        // 8 panels to the right is not cancelled out to zero; it is two
+        //  full-circle turns.
+
+        let turnSpeed = Animate.Slide( 0.95, 0.4, "lerp", time, m_panelTouchTime, m_panelTouchTime+400 );
+
+        let d = turnSpeed ** (elapsed / 250);
+        //let d = 0.4 ** (elapsed / 250);
 
         let newCam;
-        if( time < 500 ) {
+        //if( time < 500 ) {
             // 500
-            m_scrollAngle = Animate.Slide( startingAngle, snapAngle, "ease", time, 0, 500 );
+            //m_scrollAngle = Animate.Slide( startingAngle, snapAngle, "fall", time, 0, 500 );
+            m_scrollAngle = ApplyFactorOrConstSlide( m_scrollAngle, snapAngle, d, 4.0, elapsed / 1000 ); //m_scrollAngle * d + snapAngle * (1-d);
             newCam = GetRotatedCam();
-        } else {
-            newCam = normalCam;
-        }
+        //} else {
+         //   newCam = normalCam;
+        //}
 
         let desiredTurn = (m_panel - m_panelTurnOrigin) * 90;
         
-        let d = 0.4 ** (elapsed / 250);
-        m_panelTurn = m_panelTurn * d + desiredTurn * (1-d);
+        m_panelTurn = ApplyFactorOrConstSlide( m_panelTurn, desiredTurn, d, 4.0, elapsed / 1000 );
+        //m_panelTurn = m_panelTurn * d + desiredTurn * (1-d);
         let rotation = Smath.RotateAroundAxis( m_panelRotateUp, m_panelTurn * Math.PI / 180 );
         let tcam = Smath.MultiplyVec3ByMatrix3( newCam.eye, rotation );
 
         Camera.Set( tcam, [0, 0, 0], newCam.up );
+
+        // Set the color.
+        {
+            let currentTurn = m_panelTurnOrigin + (m_panelTurn/90);
+            let currentPanel = Math.floor(currentTurn);
+            let currentFraction = currentTurn - currentPanel;
+            
+            UpdateColorTheme( currentPanel, currentFraction );
+        }
 
         if( time > m_panelTouchTime + 1800 ) {
             StartPanelDisplay();
@@ -515,18 +592,25 @@ function UpdateBigText() {
 
 function GetPanelContent( index ) {
     const panels = document.getElementsByClassName( "panel" );
+    if( index >= panels.length ) return null;
+
+    let color = panels[index].dataset.color;
+    let linkcolor = panels[index].dataset.linkcolor || color;
+
     return {
         id    : panels[index].id,
         year  : panels[index].dataset.year,
         title : panels[index].dataset.title,
-        html  : panels[index].innerHTML
+        html  : panels[index].innerHTML,
+        color,
+        linkcolor
     };
 }
 
 function PanelTurn( offset ) {
     let newPanel = Smath.Clamp( m_panel + offset, 0, GetNumPanels() - 1 );
     if( newPanel == m_panel ) return;
-    StartPanelRotate();
+    StartPanelRotate( newPanel > m_panel ? "right" : "left" );
     m_panel = newPanel;
     UpdateLeftRightArrows( m_panel );
     UpdateBigText();
