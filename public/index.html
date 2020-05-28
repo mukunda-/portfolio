@@ -4,894 +4,1012 @@
       <meta charset="utf-8">
       <link rel="stylesheet" type="text/css" href="index.css"/>
       <script src="js/index.js" type="module"></script>
+      
+<!-- ////////////////////////////////////////////////////////////////////// -->
+<template id="panel1" class="panel" data-year="1998" data-title="Day Zero">
+   <div class="page">
+      <p>
+         My first line of code was a conditional statement for a Fahrenheit to
+         Celsius converter, copied from the Microsoft Visual Basic 6.0 help
+         manual, written when I was 8 years old.
+      </p>
+      <p style="text-align:center">
+         "If KeyAscii = 13 Then"
+      </p>
+      <p style="text-align:center">
+         That's when my trial by fire began.
+      </p>
+      
+   </div>
+
+   <div class="page">
+      <p>
+         Without teachers or books, it was a long few years of experimentation,
+         building small apps and games in the worst way imaginable.
+      </p>
+      <p>
+         I've written a lot of embarrassing code, but we all started
+         somewhere, right?
+      </p>
+      <p>
+         Eventually I would connect with other developers on the world
+         wide web, and I owe a lot to them for helping me along the way.
+      </p>
+   </div>
+
+   <div class="page">
+      <p>
+         I toyed with Visual Basic 6.0 for years, eventually learning about
+         DirectX libraries like DirectDraw to render 2D graphics and tilemaps.
+         (I really love tilemaps.)
+      </p>
+      <p>
+         After finding a ripped sprite sheet of Mario graphics, I made my
+         own basic iteration of "Super Mario."
+      </p>
+      <p>
+         Having never played the original game before, it was a somewhat
+         unique result. The source code, complete with custom map editors,
+         is stuck somewhere on old zip disks.
+      </p>
+   </div>
+</template>
+
+<template id="panel_jp4" class="panel" data-year="2003-2004" data-title="Jetpack">
+   <div class="page">
+      <p>
+         When I was 14 I sold my first game. It was a GameBoy Advance console port
+         of one of my PC Games, Jetpack 4, published in MaxPlay Classic Games Volume 1.
+         Read more about the story below if you want, or just watch the review on it.
+      </p>
+   </div>
+
+   <div class="page">
+      <iframe width="100%" height="50vh" src="https://www.youtube.com/embed/O_yvyKQ3X8w?start=508" 
+            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen></iframe>
+   </div>
+
+   <div class="page">
+      <div class="centered"><img src="res/cprog.png" title="This logo hasn't changed since then..."></div>
+      <p>
+         I taught myself C from resources like cprogramming.com, and I learned about console
+         programming from The PERN Project (Nintendo Reverse Engineering Project).
+      </p>
+      <p>
+         The GameBoy Advance had an incredible homebrew community, and I'm glad to have
+         been a part of it.
+      </p>
+   </div>
+
+   <div class="page">
+      <p>
+         In early 2004, a company reached out to #gbadev (EFNet) with an interest to
+         buy indie games for publishing. The deadline was one month, and I worked
+         non-stop to port my PC game to the GameBoy Advance.
+      </p>
+      <p>
+         It wasn't easy, but I got it done, and they accepted it.
+      </p>
+   </div>
+
+   <div class="page">
+      <h2>Jetpack 4</h2>
+      <p>
+         In 2003, after finishing several small games, I had created Jetpack 4,
+         which was a four-player (via split-screen and gamepads) sidescroller
+         with open-ended gameplay. Fly around, blow stuff up, build, and hurt
+         each other. It was developed in Visual Basic using DirectDraw for graphics.
+      </p>
+      <p class="centered">
+         <img src="res/jp4_1.jpg" title="Blowing up a bulk of C4."><!--
+      --><img src="res/jp4_2.jpg" title="4-player split screen.">
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         My friends would come over and we'd play this game for hours on end. I
+         would go on to write several revisions and patches over the years for
+         more to play with.
+      </p>
+      <p class="centered">
+         <img src="res/jp4_3.jpg" title="Blowing someone up."><!--
+      --><img src="res/jp4_4.jpg" title="Building a wall.">
+      </p>
+   </div>
+</template>
+
+<template id="panel_adventurer" class="panel" data-year="2005" data-title="Adventurer">
+   <div class="page">
+      <p>
+         Similar to Lode Runner, this is a GameBoy Advance puzzle platformer
+         I made for a Kraln.com competition. A defining feature is the large red
+         bricks you can push around or carry to squish enemies or make paths.
+      </p>
+      <p class="centered">
+         <img src="res/adventurer1.png" title="Splash screen."><!--
+      --><img src="res/adventurer2.png" title="Title screen."><!--
+      --><img src="res/adventurer3.png" title="The last level."><!--
+      --><img src="res/adventurer6.png" title="Carrying a red brick.">
+      </p>
+   </div>
+   <div class="page">
+      <video autoplay muted width="100%" loop>
+         <source src="res/adventurer.mp4" type="video/mp4">
+      </video>
+   </div>
+   <div class="page">
+      <p>
+         The game features 50 levels, all designed in my easy to use graphical level
+         editor. Knowing Visual Basic really comes in handy.
+      </p>
+      
+      <p class="centered">
+         <img src="res/adventurer_le.png" class="large" title="Adventurer level editor.">
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         A lot of code was hand-optimized in ARM assembly code to maximize performance.
+      </p>
+      <p class="centered">
+         <img src="res/adventurer4.png" title="Assembly is not maintainable."><!--
+      --><img src="res/adventurer5.png" title="This is a bad idea.">
+      </p>
+      <p class="centered">
+         <a href="https://mukunda.com/projects.html">Source code and game available here.</a>
+      </p>
+   </div>
+</template>
+
+<template id="panel_x86" class="panel" data-year="2007" data-title="x86 Study">
+   <div class="page">
+      <p>
+         I missed the era of early 90s programming and made up for that here, sort of.
+         After installing MS-DOS on my laptop, I proceeded to study x86 architecture.
+      </p>
+      <p>
+         I had a <a href="https://twitter.com/_mukunda/status/1259456079370608640">Pentium 4</a>
+         at the time, and I
+         learned about its rich pipeline and elaborate instruction set and then
+         wrote some small programs to play with it.
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         The source code for my x86 projects are unfortunately on a defunct hard drive.
+      </p>
+      <p>
+         One was a 3D renderer written for DOS, with the raster code written in x86
+         assembly. Of course I wrote this on DOS, too, in edit.exe, to taste the authentic
+         early 90s developer experience.
+      </p>
+      <p>
+         Another project was a falling sand game, called FastSand,
+         optimized with x86 assembly.
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         It wasn't long before I learned that the incredible engineering behind the
+         x86 processor renders hand-coded assembly
+         <a href="https://blog.mukunda.com/what-amazes-you/">mostly useless</a>.
+      </p>
+   </div>
+</template>
+
+<template id="panel_maxmod" class="panel" data-year="2008" data-title="Maxmod">
+   <div class="page">
+      <p>
+         A commercial quality music and sound engine written entirely in ARM assembly code.
+      </p>
+      <iframe 
+               src="https://www.youtube.com/embed/QsinToyyXbg" 
+               frameborder="0" 
+               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+               allowfullscreen></iframe>
+   </div>
+   <div class="page">
+      <p>
+         The above example is running on the Nintendo DS. It features taking advantage
+         of the 16-channel hardware mixer while extending that to 30 channels with
+         software mixing.
+      </p>
+      <p>
+         The library targets both the GameBoy Advance and the Nintendo DS. Unfortunately due to
+         strict licensing restrictions (you are not allowed to run code on the ARM7 co-processor,
+         which was where my driver was installed), it could not be used in commercial Nintendo DS
+         games.
+      </p>
+   </div>
+   <div class="page">
+      <h2>AsFlit</h2>
+      <p>
+         A brief mention here. With all of my work done on tracker-based
+         sound solutions, an individual contracted me to build a solution
+         for the Flash platform.
+      </p>
+      <p>
+         I put the latest Flash standard to the test, leveraging the
+         JIT-optimized ActionScript 3 engine to mix dynamic PCM channels
+         realtime. Too bad that Flash died.
+      </p>
+   </div>
+</template>
+
+<template id="panel_superwings" class="panel" data-year="2008" data-title="Super Wings">
+   <div class="page">
+      <p>
+         Directly after writing Maxmod, I employed it in a game I wrote for a
+         <a href="http://www.pdroms.de/">PDRoms</a> competition. The rom nearly
+         fit in 256KB of memory, featuring three levels, action-packed bosses,
+         and deliberate Engrish to tie it all together.
+      </p>
+      <p class="centered">
+         <a href="https://www.engadget.com/2008-03-19-super-wings-download-this-game-now.html">"Download this game now" - engadget</a>
+      </p>
+      <p class="centered">
+         
+         <video autoplay muted loop alt="hello">
+            <source src="res/sw2.mp4" type="video/mp4">
+         </video>
+         
+         <video autoplay muted loop>
+            <source src="res/sw4.mp4" type="video/mp4">
+         </video>
+         
+      </p>
+   </div>
+   <div class="page">
+      <p class="centered">
+         <video autoplay muted loop>
+            <source src="res/sw1.mp4" type="video/mp4">
+         </video>
+         <video autoplay muted loop>
+            <source src="res/sw3.mp4" type="video/mp4">
+         </video>
+         <video autoplay muted loop>
+            <source src="res/sw5.mp4" type="video/mp4">
+         </video>
+         <video autoplay muted loop>
+            <source src="res/sw6.mp4" type="video/mp4">
+         </video>
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         I created most of the graphics and music myself. coda and xaimus
+         from #mod_shrine (EsperNet) wrote two fantastic boss themes.
+      </p>
+      <p>
+         Some of the tracks have cues embedded in the channels to
+         synchronize game events.
+      </p>
+      <p class="centered">
+         <img src="res/swgfx1.png" title="Don't you love font bitmaps?"><!--
+      --><img src="res/swgfx2.png" title="The bulk of the game graphics in their 4-color glory."><!--
+      --><img src="res/swmusic1.png" title="The SF8 command triggers a shuriken storm."><!--
+      --><img src="res/swmusic2.png" title="The SF2 command makes the enemy ship fire a batch of missiles.">
+      </p>
+      <p class="centered">
+         <a href="https://github.com/mukunda-/superwings">
+            Source Code on GitHub
+         </a>
+      </p>
+   </div>
+</template>
+<!--
+<template id="panel_ewa057" class="panel" data-year="2008" data-title="EXCITING WINTERY ADVENTURE 0.57">
+   <div class="page">
+      <p>
+         I completely forgot that I wrote this joke for the Drunken Coders Winter 2008 competition, so it deserves a special place here.
+      </p>
+      <p class="centered">
+         <img src="res/ewa1.png" title="Extreme gameplay.">
+         <img src="res/ewa2.png" title="User manual.">
+      </p>
+   </div>
+</template>
+-->
+<template id="panel_nes" class="panel" data-year="2007-2010" data-title="Making the NES Sing">
+   <div class="page">
+      <p>
+         I had my fair share of fun making the Nintendo Entertainment
+         System do very strange things.
+      </p>
+      <p>
+         Below is a video of SuperNSF, a crazy audio driver I wrote
+         that has the ability to combine software-mixed PCM and NES
+         hardware waveforms.
+      </p>
+      <iframe src="https://www.youtube.com/embed/QOq9Icu2GQs" 
+         frameborder="0"
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+         allowfullscreen>
+      </iframe>
+   </div>
+   <div class="page">
+      <p>
+         The NES does not have hardware to time PCM playback. All it has
+         is one register that you can manually feed a single sample to.
+      </p>
+      <p>
+         For each block of code in the SuperNSF driver, I needed to keep
+         track of the exact cycle count (yes, counting everything manually)
+         so I could time the software mixer which outputs a single sample at
+         a time.
+      </p>
+      <p>
+         I used an array of dummy instructions to manually insert cycle delays
+         and line everything up.
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         I'm amazed that emulators even support it, as cycle-accuracy
+         is required for proper execution. A funny quirk was that the pitch of
+         the mixed output shifts slightly if you played channels at high frequencies.
+         The memory page-crossing code was too complex to account for, so it made
+         tiny delays in the output stream.
+      </p>
+      
+      <p class="centered">
+         <a href="https://github.com/mukunda-/supernsf">Source Code on GitHub</a>
+      </p>
+   </div>
+   <div class="page">
+      <h2>PCMNSF</h2>
+      <p>
+         SuperNSF was based off of some previous tinkering I did with
+         @tumult from #mod_shrine called <a href="https://github.com/mukunda-/pcmnsf">PCMNSF</a>,
+         which was a simpler 4-channel MOD player.
+      </p>
+   </div>
+   <div class="page">
+      <h2>#mod_shrine</h2>
+      <p>
+         Sometime in 2006, I joined #mod_shrine on EsperNet, a fantastic
+         community that revolves around the greatness of tracker-based
+         music.
+      </p>
+      <p>
+         I had been fascinated by music and sound drivers for a while,
+         and even tried my hand at making some amateur music compositions.
+         #mod_shrine regularly hosts one-hour music competitions, even
+         today, where people create music for an hour using a given
+         sample set, and then listen together. I did around 350 of these
+         some ten years ago.
+      </p>
+      <p>
+         These guys have been a big part of my life, and if you're one of
+         them reading this, you're awesome! We've made music, games, and
+         amazing tools together.
+      </p>
+   </div>
+   <div class="page">
+      <h2>it2nsf</h2>
+      <p>
+         Nostalgic blurb aside, a less abusive tool I wrote was it2nsf.
+         It supports MML (music macro language) techniques to create
+         unique instrument sounds while providing a tracker-friendly
+         method for composition.
+      </p>
+      <p>
+         The PC side of things generates samples that emulate the final
+         sound from the NES driver which musicians can use to compose
+         their track easily.
+      </p>
+      <p class="centered">
+         <img src="res/it2nsf1.png" title="A part of the user manual."><!--
+      --><img src="res/it2nsf2.png" title="Another part of the user manual.">
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         The NES sound driver is written in 6502 assembly, and the tool
+         side is written in C++.
+      </p>
+      <p class="centered">
+         <a href="https://github.com/mukunda-/it2nsf">
+            Source Code on GitHub
+         </a>
+      </p>
+      <p class="centered">
+         <img src="res/it2nsf3.png" title="Credits.">
+      </p>
+   </div>
+   
+   <div class="page">
+      <h2>s3m2nsf</h2>
+      <p>
+         The precursor to it2nsf, s3m2nsf is a simpler version that
+         supports basic waveforms and allows tracker fans to easily
+         write music that plays on the NES. The conversion software was
+         coded by the amazing
+         <a href="https://twitter.com/reduzio">@reduz</a>, a member of
+         the #mod_shrine community. I wrote the 6502-based S3M player in
+         assembly code.
+      </p>
+      <p class="centered">
+         <img src="res/s3m2nsf1.png" title="I love in-depth txt manuals."><!--
+      --><img src="res/s3m2nsf2.png" title="Complete with ASCII art."><!--
+      --><img src="res/s3m2nsf3.png" title="The vibrato effect."><!--
+      --><img src="res/s3m2nsf4.png" title="Portamento, or pitch-slide code.">
+      </p>
+      <p class="centered">
+         <a href="https://github.com/mukunda-/s3m2nsf">
+            Source Code on GitHub
+         </a>
+      </p>
+   </div>
+</template>
+
+<template id="panel_skipp" class="panel" data-year="2009" data-title="Skipp and Friends">
+   <div class="page">
+      <p class="centered">
+         <img src="res/skipp1.png" title="The title screen.">
+      </p>
+      <p>
+         The 1st place winner of PDRoms competition #4.01. I'm proud to
+         be one of very few developers to create a Super Nintendo game from scratch.
+      </p>
+      <p>
+         I found out recently that someone even wrote a
+         <a href="https://gamefaqs.gamespot.com/snes/181502-super-4-in-1-multicart/faqs/72589">full walkthrough</a>
+         for this game. Very cool, @Lanzz.
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         The game featured a
+         <a href="https://www.zophar.net/music/nintendo-snes-spc/skipp-and-friends">complete original soundtrack</a>
+         composed by <a href="https://twitter.com/MrMadbrain">@madbrain</a> and
+         <a href="https://twitter.com/surasshu">@surasshu</a>,
+         two amazing artists that I met in #mod_shrine.
+      </p>
+      <iframe src="https://www.youtube.com/embed/axQeMVbNauo"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+      </iframe>
+   </div>
+   <div class="page">
+      <p>
+         The competition deadline was two months, and I didn't have any time leftover.
+      </p>
+      <p>
+         The first month was spent designing and building
+         <a href="https://github.com/mukunda-/snesmod/">SNESMOD</a>,
+         an Impulse Tracker-based sound and music engine that rivals
+         commercial legends. I used what I learned from making XMSNES
+         (described below) and pushed the boundaries.
+      </p>
+      <p>
+         SNESMOD supports streaming PCM sounds from the SNES cartridge,
+         all nightmarishly implemented
+         on a <a href="https://mukunda.com/stuff/SPCTECH.html">500khz computer</a>.
+         Tooling, documentation, and examples were all extremely limited
+         or nil.
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         The game had stickmen graphics all the way until the last week
+         before the deadline, but
+         <a href="https://twitter.com/codatrigger">@coda</a>
+         pitched in and did some animation work while I worked on adding
+         all of the levels in a complex map editor I built with Visual
+         Basic.
+      </p>
+      <p class="centered">
+         <img src="res/skipp_leveleditor.png" class="large">
+      </p>
+   </div>
+   
+   <div class="page">
+      <p>
+         Ask me about the story one hour before the deadline, when I
+         decided the game needed a final boss. 
+         <a href="https://en.wikipedia.org/wiki/Cyclone_Aila">Cyclone Aila</a>
+         was right outside.
+      </p>
+   </div>
+   
+   <div class="page">
+      <h2>XMSNES</h2>
+      <p>
+         XMSNES is an XM module player for the Super Nintendo and the
+         precursor to SNESMOD. What better way to get into SNES
+         programming than writing the hardest things possible?
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         Similar to SNESMOD, XMSNES comes with a converter and sound
+         driver that was split across the two processors in the SNES.
+      </p>
+      <p>
+         Below shows a test demo of it, something that required me to
+         rewrite a hardware cartridge hundreds of times (and stick it in the
+         console, and boot it, and test via looking at those byte outputs onscreen)
+         to track some of the bugs during development.
+      </p>
+      <p>
+         The joys of programming, right?
+      </p>
+      <p>
+         <video width="100%" controls>
+            <source src="res/xmsnes.mp4" type="video/mp4">
+         </video>
+      </p>
+   </div>
+</template>
+
+<template id="panel_unbound" class="panel" data-year="2011-" data-title="The Unbound Project">
+   <div class="page">
+      <p>
+         This is a game engine I've been writing in C++. I'll get around
+         to finishing it, one day.
+      </p>
+      <p class="centered">
+         <video autoplay muted width="100%" loop controls>
+            <source src="res/archubos.mp4" type="video/mp4">
+         </video>
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         I've gotten immense practice from working on this (it's how I
+         know how to write this WebGL program with fragment shaders).
+         Below is my testing of mass-scale instanced render methods, and
+         realtime generated clouds.
+      </p>
+      <p class="centered">
+         <img class="large" src="res/ab15.jpg" title="A huge mountain of instanced cubes.">
+      </p>
+      <p class="centered">
+         <img class="large" src="res/ab22.jpg" title="Testing realtime cloud generation techniques (GPU-side).">
+      </p>
+   </div>
+</template>
+
+<template id="panel_diablo3" class="panel" data-year="By the way" data-title="I'm a Gamer">
+   <div class="page">
+      <p>
+         I was one of few demon hunters in the
+         world to tackle early patch (HARD) Inferno with an extremely
+         weak gearset (even a little spider would one-shot me, while
+         everything took forever to kill). I livestreamed a complete
+         clear. Ghom was a nearly impossible boss.
+      </p>
+      <p class="centered">
+         <video autoplay controls width="100%" loop muted>
+            <source src="res/diablo.mp4" type="video/mp4">
+         </video>
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         There is nothing like overcoming a difficult encounter
+         with your friends. I have multiple cutting-edge mythic
+         achievements in World of Warcraft.
+      </p>
+      <p class="centered">
+         <video controls width="100%">
+            <source src="res/blackhand.mp4" type="video/mp4">
+         </video>
+      </p>
+      <p class="centered">
+         <video controls width="100%">
+            <source src="res/nefarian.mp4" type="video/mp4">
+         </video>
+      </p>
+   </div>
+</template>
+
+<template id="panel_sourcemodding" class="panel" data-year="2012-2014" data-title="Source Modding">
+   <div class="page">
+      <p>
+         When CS:GO was released, I became a part of
+         <a href="https://reflex-gamers.com">Reflex Gamers</a>,
+         and found a deep fascination in the flexibility of the Source engine.
+      </p>
+      <p>
+         I went on to create tons of neat and crazy things.
+         I'm really not your typical modder.
+      </p>
+      <p class="centered">
+         <img src="res/smmeme.jpg" title="You'd hardly remember you were playing CS:GO.">
+      </p>
+   </div>
+   <div class="page">
+      <h2>"RXG Gravity" Map</h2>
+      <p>
+         This is one of the maps I made, designed for the Arms Race game mode.
+         It has a curious red button that offers some insight on the Source engine's
+         flexibility. See the video below for what happens when you push it.
+      </p>
+      <p class="centered">
+         <img src="res/csgomap1.jpg" title="RXG Gravity Arms Race map."><!--
+      --><img src="res/csgomap2.jpg" title="Tested some water effects, too."><!--
+      --><img src="res/csgomap3.jpg" title="Lighting effects."><!--
+      --><img src="res/csgomap4.jpg" title="A curious button."><!--
+      --><img src="res/gravity_overview.png" title="Loading screen." class="large">
+         
+      </p>
+   </div>
+   <div class="page">
+      <p class="centered">
+         <video controls width="100%">
+            <source src="res/gravity.mp4" type="video/mp4">
+         </video>
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         I used Sony Vegas to compose the sound effects.
+      </p>
+      <p class="centered">
+         <video controls width="100%">
+            <source src="res/vegas1.mp4" type="video/mp4">
+         </video>
+      </p>
+   </div>
+   <div class="page">
+      <h2>Pirate Wars</h2>
+      <p>
+         This was an event that I hosted, complete with a custom map,
+         ridiculously modified elements, and completely destroyble ships.
+      </p>
+      <p class="centered">
+         <video controls width="100%" onloadstart="this.volume=0.5">
+            <source src="res/pw.mp4" type="video/mp4">
+         </video>
+      </p>
+   </div>
+   
+   <div class="page">
+      <h2>Gameserver Plugins</h2>
+      <p>
+         I coded tons of customizations for the gameservers we hosted in our community,
+         like the ability for administrators to manifest themselves as visible ghosts,
+         pick up players, and kill them (if they're found cheating).
+      </p>
+      <iframe src="https://www.youtube.com/embed/M_Zj88rjmlE"
+         frameborder="0" 
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+         allowfullscreen>
+      </iframe>
+   </div>
+   <div class="page">
+      <h2>ServerTools</h2>
+      <p>
+         I also wrote a <a href="https://github.com/mukunda-/servertools">handful of tools</a>
+         to help manage our collection of gameservers and their files, complete with a
+         plugin packaging system.
+      </p>
+      <p class="centered">
+         <img class="large" src="res/servertools.png">
+      </p>
+   </div>
+</template>
+
+<template id="panel_smes" class="panel" data-year="2013" data-title="SMES">
+   <div class="page">
+      <p class="centered">
+         <a href="https://kotaku.com/1596972618#!">
+            "You shouldn't interrupt a Counter-Strike player's game of Tetris." - Kotaku
+         </a>
+      </p>
+      <p class="centered">
+         <a href="https://www.pcgamer.com/csgo-super-mareo-bruhs/">
+            "The plugin's coder deserves a barrage of internet 
+            high-fives for this feat." - PC Gamer
+         </a>
+      </p>
+      <p>
+         Real gamers play games inside their games. This mod was covered
+         by several gaming news sites, a unique feat that featured a
+         complete video game console inside of Counter-Strike.
+      </p>
+      <iframe src="https://www.youtube.com/embed/5pMQ7oBHdPE" 
+         frameborder="0" 
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+         allowfullscreen>
+      </iframe>
+   </div>
+   <div class="page">
+      <p>
+         This is a video of the early development phase of my Tetris game.
+         I made the office lounge map, too, my personal test environment with a TV.
+      </p>
+      <iframe src="https://www.youtube.com/embed/ycbxk5JCH_s" 
+         frameborder="0" 
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+         allowfullscreen>
+      </iframe>
+   </div>
+   <div class="page">
+      <p>
+         This is the finished product.
+      </p>
+      <iframe 
+         src="https://www.youtube.com/embed/nNIPB3oM5N4" 
+         frameborder="0" 
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+         allowfullscreen>
+      </iframe>
+   </div>
+   <div class="page">
+      <h2>Super Mareo Bruhs</h2>
+      <p>
+         Tetris wasn't the only game I made for it. I made a Mario game, first.
+         The level was purposely designed for expert players to be able to
+         speed-run through it while killing everything and collecting all coins.
+         Here is me doing a perfect clear.
+      </p>
+      <iframe src="https://www.youtube.com/embed/qV5Ky9aOe-k" 
+         frameborder="0" 
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+         allowfullscreen>
+      </iframe>
+      <p>
+         The sound effects for the game are ripped from an
+         <a href="https://www.youtube.com/watch?v=u9wp6cz0A1o">amazing video made by Jake "virt" Kaufman</a>,
+         another extremely talented someone I met in #mod_shrine.
+      </p>
+   </div>
+</template>
+
+<template id="panel_rxg" class="panel" data-year="2013-2014" data-title="RXG Sites">
+   <div class="page">
+      <p>
+         @WhiteThunder and I put together a store site for our community.
+         I built most of the PayPal integration while he worked on a fantastic frontend.
+      </p>
+      <p class="centered">
+         <img src="res/rxgstore1.png" title="RXG Store landing page." class="large">
+      </p>
+      <p>
+         I designed the interface between the site and our game servers, and then created
+         several virtual items that can be bought on the store and then used in-game via
+         custom plugins.
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         One of the items on the menu crashes the server and costs $100.
+         Well worth the price? Yes! According to one of our customer's positive review.
+      </p>
+      <p class="centered">
+         <img src="res/rxgstore2.png" title="Nuke item description."><!--
+      --><img src="res/rxgstore3.png" title="Positive customer review.">
+      </p>
+      <p>
+         Source code is
+         <a href="https://github.com/ReflexGamers/rxgstore">available on GitHub</a>.
+         So are <a href="https://github.com/mukunda-/rxg-plugins">all of our server plugins</a>.
+      </p>
+   </div>
+   <div class="page">
+      <h2>RXG Demos</h2>
+      <p>
+         Another service I created for our gameservers was an automatic demo
+         recorder. Source games typically have the ability to record gameplay,
+         and I wrote a server modification to automatically transfer those gameplay
+         files to a publicly viewable repository, complete with meta information.
+      </p>
+      <p class="centered">
+         <img src="res/rxgdemos.png" title="RXG demos repository." class="large">
+      </p>
+      <p>
+         The web side is written in PHP, with a sort of REST API exposed to upload
+         and register demos. 
+         <a href="https://github.com/mukunda-/rxgdemos">The source code is public here</a>.
+      </p>
+   </div>
+</template>
+
+<template id="panel_java" class="panel" data-year="2014" data-title="Java">
+   <div class="page">
+      <p class="centered">
+         <img src="res/javalogo.png" title="Java!">
+      </p>
+      <p>
+         I like to say that I'm a fast learner. For example, in
+         late 2014, I wanted to write some Minecraft modifications,
+         so I opened the Java manual, read it completely (it took three days),
+         and directly after I was writing robust Java code, complete with
+         proper packaging practices, database work, JavaDoc comments, 
+         and safe concurrent programming.
+      </p>
+      <p>I actually really like how the Java manual is written.</p>
+   </div>
+   <div class="page">
+      <p>
+         I was working on creating a new experience for Minecraft players,
+         but sadly due to the new legal issues Bukkit faced, I decided to
+         put that project on the shelf.
+      </p>
+      <p class="centered">
+         <img src="res/java1.png" title="Java was fairly pleasing to work with." class="large">
+      </p>
+      <p>
+         I haven't written Java in a while, but it is certainly up there
+         on likeable languages for me.
+      </p>
+   </div>
+</template>
+
+<template id="panel_myhome" class="panel" data-year="2016" data-title="My Home">
+   <div class="page">
+      <p>
+         I might be a huge geek, but I have some stories away from computers, too.
+         Construction is my family's trade, and I live in this home that I built
+         with my family. The entire thing.
+      </p>
+      <p class="centered">
+         <img src="res/home/1.jpg" title="Plotting."><!--
+      --><img src="res/home/2.jpg" title="Steel being planted."><!--
+      --><img src="res/home/3.jpg" title="My dirty hand."><!--
+      --><img src="res/home/4.jpg" title="Forms for concrete.">
+      </p>
+   </div>
+   <div class="page">
+      <p class="centered">
+         <img src="res/home/5.jpg" title="Pouring the concrete."><!--
+      --><img src="res/home/6.jpg" title="The finished forms."><!--
+      --><img src="res/home/7.jpg" title="Post slab-pouring."><!--
+      --><img src="res/home/8.jpg" title="Framing.">
+      </p>
+   </div>
+   <div class="page">
+      <p class="centered">
+         <img src="res/home/9.jpg" title="Scared of heights?"><!--
+      --><img src="res/home/10.jpg" title="Crane and rafters."><!--
+      --><img src="res/home/11.jpg" title="A long day."><!--
+      --><img src="res/home/12.jpg" title="Sheathing.">
+      </p>
+   </div>
+   <div class="page">
+      <p class="centered">
+         <img src="res/home/13.jpg" title="Roofing."><!--
+      --><img src="res/home/14.jpg" title="Shingles."><!--
+      --><img src="res/home/15.jpg" title="Siding."><!--
+      --><img src="res/home/16.jpg" title="A simple design.">
+      </p>
+   </div>
+   <div class="page">
+      <p class="centered">
+         <img src="res/home/17.jpg" title="Early kitchen."><!--
+      --><img src="res/home/18.jpg" title="Living space.">
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         This wasn't the only home I built either. Around 2008 I finished
+         another house much the same in Dallas, Texas. Again, from the grass up.
+      </p>
+   </div>
+</template>
+
+<template id="panel_crossrp" class="panel" data-year="2018" data-title="Cross RP and WoW">
+   <div class="page">
+      <p>
+         This is a picture of over a thousand players in
+         World of Warcraft gathering after an amazing virtual fair in 2018,
+         the annual Tournament of Ages on Moon Guard.
+      </p>
+      <p class="centered">
+         <img class="large"src="res/crossrp1.jpg" title="Tournament of Ages 2018 closing ceremony.">
+      </p>
+      <p>
+         That year was particularly special because my project
+         allowed players of both factions to talk to each other freely,
+         something completely unthinkable before.
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         Just before the release of Battle for Azeroth, I created Cross RP,
+         using the newly released "Communities" feature to bridge
+         the language divide between factions, blowing away the gates for
+         cross-faction role-play enthusiasts.
+      </p>
+      <p>
+         It had a massive welcoming, with a
+         <a href="https://www.reddit.com/r/wow/comments/95l87e/the_final_staredown_drums_of_war_campaign_finale/">huge event on Argent Dawn-EU</a>
+         being the first to use it.
+      </p>
+      <p class="centered">
+         <img src="res/crossrp3.jpg" title="A happy customer." class="large">
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         Not to boast, but I would credit a lot of Cross RP's viral adoption
+         and success to its expert design. Here are some points that were
+         bulleted in the source code at the start.
+      </p>
+      <p class="centered">
+         <img src="res/crossrp2.png" class="large" title="Cross RP design notes.">
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         It's also just plain amazing. I get carried away when it comes to
+         attention to detail.
+      </p>
+      <p>
+         A typical implementation would just translate text in the chatbox, but
+         I wanted the chat bubbles to be translated too.
+      </p>
+      <p>
+         This is an early video before I redid the communications layer to
+         synchronize translation data with outgoing chat, so the translations
+         don't have the short delay shown. Instant and seamless.
+      </p>
+      <p class="centered">
+         <video width="100%" muted loop autoplay>
+            <source src="res/crossrp.mp4" type="video/mp4">
+         </video>
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         Some months later, Blizzard patched the game and incidentally removed the API Cross RP was
+         depending on. They said that it was an unfortunate side effect, and introduced the
+         Elixir of Tongues item to compensate, which essentially provides
+         the same functionality of Cross RP, all without requiring an addon.
+         Thanks Blizzard!
+      </p>
+   </div>
+   <div class="page">
+      <p>
+         I still had to rework my code to transfer role-play character profiles across the
+         faction divide, basically doing the impossible. I'll spare you the details unless
+         you ask, but I essentially built a peer-to-peer network and protocol, turning some
+         of my userbase into routers to pass data where it needs to go.
+      </p>
+   </div>
+   <div class="page">
+      <h2>Other Modifications</h2>
+      <p>
+         I've written <a href="https://www.curseforge.com/members/tammymg/projects">multiple popular addons</a>
+         that their users can't live without, as well as 
+         <a href="https://www.reddit.com/r/wow/comments/368v5i/mythiccool_weakauras/">a ton of other UI modifications</a>.
+         I can really appreciate platforms and games that offer this
+         flexibility for developers like myself.
+      </p>
+      <p>
+         I was the #1 survival hunter in the world for a few days during
+         Emerald Nightmare mythic progression. It was one of the hardest
+         specializations to play, but I designed an 
+         <a href="https://wago.io/4JarwDVg7">incredible UI</a> to
+         trivialize it.
+      </p>
+      <p class="centered">
+         <video width="100%" controls>
+            <source src="res/svnewmok.mp4" type="video/mp4">
+         </video>
+      </p>
+   </div>
+</template>
+<!-- ////////////////////////////////////////////////////////////////////// -->
    </head>
    <body>
-      <template id="panel1" class="panel" data-year="1998" data-title="Day Zero">
-         <div class="page">
-            <p>
-               My first line of code was a conditional statement for a
-               Fahrenheit to Celsius converter, copied from the Microsoft Visual
-               Basic 6.0 help manual, written when I was 8 years old.
-            </p>
-            <p style="text-align:center">
-               "If KeyAscii = 13 Then"
-            </p>
-            <p style="text-align:center">
-               That's when my trial by fire began.
-            </p>
-            
-         </div>
-
-         <div class="page">
-            <p>
-               Without teachers or books, it was a long few years of
-               experimentation, building small apps and games in the worst
-               way imaginable.
-            </p>
-            <p>
-               I've written a lot of embarrassing code, but we all started
-               somewhere, right?
-            </p>
-            <p>
-               Eventually I would connect with other developers on the world
-               wide web, and I owe a lot to them for helping me along the way.
-            </p>
-         </div>
-
-         <div class="page">
-            <p>
-               I toyed with Visual Basic 6.0 for years, eventually learning about
-               DirectX libraries like DirectDraw to render 2D graphics and tilemaps.
-               (I really love tilemaps.)
-            </p>
-            <p>
-               After finding a ripped sprite sheet of Mario graphics, I made my
-               own basic iteration of "Super Mario."
-               
-            </p>
-            <p>
-               Having never played
-               the original game before, it was a somewhat unique result. The source code,
-               complete with custom map editors, is stuck somewhere on old zip disks.
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_jp4" class="panel" data-year="2003" data-title="Jetpack 4">
-         <div class="page">
-            <p>
-               After finishing several games, I created Jetpack 4, which was a four-player 
-               (via split-screen and gamepads) sidescroller with open-ended gameplay.
-               Fly around, blow stuff up, build, and hurt each other.
-            </p>
-            <p class="centered">
-               <img src="res/jp4_1.jpg" title="Blowing up a bulk of C4.">
-               <img src="res/jp4_2.jpg" title="4-player split screen.">
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               My friends would come over, and we'd play this game for hours on end. I
-               would go on to write several revisions and patches for more to play with.
-            </p>
-            <p class="centered">
-               <img src="res/jp4_3.jpg" title="Blowing someone up.">
-               <img src="res/jp4_4.jpg" title="Building a wall.">
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_jp2" class="panel" data-year="2004" data-title="Jetpack 2">
-         <div class="page">
-            <p>
-               When I was 14 I sold my first game, a port of Jetpack 4 to
-               the GameBoy Advance. Read more about the story below if you want, or just
-               watch a review on it.
-            </p>
-         </div>
-         <div class="page">
-            <iframe width="100%" height="50vh" src="https://www.youtube.com/embed/O_yvyKQ3X8w?start=508" 
-                  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen></iframe>
-         </div>
-         <div class="page">
-            <div class="centered"><img src="res/cprog.png" title="This logo hasn't changed since then..."></div>
-            <p>
-               It was around this time I became interested in game-console programming.
-               I learned C from resources like cprogramming.com. And I learned about console
-               programming from The PERN Project (Nintendo Reverse Engineering Project).
-            </p>
-            <p>
-               The GameBoy Advance had an incredible homebrew community, and I'm glad to have
-               been a part of it.
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               In early 2004, a company reached out to the community with an interest to
-               buy indie games for publishing. The deadline was one month, and I worked
-               non-stop to port my PC game to the GameBoy Advance.
-            </p>
-            <p>
-               It wasn't easy, but I got it done, and they accepted it.
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_adventurer" class="panel" data-year="2005" data-title="Adventurer">
-         <div class="page">
-            <p>
-               Similar to Lode Runner, this is a GameBoy Advance puzzle platformer I made for a Kraln.com competition.
-               A big feature is the large red bricks you can push around or carry to squish enemies or make paths.
-            </p>
-            <p class="centered">
-               <img src="res/adventurer1.png" title="Splash screen.">
-               <img src="res/adventurer2.png" title="Title screen.">
-               <img src="res/adventurer3.png" title="The last level.">
-               <img src="res/adventurer6.png" title="Carrying a red brick.">
-            </p>
-         </div>
-         <div class="page">
-            <video autoplay muted width="100%" loop>
-               <source src="res/adventurer.mp4" type="video/mp4">
-            </video>
-         </div>
-         <div class="page">
-            <p>
-               The game features 50 levels, all designed in my easy to use graphical level
-               editor, courtesy of Visual Basic.
-            </p>
-            
-            <p class="centered">
-               <img src="res/adventurer_le.png" class="large" title="Adventurer level editor.">
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               A lot of code was hand-optimized in ARM assembly code to maximize performance.
-            </p>
-            <p class="centered">
-               <img src="res/adventurer4.png" title="Assembly is not maintainable.">
-               <img src="res/adventurer5.png" title="This is a bad idea.">
-            </p>
-            <p class="centered">
-               <a href="https://mukunda.com/projects.html">Source code and game available here.</a>
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_x86" class="panel" data-year="2007" data-title="x86 Study">
-         <div class="page">
-            <p>
-               I missed the era of early 90s programming and made up for that here, sort of.
-               After installing MS-DOS on my laptop, I proceeded to study x86 architecture.
-            </p>
-            <p>
-               I had a <a href="https://twitter.com/_mukunda/status/1259456079370608640">Pentium 4</a> at the time, which was still a marvel of engineering. I
-               learned about its rich pipeline and elaborate instruction set, and then
-               wrote some small programs to play with it.
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               The source code for my x86 projects are unfortunately on a defunct hard drive.
-            </p>
-            <p>
-               One was a 3D renderer written for DOS, with the raster code written in x86
-               assembly. Of course I wrote this on DOS, too, in edit.exe, to taste the authentic
-               early 90s developer experience.
-            </p>
-            <p>
-               Another project was a falling sand game, called FastSand,
-               optimized with x86 assembly.
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               It wasn't long before I learned that the incredible engineering behind the
-               x86 processor renders hand-coded assembly
-               <a href="https://blog.mukunda.com/what-amazes-you/">mostly useless</a>.
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_maxmod" class="panel" data-year="2008" data-title="Maxmod">
-         <div class="page">
-            <p>
-               A commercial quality music and sound engine written entirely in ARM assembly code.
-            </p>
-            <iframe 
-                    src="https://www.youtube.com/embed/QsinToyyXbg" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
-         </div>
-         <div class="page">
-            <p>
-               The above example is running on the Nintendo DS. It features taking advantage
-               of the 16-channel hardware mixer while extending that to 30 channels with
-               software mixing.
-            </p>
-            <p>
-               The library targets both the GameBoy Advance and the Nintendo DS. Unfortunately due to
-               strict licensing restrictions (you are not allowed to run code on the ARM7 co-processor,
-               which was where my driver was installed), it could not be used in commercial Nintendo DS
-               games.
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_superwings" class="panel" data-year="2008" data-title="Super Wings">
-         <div class="page">
-            <p>
-               Directly after writing Maxmod, I employed it in a game I wrote for a
-               <a href="http://www.pdroms.de/">PDRoms</a> competition. The rom nearly
-               fit in 256KB of memory, featuring three levels, action-packed bosses,
-               and deliberate Engrish to tie it all together.
-            </p>
-            <p class="centered">
-               <a href="https://www.engadget.com/2008-03-19-super-wings-download-this-game-now.html">"Download this game now" - engadget</a>
-            </p>
-            <p class="centered">
-               
-               <video autoplay muted loop alt="hello">
-                  <source src="res/sw2.mp4" type="video/mp4">
-               </video>
-               
-               <video autoplay muted loop>
-                  <source src="res/sw4.mp4" type="video/mp4">
-               </video>
-               
-            </p>
-         </div>
-         <div class="page">
-            <p class="centered">
-               <video autoplay muted loop>
-                  <source src="res/sw1.mp4" type="video/mp4">
-               </video>
-               <video autoplay muted loop>
-                  <source src="res/sw3.mp4" type="video/mp4">
-               </video>
-               <video autoplay muted loop>
-                  <source src="res/sw5.mp4" type="video/mp4">
-               </video>
-               <video autoplay muted loop>
-                  <source src="res/sw6.mp4" type="video/mp4">
-               </video>
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               I created most of the graphics and music myself. coda and xaimus
-               from #mod_shrine (EsperNet) wrote two fantastic boss themes.
-            </p>
-            <p>
-               Some of the tracks have cues embedded in the channels to synchronize game events.
-            </p>
-            <p class="centered">
-               <img src="res/swgfx1.png" title="Don't you love font bitmaps?">
-               <img src="res/swgfx2.png" title="The bulk of the game graphics in their 4-color glory.">
-               <img src="res/swmusic1.png" title="The SF8 command triggers a shuriken storm.">
-               <img src="res/swmusic2.png" title="The SF2 command makes the enemy ship fire a batch of missiles.">
-            </p>
-            <p class="centered">
-               <a href="https://github.com/mukunda-/superwings">Source Code on GitHub</a>
-            </p>
-         </div>
-      </template>
-<!--
-      <template id="panel_ewa057" class="panel" data-year="2008" data-title="EXCITING WINTERY ADVENTURE 0.57">
-         <div class="page">
-            <p>
-               I completely forgot that I wrote this joke for the Drunken Coders Winter 2008 competition, so it deserves a special place here.
-            </p>
-            <p class="centered">
-               <img src="res/ewa1.png" title="Extreme gameplay.">
-               <img src="res/ewa2.png" title="User manual.">
-            </p>
-         </div>
-      </template>
-   -->
-      <template id="panel_it2nsf" class="panel" data-year="2009" data-title="it2nsf">
-         <div class="page">
-            <p>
-               The successor to s3m2nsf, this supports MML (music macro language)
-               techniques to create unique instrument sounds.
-            </p>
-            <p>A preprocessor program
-               generates samples that emulate the final sound from the NES driver which
-               musicians can use to compose their track easily.
-            </p>
-            <p class="centered">
-               <img src="res/it2nsf1.png" title="A part of the user manual.">
-               <img src="res/it2nsf2.png" title="Another part of the user manual.">
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               The NES sound driver is written in 6502 assembly, and the conversion program is written in C++.
-            </p>
-            <p class="centered">
-               <a href="https://github.com/mukunda-/it2nsf">Source Code on GitHub</a>
-            </p>
-            <p class="centered">
-               <img src="res/it2nsf3.png" title="Credits.">
-            </p>
-         </div>
-         
-         <div class="page">
-            <p>
-               The precursor to it2nsf is s3m2nsf, a simpler version, a tool that helps tracker fans easily
-               create music for the Nintendo Entertainment System. The conversion 
-               software was coded by <a href="https://twitter.com/reduzio">@reduz</a>, a member of the
-               #mod_shrine (EsperNet) community. I wrote the 6502-based S3M player in assembly code.
-            </p>
-            <p class="centered">
-               <img src="res/s3m2nsf1.png" title="I love in-depth txt manuals.">
-               <img src="res/s3m2nsf2.png" title="Complete with ASCII art.">
-               <img src="res/s3m2nsf3.png" title="The vibrato effect.">
-               <img src="res/s3m2nsf4.png" title="Portamento, or pitch-slide code.">
-            </p>
-            <p class="centered">
-               <a href="https://github.com/mukunda-/s3m2nsf">Source Code on GitHub</a>
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_skipp" class="panel" data-year="2009" data-title="Skipp and Friends">
-         <div class="page">
-            <p class="centered">
-               <img src="res/skipp1.png" title="The title screen.">
-            </p>
-            <p>
-               This is the 1st place winner of PDRoms competition #4.01. I'm proud to
-               be one of very few developers to create a Super Nintendo game from scratch.
-            </p>
-            <p>
-               I found out that someone even wrote a <a href="https://gamefaqs.gamespot.com/snes/181502-super-4-in-1-multicart/faqs/72589">full walkthrough</a> for this game. I appreciate it, @Lanzz.
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               The game featured a
-               <a href="https://www.zophar.net/music/nintendo-snes-spc/skipp-and-friends">complete original soundtrack</a>
-               composed by @madbrain and
-               <a href="https://twitter.com/surasshu">@surasshu</a>,
-               two amazing artists that I met in #mod_shrine.
-            </p>
-            <iframe src="https://www.youtube.com/embed/axQeMVbNauo"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-         </div>
-         <div class="page">
-            <p>
-               The competition deadline was two months, and I didn't have any time leftover.
-            </p>
-            <p>
-               The first month was spent designing and building <a href="https://github.com/mukunda-/snesmod/">SNESMOD</a>,
-               an Impulse Tracker-based sound and music engine that rivals commercial legends.
-               I used what I learned from making XMSNES and pushed the boundaries.
-            </p>
-            <p>
-               SNESMOD supports streaming PCM sounds from the SNES cartridge, all nightmarishly
-               on a <a href="https://mukunda.com/stuff/SPCTECH.html">500khz computer</a>.
-               Tooling, documentation, and examples were all extremely limited or nil.
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               The game had stickmen graphics all the way until the last week before the deadline, but
-               <a href="https://twitter.com/codatrigger">@coda</a>
-               pitched in and did some animation work while I worked on adding all of
-               the levels in a complex map editor I built with Visual Basic.
-            </p>
-            <p class="centered">
-               <img src="res/skipp_leveleditor.png" class="large">
-            </p>
-
-         </div>
-         
-         <div class="page">
-            <p>
-               Ask me about the story one hour before the deadline, when I decided the
-               game needed a final boss. 
-               <a href="https://en.wikipedia.org/wiki/Cyclone_Aila">Cyclone Aila</a>
-               was right outside.
-            </p>
-         </div>
-         
-         <div class="page">
-            <h2>XMSNES and #mod_shrine</h2>
-            <p>
-               Sometime in 2007, I joined #mod_shrine on EsperNet, a fantastic community
-               that revolves around the greatness of tracker-based music.
-            </p>
-            <p>
-               I had been fascinated by music and sound drivers for a while, and even tried my
-               hand at making some amateur music compositions.
-            </p>
-            <p>
-               I built several module-based music players, and XMSNES was one of them, an
-               XM module player for the Super Nintendo and the precursor to SNESMOD.
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               Similar to SNESMOD, XMSNES comes with a converter and sound driver that was split
-               across the two processors in the SNES. Below shows a test demo of it.
-            </p>
-            <p>
-               <video width="100%" controls>
-                  <source src="res/xmsnes.mp4" type="video/mp4">
-               </video>
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_asflit" class="panel" data-year="2009" data-title="AsFLIT">
-         <div class="page">
-            <p>
-               A brief mention here. With all of my work done on tracker-based
-               sound solutions, I built AsFLIT for an individual interested in
-               bringing this power to the Flash platform.
-            </p>
-            
-            <p>
-               It put the latest Flash standard
-               to the test, leveraging the JIT-optimized ActionScript 3 engine to
-               mix dynamic PCM channels realtime.
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_supernsf" class="panel" data-year="2010" data-title="SuperNSF">
-         <div class="page">
-            <p>
-               A tiny marvel of engineering, this is a music player for the NES with
-               the capability to combine a mix of NES hardware waveforms alongside
-               software-mixed PCM.
-            </p>
-            <iframe src="https://www.youtube.com/embed/QOq9Icu2GQs" 
-               frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-               allowfullscreen>
-            </iframe>
-         </div>
-         <div class="page">
-            <p>
-               The NES does not have hardware to time PCM playback.
-            </p>
-               
-            <p>Whenever a
-               block of code was executed, I needed to keep track of the exact cycle count
-               (yes, counting everything manually)
-               so I could time the software mixer which outputs a single sample at
-               a time.
-            </p>
-            <p>
-               I used an array of dummy instructions to manually insert cycle delays.
-            </p>
-            
-         </div>
-         <div class="page">
-            <p>
-               A funny quirk was that the pitch of the sound would change slightly if you played
-               samples at high frequencies. The memory page-crossing code was too complex to
-               account for, so it made tiny delays in the output stream.
-            </p>
-            
-            <p class="centered">
-               <a href="https://github.com/mukunda-/supernsf">Source Code on GitHub</a>
-            </p>
-         </div>
-         
-         <div class="page">
-            <p>
-               This project was based off of some previous tinkering I did with
-               @tumult from #mod_shrine called <a href="https://github.com/mukunda-/pcmnsf">PCMNSF</a>,
-               which was a simpler 4-channel MOD player.
-            </p>
-         </div>
-      </template>
-      <template id="panel_unbound" class="panel" data-year="2011" data-title="The Unbound Project">
-         <div class="page">
-            <p>
-               This is a game engine I've been writing in C++. I'll get around to finishing it, one day...
-            </p>
-            <p class="centered">
-               <video autoplay muted width="100%" loop controls>
-                  <source src="res/archubos.mp4" type="video/mp4">
-               </video>
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               I've gotten immense practice from working on this project (how I know how to
-               write this WebGL program with fragment shaders). Below is my testing
-               of mass-scale instanced render methods.
-            </p>
-            <p class="centered">
-               <img class="large" src="res/ab15.jpg" title="A huge mountain of instanced cubes.">
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               
-            </p>
-            <p class="centered">
-               <img class="large" src="res/ab22.jpg" title="Testing realtime cloud generation techniques (GPU-side).">
-            </p>
-         </div>
-      </template>
-      <template id="panel_diablo3" class="panel" data-year="2012" data-title="I'm a Gamer">
-         <div class="page">
-            <p>
-               Strange flex, but I was one of the few demon hunters in the world to tackle
-               early patch (HARD) Inferno with an extremely weak gearset (even a little spider
-               would one-shot me, while everything took forever to kill).
-               I livestreamed a complete clear. Ghom was a nearly impossible boss.
-            </p>
-            <p class="centered">
-               <video autoplay controls width="100%" loop muted>
-                  <source src="res/diablo.mp4" type="video/mp4">
-               </video>
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_sourcemodding" class="panel" data-year="2012" data-title="Source Modding">
-         <div class="page">
-            <p>
-               When CS:GO was released, I became a part of
-               <a href="https://reflex-gamers.com">Reflex Gamers</a>,
-               and found a deep fascination in the flexibility of the Source engine.
-            </p>
-            <p>
-               I went on to create tons of neat maps, mods, and crazy things.
-               I'm really not your typical modder.
-            </p>
-            <p class="centered">
-               <img src="res/smmeme.jpg" title="You'd hardly remember you were playing CS:GO.">
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               This was a "pirate wars" event that I hosted, complete with a custom maps and crazily
-               modified elements. Ridiculously fun.
-            </p>
-            <p class="centered">
-               <video controls width="100%" onloadstart="this.volume=0.5">
-                  <source src="res/pw.mp4" type="video/mp4">
-               </video>
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               I wrote tons of modifications for our servers, like the ability for administrators
-               to manifest themselves as visible ghosts, pick up players, and kill them if
-               they're found cheating.
-            </p>
-            <iframe src="https://www.youtube.com/embed/M_Zj88rjmlE"
-               frameborder="0" 
-               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-               allowfullscreen>
-            </iframe>
-         </div>
-         <div class="page">
-            <p>
-               I also wrote a <a href="https://github.com/mukunda-/servertools">handful of tools</a> to help manage our collection of gameservers.
-            </p>
-            <p class="centered">
-               <img class="large" src="res/servertools.png">
-            </p>
-         </div>
-      </template>
-      <template id="panel_smes" class="panel" data-year="2013" data-title="SMES">
-         
-         <div class="page">
-            <p>
-               Real gamers play games inside their games. This mod was covered
-               by several gaming news sites, a unique feat that featured a
-               complete video game console inside of Counter-Strike.
-            </p>
-            <iframe src="https://www.youtube.com/embed/5pMQ7oBHdPE" 
-               frameborder="0" 
-               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-               allowfullscreen>
-            </iframe>
-         </div>
-         <div class="page">
-            <p>
-               This is a video of the early development phase of my tetris game.
-               I made the office lounge map, too, my personal test environment with a TV.
-            </p>
-            <iframe src="https://www.youtube.com/embed/ycbxk5JCH_s" 
-               frameborder="0" 
-               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-               allowfullscreen>
-            </iframe>
-         </div>
-         <div class="page">
-            <p>
-               This is the finished product.
-            </p>
-            <iframe 
-               src="https://www.youtube.com/embed/nNIPB3oM5N4" 
-               frameborder="0" 
-               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-               allowfullscreen>
-            </iframe>
-         </div>
-         <div class="page">
-            <p>
-               Tetris wasn't the only game I made for it. I made a Mario game, first.
-               The level was purposely designed for expert players to be able to
-               speed-run through it while killing everything and collecting all coins.
-               Here is me doing a perfect clear.
-            </p>
-            <iframe src="https://www.youtube.com/embed/qV5Ky9aOe-k" 
-               frameborder="0" 
-               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-               allowfullscreen>
-            </iframe>
-            <p>
-               The sound effects for the game are ripped from an
-               <a href="https://www.youtube.com/watch?v=u9wp6cz0A1o">amazing video made by Jake "virt" Kaufman</a>,
-               another extremely talented someone I met in #mod_shrine.
-            </p>
-         </div>
-         <div class="page">
-            <p class="centered">
-               <a href="https://kotaku.com/1596972618#!">
-                  "You shouldn't interrupt a Counter-Strike player's game of Tetris." - Kotaku
-               </a>
-            </p>
-            <p class="centered">
-               <a href="https://www.pcgamer.com/csgo-super-mareo-bruhs/">
-                  "The plugin's coder deserves a barrage of internet 
-                  high-fives for this feat." - PC Gamer
-               </a>
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_rxg" class="panel" data-year="2014" data-title="RXG Sites">
-         <div class="page">
-            <p>
-               My pal @WhiteThunder and I put together a store site for our community.
-               I built most of the PayPal integration while he worked on a fantastic frontend.
-            </p>
-            <p class="centered">
-               <img src="res/rxgstore1.png" title="RXG Store landing page.">
-            </p>
-            <p>
-               I designed the interface between the site and our game servers, and then created
-               several virtual items that can be bought on the store and then used in-game via
-               custom plugins.
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               One of the items on the menu crashes the server and costs $100.
-               Well worth the price? Yes! According to one of our customer's positive review.
-            </p>
-            <p class="centered">
-               <img src="res/rxgstore2.png" title="Nuke item description.">
-               <img src="res/rxgstore3.png" title="Positive customer review.">
-            </p>
-            <p>
-               Source code is
-               <a href="https://github.com/ReflexGamers/rxgstore">available on GitHub</a>.
-               So are <a href="https://github.com/mukunda-/rxg-plugins">all of our server plugins</a>.
-            </p>
-         </div>
-         <div class="page">
-            <h2>RXG Demos</h2>
-            <p>
-               Another service I created for our gameservers was an automatic demo
-               recorder. Source games typically have the ability to record gameplay,
-               and I wrote a server modification to automatically transfer those gameplay
-               files to a publicly viewable repository, complete with meta information.
-            </p>
-            <p class="centered">
-               <img src="res/rxgdemos.png" title="RXG demos repository.">
-            </p>
-            <p>
-               The web side is written in PHP, with a sort of REST API exposed to upload
-               and register demos. 
-               <a href="https://github.com/mukunda-/rxgdemos">The source code is public here</a>.
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_java" class="panel" data-year="2014" data-title="Java">
-         <div class="page">
-            <p class="centered">
-               <img src="res/javalogo.png" title="Java!">
-            </p>
-            <p>
-               I like to say that I'm a strong generalist.
-               In late 2014, I wanted to write some Minecraft modifications,
-               so I opened the Java manual, read it completely (it took three days),
-               and directly after I was writing robust Java code, complete with
-               proper packaging practices, database work, JavaDoc comments, 
-               and safe concurrent programming.
-            </p>
-            <p>I actually really like how the Java manual is written.</p>
-         </div>
-         <div class="page">
-            <p>
-               I was working on creating a new experience for Minecraft players,
-               but sadly due to the new legal issues Bukkit faced, I decided to
-               put this project on the shelf.
-            </p>
-            <p class="centered">
-               <img src="res/java1.png" title="Java was fairly pleasing to work with.">
-            </p>
-            <p>
-               I haven't written Java in a while, but it is certainly up there
-               on likeable languages for me.
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_myhome" class="panel" data-year="2016" data-title="My Home">
-         <div class="page">
-            <p>
-               I might be a huge geek, but I have some stories away from the computer, too.
-               Construction is my family's trade, and I live in this home that I built
-               with my family. The entire thing.
-            </p>
-            <p class="centered">
-               <img src="res/home/1.jpg" title="Plotting.">
-               <img src="res/home/2.jpg" title="Steel being planted.">
-               <img src="res/home/3.jpg" title="My dirty hand.">
-               <img src="res/home/4.jpg" title="Forms for concrete.">
-            </p>
-         </div>
-         <div class="page">
-            <p class="centered">
-               <img src="res/home/5.jpg" title="Pouring the concrete.">
-               <img src="res/home/6.jpg" title="The finished forms.">
-               <img src="res/home/7.jpg" title="Post slab-pouring.">
-               <img src="res/home/8.jpg" title="Framing.">
-            </p>
-         </div>
-         <div class="page">
-            <p class="centered">
-               <img src="res/home/9.jpg" title="Scared of heights?">
-               <img src="res/home/10.jpg" title="Crane and rafters.">
-               <img src="res/home/11.jpg" title="A long day.">
-               <img src="res/home/12.jpg" title="Sheathing.">
-            </p>
-         </div>
-         <div class="page">
-            <p class="centered">
-               <img src="res/home/13.jpg" title="Roofing.">
-               <img src="res/home/14.jpg" title="Shingles.">
-               <img src="res/home/15.jpg" title="Siding.">
-               <img src="res/home/16.jpg" title="A simple design.">
-            </p>
-         </div>
-         <div class="page">
-            <p class="centered">
-               <img src="res/home/17.jpg" title="Early kitchen.">
-               <img src="res/home/18.jpg" title="Living space.">
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               This wasn't the only home I built either. Around 2008 I finished
-               another house much the same in Dallas, Texas. Again, from the grass up.
-            </p>
-         </div>
-      </template>
-
-      <template id="panel_crossrp" class="panel" data-year="2018" data-title="Cross RP and WoW">
-         <div class="page">
-            <p>
-               This is a picture of about a thousand players in
-               World of Warcraft gathering after an amazing virtual fair in 2018,
-               the annual Tournament of Ages on Moon Guard. That year was particularly
-               special because both factions could talk to each other freely with my
-               addon, something completely unthinkable before.
-            </p>
-            <p class="centered">
-               <img class="large"src="res/crossrp1.jpg" title="Tournament of Ages 2018 closing ceremony.">
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               Just before the release of Battle for Azeroth, I created Cross RP,
-               taking advantage of the newly released "Communities" feature to bridge
-               the language divide between factions, opening up new venues for cross-faction
-               role-play enthusiasts. It had a massive welcoming, with a huge event on
-               Argent Dawn-EU being the first to use it.
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               Not to boast, but I would credit a lot of Cross RP's viral adoption
-               and success to its expert design. Here are some points that were
-               bulleted in the source code at the start.
-            </p>
-            <p class="centered">
-               <img src="res/crossrp2.png" class="large" title="Cross RP design notes.">
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               It's also just plain amazing. I get carried away when it comes to attention to detail.
-            </p>
-            <p>
-               A typical implementation would just translate text in the chatbox, but I wanted
-               the chat bubbles to be translated too.
-            </p>
-            <p>
-               This is an early shot before I redid the
-               communications layer to synchronize translation data with outgoing chat, so the
-               translations don't have the short delay shown. Instant and seamless.
-            </p>
-            <p class="centered">
-               <video width="100%" muted loop autoplay>
-                  <source src="res/crossrp.mp4" type="video/mp4">
-               </video>
-            </p>
-         </div>
-         <div class="page">
-            <p>
-               Some months later, Blizzard patched the game and removed the API Cross RP was
-               depending on, but they also introduced the Elixir of Tongues, essentially to
-               provide the same functionality of Cross RP, all without requiring an addon.
-               Thanks Blizzard!
-            </p>
-            <p>
-               Although then I spent a month reworking my addon to still be able to transfer
-               roleplay character profiles across the faction divide. Basically doing the impossible.
-               I'll spare you the details unless you ask, but I essentially built a peer-to-peer
-               network, turning some of my userbase into routers to pass data where it needs to go.
-            </p>
-         </div>
-         <div class="page">
-            <h2>Other Modifications</h2>
-            <p>
-               I've written <a href="https://www.curseforge.com/members/tammymg/projects">multiple popular addons</a>
-               that their users simply cannot live without, as well as numerous smaller modifications
-               to assist players through raiding encounters. I can really appreciate platforms
-               and games that offer this flexibility for developers like myself.
-            </p>
-            <p>
-               I was the #1 survival hunter in the
-               world for a few days during Emerald Nightmare mythic progression. It was one
-               of the hardest specializations to play, but I designed an incredible
-               UI to compensate.
-            </p>
-            <p class="centered">
-               <video width="100%" controls>
-                  <source src="res/svnewmok.mp4" type="video/mp4">
-               </video>
-            </p>
-         </div>
-      </template>
-      <template id="panel_gamer" class="panel" data-year="2020" data-title="Scripting">
-
-      </template>
 
       <canvas id="background"></canvas>
+
       <div id="bottomleft" class="hide">© 2020 Mukunda Johnson</div>
-      <div id="content">
-         
-      </div>
+
+      <div id="content"></div>
       
       <div id="bigtext_container">
-         <div id="bigtext">
-            
-         </div>
-         <div id="bigtext_subtitle">
-           
-         </div>
+         <div id="bigtext"></div>
+         <div id="bigtext_subtitle"></div>
       </div>
-      <div id="scanlines"> </div>
+      
+      <div id="scanlines"></div>
    </body>
 </html>
