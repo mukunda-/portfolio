@@ -34,6 +34,8 @@ let m_panelRotateStartPanel = 0;
 let m_panelAnimateTime      = 0;
 let m_panelTouchTime        = 0;
 
+let m_arrowScroll = 0;
+
 function Start() {
     let [eye] = Camera.Get();
     m_cam = eye;
@@ -51,41 +53,56 @@ function Start() {
     StartFlicker();
     //LoadContent( "panel1" );
 
+    window.addEventListener( "scroll", e => {
+        SetDesiredScroll( PixelsToVH(window.scrollY) );
+    });
+
+    window.addEventListener( "mouseup", e => {
+        if( e.button == 0 ) {
+            // This is just in general to avoid stuck arrow buttons.
+            m_arrowScroll = 0;
+            //console.log( "VERIFY ME!" ); done.
+        }
+    });
 
     // Replace this with native scrolling of element.
+    /*
     document.addEventListener( "wheel", ( e ) => {
         if( e.deltaY > 0 ) {
             Scroll( 5 );
         } else {
             Scroll( -5 );
         }
-    });
+    });*/
 
     // Replace this with native scrolling of element.
     document.addEventListener( "keydown", ( e ) => {
         if( !e.repeat ) {
             if( e.key == "ArrowDown" ) {
                 // down
-                m_keyNav = KEYNAV_DOWN;
+                //m_keyNav = KEYNAV_DOWN;
             } else if( e.key == "ArrowUp" ) {
                 // up arrow
-                m_keyNav = KEYNAV_UP;
+                //m_keyNav = KEYNAV_UP;
             } else if( e.key == "ArrowLeft" ) {
                 PanelLeft();
             } else if( e.key == "ArrowRight" ) {
                 PanelRight();
             } else if( e.key == "PageDown" ) {
                 ScrollDownPage();
+                e.stopPropagation();
+                // TODO
             } else if( e.key == "PageUp" ) {
                 ScrollUpPage();
+                e.stopPropagation();
             }
         }
     });
     document.addEventListener( "keyup", ( e ) => {
         if( e.key == "ArrowDown" ) {
-            m_keyNav &= ~KEYNAV_DOWN;
+            //m_keyNav &= ~KEYNAV_DOWN;
         } else if( e.key == "ArrowUp" ) {
-            m_keyNav &= ~KEYNAV_UP;
+            //m_keyNav &= ~KEYNAV_UP;
         }
     });
 
@@ -145,14 +162,40 @@ function StartPanelDisplay() {
 
     UpdateUpDownArrows();
 
+    window.scrollTo( 0, 0 );
+    UpdateScrollSpace();
+
     Animate.Start( "roller", OnAnimate );
+}
+
+function UpdateScrollSpace() {
+    let windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
+    // [Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
+
+    let sh1 = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let sh2 = content.scrollHeight - content.offsetHeight;
+    
+    if( sh1 != sh2 ) {
+        console.log( "Updating body height.", sh1, sh2 );
+        document.body.style.height = `${windowHeight + sh2}px`;
+        window.scrollTo( 0, VHToPixels(m_desiredScroll) );
+    }
+
+    //const numPanels = GetNumPanels();
+/*
+    if( document.body.scrollWidth != content.offsetWidth * (numPanels - 1) ) {
+        document.body.style.width = `calc(100% + ${content.offsetWidth * (numPanels - 1)}px)`;
+        console.log( "Updating body width." );
+    }*/
 }
 
 function UpdateLeftRightArrows( currentPanel ) {
     const numPanels = GetNumPanels();
     if( currentPanel > 0 ) {
-        Arrows.SetAction( "left", () => {
-            PanelLeft();
+        Arrows.SetAction( "left", (type, e) => {
+            if( type == "click" && e.button == 0 ) {
+                PanelLeft();
+            }
         });
     } else {
         Arrows.SetAction( "left", null );
@@ -160,8 +203,10 @@ function UpdateLeftRightArrows( currentPanel ) {
 
     if( currentPanel < numPanels - 1 && numPanels != 0 ) {
         
-        Arrows.SetAction( "right", () => {
-            PanelRight();
+        Arrows.SetAction( "right", (type, e) => {
+            if( type == "click" && e.button == 0 ) {
+                PanelRight();
+            }
         });
     } else {
         Arrows.SetAction( "right", null );
@@ -176,13 +221,21 @@ function UpdateUpDownArrows() {
     }
 
     if( m_desiredScroll > 1 ) {
-        Arrows.SetAction( "up", ScrollUpPage );
+        Arrows.SetAction( "up", (type, e) => {
+            if( type == "mousedown" && e.button == 0 ) {
+                m_arrowScroll = -1;
+            }
+        });
     } else {
         Arrows.SetAction( "up", null );
     }
     
     if( m_desiredScroll < MaxScroll() - 1 ) {
-        Arrows.SetAction( "down", ScrollDownPage );
+        Arrows.SetAction( "down", (type, e) => {
+            if( type == "mousedown" && e.button == 0 ) {
+                m_arrowScroll = 1;
+            }
+        });
     } else {
         Arrows.SetAction( "down", null );
     }
@@ -223,19 +276,26 @@ function GetRotatedCam() {
 }
 
 function OnAnimate( time, elapsed ) {
+
+    UpdateScrollSpace();
+
     // Rotate camera "down" by desired angle.
     let cam = GetRotatedCam();
     
     Camera.Set( cam.eye, [0, 0, 0], cam.up );
-
+/*
     if( m_keyNav & KEYNAV_UP ) {
         Scroll( -2 * 16 / elapsed );
     } else if( m_keyNav & KEYNAV_DOWN ) {
         Scroll( 2 * 16 / elapsed );
+    }*/
+
+    if( m_arrowScroll != 0 ) {
+        window.scrollBy( 0, VHToPixels(m_arrowScroll * elapsed / 1000 * 100) );
     }
 
     if( m_currentScroll != m_desiredScroll ) {
-        let d = 0.4 ** (elapsed / 250);
+        let d = 0.1 ** (elapsed / 250);
         //let d2 = 0.9 ** (elapsed / 250);
         //let scrolld = (m_currentScroll * d + m_desiredScroll * (1-d)) - m_currentScroll;
         //if( scrolld < 0 && m_maxVSpeed > 0 || scrolld > 0 && m_maxVSpeed < 0 )
@@ -374,18 +434,19 @@ function ScrollUpPage() {
         if( scrollAmount > -pi.top )
             scrollAmount = -pi.top;
         //if( toBottom > pi.displayHeight * 0.9 ) toBottom = pi.displayHeight * 0.9
-        m_desiredScroll -= PixelsToVH( scrollAmount );//toBottom );
+        window.scrollBy( 0, -scrollAmount );
+        //m_desiredScroll -= PixelsToVH( scrollAmount );//toBottom );
         if( scrollAmount / pi.displayHeight < 0.1 && pi.index > 0 )
             return ScrollUpPage();
     } else {
         let amount = -pi.top + pi.displayHeight;
-        m_desiredScroll -= PixelsToVH( amount );
-        
+        //m_desiredScroll -= PixelsToVH( amount );
+        window.scrollBy( 0, -scrollAmount );
         if( amount / pi.displayHeight < 0.1 && pi.index > 0 )
             return ScrollUpPage();
     }
 
-    m_desiredScroll = Smath.Clamp( m_desiredScroll, 0, MaxScroll() );
+    //m_desiredScroll = Smath.Clamp( m_desiredScroll, 0, MaxScroll() );
 }
 
 function Scroll( amount ) {
@@ -402,9 +463,16 @@ function Scroll( amount ) {
     m_desiredScroll = Smath.Clamp( m_desiredScroll, 0, maxScroll );
 }
 
+function SetDesiredScroll( vh ) {
+    m_desiredScroll = vh;
+}
+
 function SetScroll( vh ) {
     vh = Smath.Clamp( vh, 0, MaxScroll() );
     m_currentScroll = vh;
+
+    UpdateScrollSpace();
+    
     let content = document.getElementById( "content" );
     let pixels = Math.round(vh * GetDeviceHeight() / 100);
     

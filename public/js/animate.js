@@ -122,7 +122,7 @@ class Slider {
       this.v2            = start;
    	this.value         = start;
       this.desired       = start;
-      this.slide = slide;
+      this.slide         = slide;
 	}
    
    update( elapsed ) {

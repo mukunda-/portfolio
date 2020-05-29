@@ -9,7 +9,7 @@ function Setup() {
     let upArrow    = CreateArrow( "upArrow", -90 );
 }
 
-function SetAction( id, action ) {
+function SetAction( id, action, actionUp ) {
     let elem = document.getElementById( id + "Arrow" );
     if( !elem ) throw "Invalid ID.";
 
@@ -23,10 +23,10 @@ function SetAction( id, action ) {
     }
 }
 
-function OnArrowClicked( e ) {
+function OnArrowEvent( type, e ) {
     let snippedID = e.currentTarget.id.split("Arrow")[0];
     if( m_actions[snippedID] ) {
-        return m_actions[snippedID]( e );
+        return m_actions[snippedID]( type, e );
     }
 }
 
@@ -60,7 +60,9 @@ function CreateArrow( id, angle ) {
     polyline.setAttribute( "style", "fill:none;stroke:rgb(255,255,255);stroke-width:7" );
     arrow.appendChild( polyline );
 
-    arrow.addEventListener( "click", OnArrowClicked );
+    arrow.addEventListener( "click", e => OnArrowEvent( "click", e ) );
+    arrow.addEventListener( "mousedown", e => OnArrowEvent( "mousedown", e ) );
+    arrow.addEventListener( "mouseup", e => OnArrowEvent( "mouseup", e ) );
 
     document.body.appendChild( arrow );
     return arrow;

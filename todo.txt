@@ -16,3 +16,7 @@ change .page to html5 section
 gaming chapter
 
 game-servers chapter
+
+pause everything when faded out
+
+dont forget skipp was published

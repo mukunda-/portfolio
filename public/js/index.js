@@ -117,10 +117,6 @@ async function Setup() {
       OnResize();
    });
 
-   window.addEventListener( "click", e => {
-      console.log( "CLICKED" );
-   });
-
    ResizeViewport();
    
    hc.gl.clearColor( 0.01, 0.01, 0.05, 1.0 );
