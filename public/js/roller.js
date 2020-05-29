@@ -70,6 +70,10 @@ function Start() {
             } else if( e.key == "ArrowUp" ) {
                 // up arrow
                 m_keyNav = KEYNAV_UP;
+            } else if( e.key == "ArrowLeft" ) {
+                PanelLeft();
+            } else if( e.key == "ArrowRight" ) {
+                PanelRight();
             } else if( e.key == "PageDown" ) {
                 ScrollDownPage();
             } else if( e.key == "PageUp" ) {
@@ -524,6 +528,11 @@ function StartPanelRotate( startDirection ) {
     m_panelAnimateTime = 0;
     m_panelTouchTime   = 0;
 
+    // Full circle in 1 second.
+    //const sliderAngle = new Animate.Slider( 180, 0.025, startingAngle );
+    //const sliderTurn = new Animate.Slider( 300, 0.025, m_panelTurn );
+    const sliderAngle = new Animate.Slider( 0.01, startingAngle );
+    const sliderTurn = new Animate.Slider( 0.01, m_panelTurn );
 
     Animate.Start( "roller", ( time, elapsed ) => {
         m_panelAnimateTime = time;
@@ -532,6 +541,9 @@ function StartPanelRotate( startDirection ) {
         //  that axis when panels are changed.
         // 8 panels to the right is not cancelled out to zero; it is two
         //  full-circle turns.
+
+        sliderAngle.desired = snapAngle;
+        
 
         let turnSpeed = Animate.Slide( 0.95, 0.4, "lerp", time, m_panelTouchTime, m_panelTouchTime+400 );
 
@@ -542,15 +554,19 @@ function StartPanelRotate( startDirection ) {
         //if( time < 500 ) {
             // 500
             //m_scrollAngle = Animate.Slide( startingAngle, snapAngle, "fall", time, 0, 500 );
-            m_scrollAngle = ApplyFactorOrConstSlide( m_scrollAngle, snapAngle, d, 4.0, elapsed / 1000 ); //m_scrollAngle * d + snapAngle * (1-d);
+            //m_scrollAngle = ApplyFactorOrConstSlide( m_scrollAngle, snapAngle, d, 4.0, elapsed / 1000 ); //m_scrollAngle * d + snapAngle * (1-d);
+            m_scrollAngle = sliderAngle.update( elapsed/1000 );
             newCam = GetRotatedCam();
         //} else {
          //   newCam = normalCam;
         //}
 
         let desiredTurn = (m_panel - m_panelTurnOrigin) * 90;
+        sliderTurn.desired = desiredTurn;
+
+        m_panelTurn = sliderTurn.update( elapsed/1000 );
         
-        m_panelTurn = ApplyFactorOrConstSlide( m_panelTurn, desiredTurn, d, 4.0, elapsed / 1000 );
+        //m_panelTurn = ApplyFactorOrConstSlide( m_panelTurn, desiredTurn, d, 4.0, elapsed / 1000 );
         //m_panelTurn = m_panelTurn * d + desiredTurn * (1-d);
         let rotation = Smath.RotateAroundAxis( m_panelRotateUp, m_panelTurn * Math.PI / 180 );
         let tcam = Smath.MultiplyVec3ByMatrix3( newCam.eye, rotation );
@@ -566,7 +582,7 @@ function StartPanelRotate( startDirection ) {
             UpdateColorTheme( currentPanel, currentFraction );
         }
 
-        if( time > m_panelTouchTime + 1800 ) {
+        if( time > m_panelTouchTime + 1800 && sliderTurn.remaining() < 1 && sliderAngle.remaining() < 1 ) {
             StartPanelDisplay();
         }
     });

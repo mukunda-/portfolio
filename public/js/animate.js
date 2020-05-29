@@ -77,12 +77,80 @@ function Update( time ) {
       }
    }
 }
-
+/*
 class Slider {
+	
+   constructor( speed, slide, start ) {
+      start = start || 0;
+      this.currentLinear = start;
+      this.currentReal   = start;
+      this.desired       = start;
+      this.value         = start;
+     
+      this.speed   = speed;//500;   // every period = 1 unit closer.
+      this.slide   = slide;//0.025; // every period = 50% closer.
+   }
+  
+  update( elapsed ) {
+      if( this.currentLinear < this.desired ) {
+         this.currentLinear += this.speed * elapsed;
+         this.currentLinear = this.currentLinear > this.desired ? this.desired : this.currentLinear;
+      } else {
+         this.currentLinear -= this.speed * elapsed;
+         this.currentLinear = this.currentLinear < this.desired ? this.desired : this.currentLinear;
+      }
+       
+      let d = this.slide ** elapsed;
+     
+      let diff = this.currentLinear - this.value;
+      this.value += diff * (1-d);
+      return this.value;
+   }
+  
+   reset( y ) {
+      this.from = this.to = this.value = y;
+   }
+  
+   slideTo( y ) {
+      this.desired = y;
+   }
+}*/
+class Slider {
+	
+ 	constructor( slide, start ) {
+   	this.v1            = start;
+      this.v2            = start;
+   	this.value         = start;
+      this.desired       = start;
+      this.slide = slide;
+	}
    
+   update( elapsed ) {
+      let d = this.slide ** elapsed;
+      // i admit i have no idea what i did here
+      this.v1 += (this.desired - this.v1) * 1.25 * (1-d);
+      this.v2 += (this.v1 - this.v2) * 1.25 * (1-d);
+      if( this.value < this.desired ) {
+         this.value += (this.v2 - this.value) * 1.25 * (1-d);
+         if( this.value > this.desired ) this.value = this.desired;
+      } else {
+         this.value += (this.v2 - this.value) * 1.25 * (1-d);
+         if( this.value < this.desired ) this.value = this.desired;
+      }
+      
+      return this.value;
+   }
+
+   remaining() {
+      return Math.abs(this.desired - this.value);
+   }
+   
+   reset( y ) {
+      this.v1 = this.v2 = this.value = this.desired = y;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 export default {
-   Start, Stop, Update, GetTime, Slide
+   Start, Stop, Update, GetTime, Slide, Slider
 };

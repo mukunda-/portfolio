@@ -12,3 +12,7 @@ pause video elements when out of range.
 move templates to different file
 
 change .page to html5 section
+
+gaming chapter
+
+game-servers chapter
