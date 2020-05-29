@@ -104,6 +104,10 @@ function Update() {
    Render();
 }
 
+export function IsMobile() {
+   return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+}
+
 //-----------------------------------------------------------------------------
 async function Setup() {
    hc.Init( "background", {

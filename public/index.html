@@ -4,6 +4,7 @@
       <meta charset="utf-8">
       <!-- Prevent search engine indexing. -->
       <meta name="robots" content="noindex">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0">
       <link rel="stylesheet" type="text/css" href="index.css"/>
       <script src="js/index.js" type="module"></script>
       
@@ -702,7 +703,8 @@
       <h2>Game-server Plugins</h2>
       <p>
          I coded <a href="https://github.com/mukunda-/rxg-plugins">a lot of customizations</a>
-         for the game-servers we hosted in our community.
+         for the game-servers we hosted in our community. The Source engine is super fun to
+         experiment with.
       </p>
       <p class="centered">
          <video controls width="100%">
@@ -713,9 +715,9 @@
    <div class="page">
       <h2>ServerTools</h2>
       <p>
+         To manage our growing plugin list and server files, 
          I wrote a <a href="https://github.com/mukunda-/servertools">handful of tools</a>
-         to help manage our collection of game-servers and their files, complete with a
-         plugin packaging system.
+         to help out, complete with a plugin packaging system.
       </p>
       <p class="centered">
          <img class="large" src="res/servertools.png">
@@ -1167,6 +1169,10 @@
 
       <canvas id="background"></canvas>
 
+      <button id="reloader" style="position:fixed; left:0px; bottom:0px; width:10vh; height:10vh; z-index: 20" onclick="javascript.location.reload(true)">rload</button>
+      <button id="reloader2" style="position:fixed; left:10vh; bottom:0px; width:10vh; height:10vh; z-index: 20" onclick="">rload</button>
+      <div id="testout" style="position:fixed; left:0px; top:0px; width:100%; z-index: 20">test oudtput</div>
+
       <div id="bottomleft" class="hide">© 2020 Mukunda Johnson</div>
 
       <div id="content"></div>
@@ -1176,6 +1182,9 @@
          <div id="bigtext_subtitle"></div>
       </div>
 
+      </div>
       <div id="scanlines"></div>
+
+      <div id="scroller_height"></div>
    </body>
 </html>

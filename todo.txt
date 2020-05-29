@@ -20,3 +20,7 @@ game-servers chapter
 pause everything when faded out
 
 dont forget skipp was published
+
+need a fullscreen/exit fullscreen button for mobile.
+
+floating point precision stuff on mobile

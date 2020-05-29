@@ -3,6 +3,7 @@ import Cube from "./cube.js";
 import Animate from "./animate.js";
 import Smath from "./smath.js";
 import Roller from "./roller.js";
+import {IsMobile} from "./index.js";
 
 let m_state = {
    name : "",
@@ -20,6 +21,9 @@ let m_state_handlers = {
          clicker.addEventListener( "click", () => {
             document.body.removeChild( clicker );
             SetState( "zoom" );
+            //if( IsMobile() ) {
+               document.documentElement.requestFullscreen();
+            //}
          });
 
          Animate.Start( "cube_intensity", (time, elapsed) => {
@@ -61,6 +65,7 @@ let m_state_handlers = {
 
    zoom: {
       Start() {
+         
          let [oldEye, oldTarget] = Camera.Get();
          // distance to one of the points, 0,0,4 -> 1,1,1
          const originalDistance = m_state.cameraDistance;
@@ -109,6 +114,7 @@ let m_state_handlers = {
    ready: {
       Start() {
          Roller.Start();
+         
          Animate.Start( "ttest1", ( time ) => {
             //Roller.SetScroll( time * 0.01 * 8 - 50 );//Math.sin(time *0.01) * 50 );
          });

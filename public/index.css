@@ -16,6 +16,25 @@ body {
 a {
    text-decoration: none;
 }
+/*
+#scroller {
+   position: fixed;
+   left: 0px;
+   top: 0px;
+   width: 100%;
+   height: 50%;
+   overflow-y: scroll;
+   background-color:red;
+}
+
+#scroller_height {
+   width: 10px;
+}*/
+
+#scroller_height {
+   width: 1px;
+   background-color:red;
+}
 
 #background {
    width: 100%;
