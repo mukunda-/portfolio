@@ -7,6 +7,8 @@ import Animate from "./animate.js";
 import Roller from "./roller.js";
 import Arrows from "./arrows.js";
 import Color from "./color.js";
+import Zoomer from "./zoomer.js";
+import Dots from "./dots.js";
 ///////////////////////////////////////////////////////////////////////////////
 
 let currentScreenSize = [0, 0];
@@ -91,8 +93,9 @@ function Render() {
    
    let projview = Smath.MultiplyMatrices( projMatrix, viewMatrix );
    
-   hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
+   //hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
    Cube.Render( projview, currentScreenSize );
+   Dots.Render( projview );
 
 }
 
@@ -129,7 +132,11 @@ async function Setup() {
    hc.gl.blendFunc( hc.gl.ONE, hc.gl.ONE );
    hc.gl.disable( hc.gl.CULL_FACE );
 
-   await Cube.Setup();
+   await Promise.all([
+      Cube.Setup(),
+      Dots.Setup()
+   ]);
+
    Cube.color[0] = 1.0;
    Cube.color[1] = 0.7;
    Cube.color[2] = 1.0;
@@ -137,6 +144,7 @@ async function Setup() {
    App.Setup();
    Arrows.Setup();
    Color.Setup();
+   Zoomer.Setup();
    
    let content = document.getElementById( "content" )
    content.style.display = "none";

@@ -31,6 +31,8 @@ function Init( canvas_id, options ) {
       gl = null;
       return false;
    }
+
+   gl.aia = gl.getExtension( "ANGLE_instanced_arrays" );
    
    return true;
 }

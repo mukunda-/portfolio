@@ -5,6 +5,7 @@ let cameraTarget = [];
 let cameraUp     = [0, 1, 0];
 
 function GetViewMatrix() {
+   // TODO: cache this result.
    return Smath.LookAt( cameraEye, cameraTarget, cameraUp );
 }
 

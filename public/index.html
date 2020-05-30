@@ -6,30 +6,30 @@
       <meta name="robots" content="noindex">
       <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0">
       <link rel="stylesheet" type="text/css" href="index.css"/>
+      <script src="https://www.youtube.com/iframe_api" type="text/javascript"></script>
       <script src="js/index.js" type="module"></script>
       
+
 <!-- ////////////////////////////////////////////////////////////////////// -->
 <template id="panel1" class="panel"
           data-year="1998" data-title="Day Zero"
           data-color="ffb2ff">
    <div class="page">
       <p>
-         My first line of code was a conditional statement for a Fahrenheit to
-         Celsius converter, copied from the Microsoft Visual Basic 6.0 help
-         manual, written when I was 8 years old.
+         I remember my first line of code, a conditional statement to handle
+         pressing Enter, copied from the Microsoft Visual Basic
+         6.0 manual, written when I was 8 years old.
       </p>
       <p style="text-align:center">
          "If KeyAscii = 13 Then"
       </p>
-      <p style="text-align:center">
-         That's when my trial by fire began.
-      </p>
+      
    </div>
 
    <div class="page">
       <p>
          Without teachers or books, it was a long few years of experimentation,
-         building small apps and games in the worst way imaginable.
+         a trial by fire, building small apps and games in the worst way imaginable.
       </p>
       <p>
          I've written a lot of embarrassing code, but we all started
@@ -49,12 +49,12 @@
       </p>
       <p>
          After finding a ripped sprite sheet of Mario graphics, I made my
-         own basic iteration of "Super Mario."
+         own iteration of "Super Mario."
       </p>
       <p>
-         Having never played the original game before, it was a somewhat
-         unique result. The source code, complete with custom map editors,
-         is stuck somewhere on old zip disks.
+         Having never played the original game before, it was a...unique result.
+         The source code, complete with custom map editors, is stuck somewhere
+         on <a href="https://twitter.com/_mukunda/status/1258814715888898049">old zip disks</a>.
       </p>
    </div>
 </template>
@@ -71,9 +71,12 @@
    </div>
 
    <div class="page">
-      <iframe width="100%" height="50vh" src="https://www.youtube.com/embed/O_yvyKQ3X8w?start=508" 
-            frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/O_yvyKQ3X8w?start=508&enablejsapi=1"
+         id="yt_jetpack"
+         class="youtube"
+         frameborder="0"
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen></iframe>
    </div>
 
    <div class="page">
@@ -108,8 +111,8 @@
          each other. It was developed in Visual Basic using DirectDraw for graphics.
       </p>
       <p class="centered">
-         <img src="res/jp4_1.jpg" title="Blowing up a bulk of C4."><!--
-      --><img src="res/jp4_2.jpg" title="4-player split screen.">
+         <img src="res/jp4_1.jpg" title="Blowing up a bulk of C4." class="zoomable"><!--
+      --><img src="res/jp4_2.jpg" title="4-player split screen." class="zoomable">
       </p>
    </div>
    <div class="page">
@@ -119,8 +122,8 @@
          more to play with.
       </p>
       <p class="centered">
-         <img src="res/jp4_3.jpg" title="Blowing someone up."><!--
-      --><img src="res/jp4_4.jpg" title="Building a wall.">
+         <img src="res/jp4_3.jpg" title="Blowing someone up." class="zoomable"><!--
+      --><img src="res/jp4_4.jpg" title="Building a wall." class="zoomable">
       </p>
    </div>
 </template>
@@ -135,14 +138,14 @@
          bricks you can push around or carry to squish enemies or make paths.
       </p>
       <p class="centered">
-         <img src="res/adventurer1.png" title="Splash screen."><!--
-      --><img src="res/adventurer2.png" title="Title screen."><!--
-      --><img src="res/adventurer3.png" title="The last level."><!--
-      --><img src="res/adventurer6.png" title="Carrying a red brick.">
+         <img src="res/adventurer1.png" title="Splash screen." class="zoomable" data-pixel><!--
+      --><img src="res/adventurer2.png" title="Title screen." class="zoomable" data-pixel><!--
+      --><img src="res/adventurer3.png" title="The last level." class="zoomable" data-pixel><!--
+      --><img src="res/adventurer6.png" title="Carrying a red brick." class="zoomable" data-pixel>
       </p>
    </div>
    <div class="page">
-      <video autoplay muted width="100%" loop>
+      <video autoplay muted width="100%" loop id="adventurer">
          <source src="res/adventurer.mp4" type="video/mp4">
       </video>
    </div>
@@ -151,9 +154,9 @@
          The game features 50 levels, all designed in my easy to use graphical level
          editor. Knowing Visual Basic really comes in handy.
       </p>
-      
+
       <p class="centered">
-         <img src="res/adventurer_le.png" class="large" title="Adventurer level editor.">
+         <img src="res/adventurer_le.png" class="large zoomable" title="Adventurer level editor.">
       </p>
    </div>
    <div class="page">
@@ -161,51 +164,45 @@
          A lot of code was hand-optimized in ARM assembly code to maximize performance.
       </p>
       <p class="centered">
-         <img src="res/adventurer4.png" title="Assembly is not maintainable."><!--
-      --><img src="res/adventurer5.png" title="This is a bad idea.">
+         <img src="res/adventurer4.png" title="Assembly is not maintainable." class="zoomable"><!--
+      --><img src="res/adventurer5.png" title="This is a bad idea." class="zoomable">
       </p>
       <p class="centered">
          <a href="https://mukunda.com/projects.html">Source code and game available here.</a>
       </p>
    </div>
    <!-- move x86 assemblyi nto here -->
-</template>
-
-<template id="panel_x86" class="panel"
-          data-year="2007" data-title="The Great x86"
-          data-color="b8b8b8"
-          data-linkcolor="61e7ff">
    <div class="page">
+      <h2>An Adventure Into Assembly</h2>
       <p>
-         I missed the era of early 90s programming and made up for that here, sort of.
-         After installing MS-DOS on my laptop, I proceeded to study x86 architecture.
+         Around this time I started gaining an unhealthy fascination with writing
+         assembly language. The tiny binary sizes were just so cool.
       </p>
       <p>
-         I had a <a href="https://twitter.com/_mukunda/status/1259456079370608640">Pentium 4</a>
-         at the time, and I
-         learned about its rich pipeline and elaborate instruction set and then
-         wrote some small programs to play with it.
+         By now I've
+         seen a lot of different flavors, including Z80, 6502, 65816, 68K, SPC-700,
+         ARM, and x86. Those are 8-bit, 16-bit, and 32-bit+ computers.
       </p>
    </div>
    <div class="page">
       <p>
-         The source code for my x86 projects are unfortunately on a defunct hard drive.
+         In 2007, I installed MS-DOS on my 
+         <a href="https://twitter.com/_mukunda/status/1259456079370608640">Pentium 4 laptop</a>
+         and then proceeded to write C and x86 assembly in edit.exe (to taste the authentic
+         early 90s developer experience).
       </p>
       <p>
-         One was a 3D renderer written for DOS, with the raster code written in x86
-         assembly. Of course I wrote this on DOS, too, in edit.exe, to taste the authentic
-         early 90s developer experience.
-      </p>
-      <p>
-         Another project was a falling sand game, called FastSand,
-         optimized with x86 assembly.
+         The source code for my x86 projects are unfortunately on a defunct hard drive,
+         but one project was a 3D renderer for DOS with an assembly-optimized rasterizer
+         (complete with perspective correction!).
       </p>
    </div>
    <div class="page">
+      
       <p>
          It wasn't long before I learned that the incredible engineering behind the
          x86 processor renders hand-coded assembly
-         <a href="https://blog.mukunda.com/what-amazes-you/">mostly useless</a>.
+         <a href="https://blog.mukunda.com/what-amazes-you/">basically useless</a>.
       </p>
    </div>
 </template>
@@ -215,13 +212,15 @@
           data-color="12fcff">
    <div class="page">
       <p>
-         A commercial quality music and sound engine written entirely in ARM assembly code.
+         A commercial-quality music and sound engine written entirely in ARM assembly code.
       </p>
-      <iframe 
-               src="https://www.youtube.com/embed/QsinToyyXbg" 
-               frameborder="0" 
-               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-               allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/QsinToyyXbg?enablejsapi=1"
+         id="yt_maxmod"
+         class="youtube"
+         frameborder="0"
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
+      </iframe>
    </div>
    <div class="page">
       <p>
@@ -241,14 +240,14 @@
    <div class="page">
       <h2>Bringing it to Flash</h2>
       <p>
-         With all of my work done on tracker-based
-         sound solutions, an individual contracted me to build a solution
+         After noting my work done on tracker-based
+         sound solutions, an individual contracted me to build something
          for the Flash platform.
       </p>
       <p>
          I put the latest Flash standard to the test, leveraging the
          JIT-optimized ActionScript 3 engine to mix dynamic PCM channels
-         realtime. Too bad that Flash died. 
+         realtime. Too bad that Flash died.
       </p>
    </div>
 </template>
@@ -259,7 +258,7 @@
    <div class="page">
       <p>
          Directly after writing Maxmod, I employed it in a game I wrote for a
-         <a href="http://www.pdroms.de/">PDRoms</a> competition. The rom nearly
+         <a href="http://www.pdroms.de/">PDRoms</a> competition. The binary nearly
          fit in 256KB of memory, featuring three levels, action-packed bosses,
          and deliberate Engrish to tie it all together.
       </p>
@@ -267,29 +266,29 @@
          <a href="https://www.engadget.com/2008-03-19-super-wings-download-this-game-now.html">"Download this game now" - engadget</a>
       </p>
       <p class="centered">
-         
-         <video autoplay muted loop alt="hello">
+
+         <video autoplay muted loop id="video_superwings2">
             <source src="res/sw2.mp4" type="video/mp4">
          </video>
-         
-         <video autoplay muted loop>
+
+         <video autoplay muted loop id="video_superwings4">
             <source src="res/sw4.mp4" type="video/mp4">
          </video>
-         
+
       </p>
    </div>
    <div class="page">
       <p class="centered">
-         <video autoplay muted loop>
+         <video autoplay muted loop id="video_superwings1">
             <source src="res/sw1.mp4" type="video/mp4">
          </video>
-         <video autoplay muted loop>
+         <video autoplay muted loop id="video_superwings3">
             <source src="res/sw3.mp4" type="video/mp4">
          </video>
-         <video autoplay muted loop>
+         <video autoplay muted loop id="video_superwings5">
             <source src="res/sw5.mp4" type="video/mp4">
          </video>
-         <video autoplay muted loop>
+         <video autoplay muted loop id="video_superwings6">
             <source src="res/sw6.mp4" type="video/mp4">
          </video>
       </p>
@@ -304,10 +303,10 @@
          synchronize game events.
       </p>
       <p class="centered">
-         <img src="res/swgfx1.png" title="Don't you love font bitmaps?"><!--
-      --><img src="res/swgfx2.png" title="The bulk of the game graphics in their 4-color glory."><!--
-      --><img src="res/swmusic1.png" title="The SF8 command triggers a shuriken storm."><!--
-      --><img src="res/swmusic2.png" title="The SF2 command makes the enemy ship fire a batch of missiles.">
+         <img src="res/swgfx1.png" title="Don't you love font bitmaps?" class="zoomable" data-pixel><!--
+      --><img src="res/swgfx2.png" title="The bulk of the game graphics in their 4-color glory."  class="zoomable" data-pixel><!--
+      --><img src="res/swmusic1.png" title="The SF8 command triggers a shuriken storm." class="zoomable"><!--
+      --><img src="res/swmusic2.png" title="The SF2 command makes the enemy ship fire a batch of missiles." class="zoomable">
       </p>
       <p class="centered">
          <a href="https://github.com/mukunda-/superwings">
@@ -338,15 +337,17 @@
          System do very strange things.
       </p>
       <p>
-         Below is a video of 
+         Below is a recording of
          <a href="https://github.com/mukunda-/supernsf">SuperNSF</a>,
          a crazy audio driver I wrote that has the ability to combine
          software-mixed PCM and NES hardware waveforms (which is quite
          difficult).
       </p>
-      <iframe src="https://www.youtube.com/embed/QOq9Icu2GQs" 
+      <iframe src="https://www.youtube.com/embed/QOq9Icu2GQs?enablejsapi=1"
+         id="yt_supernsf"
+         class="youtube"
          frameborder="0"
-         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
          allowfullscreen>
       </iframe>
    </div>
@@ -426,19 +427,19 @@
          their track easily.
       </p>
       <p class="centered">
-         <img src="res/it2nsf1.png" title="A part of the user manual."><!--
-      --><img src="res/it2nsf2.png" title="Another part of the user manual.">
+         <img src="res/it2nsf1.png" title="A part of the user manual." class="zoomable"><!--
+      --><img src="res/it2nsf2.png" title="Another part of the user manual." class="zoomable">
       </p>
       <p>
          The NES sound driver is written in 6502 assembly, and the tool
          side is written in C++.
       </p>
    </div>
-   
+
    <div class="page">
       <h2>s3m2nsf</h2>
       <p>
-         The precursor to it2nsf, 
+         The precursor to it2nsf,
          <a href="https://github.com/mukunda-/s3m2nsf">s3m2nsf</a> is
          a simpler version that
          supports basic waveforms and allows tracker fans to easily
@@ -449,10 +450,10 @@
          assembly code.
       </p>
       <p class="centered">
-         <img src="res/s3m2nsf1.png" title="I love in-depth txt manuals."><!--
-      --><img src="res/s3m2nsf2.png" title="Complete with ASCII art."><!--
-      --><img src="res/s3m2nsf3.png" title="The vibrato effect."><!--
-      --><img src="res/s3m2nsf4.png" title="Portamento, or pitch-slide code.">
+         <img src="res/s3m2nsf1.png" title="I love in-depth txt manuals." class="zoomable"><!--
+      --><img src="res/s3m2nsf2.png" title="Complete with ASCII art." class="zoomable"><!--
+      --><img src="res/s3m2nsf3.png" title="The vibrato effect." class="zoomable"><!--
+      --><img src="res/s3m2nsf4.png" title="Portamento, or pitch-slide code." class="zoomable">
       </p>
    </div>
 </template>
@@ -462,12 +463,12 @@
           data-color="d490ff">
    <div class="page">
       <p class="centered">
-         <img src="res/skipp1.png" title="The title screen.">
+         <img src="res/skipp1.png" title="The title screen." class="zoomable" data-pixel>
       </p>
       <p>
          The 1st place winner of PDRoms competition #4.01. I'm proud to
          be one of very few developers to create a complete Super Nintendo
-         game from scratch.
+         game from scratch. Everything is written in assembly language.
       </p>
       <p>
          I found out recently that someone even wrote a
@@ -483,10 +484,12 @@
          <a href="https://twitter.com/surasshu">@surasshu</a>,
          two amazing artists that I met in #mod_shrine.
       </p>
-      <iframe src="https://www.youtube.com/embed/axQeMVbNauo"
-            frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
+      <iframe src="https://www.youtube.com/embed/axQeMVbNauo?enablejsapi=1"
+         id="yt_skipp"
+         class="youtube"
+         frameborder="0"
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+         allowfullscreen>
       </iframe>
    </div>
    <div class="page">
@@ -518,19 +521,26 @@
          Basic.
       </p>
       <p class="centered">
-         <img src="res/skipp_leveleditor.png" class="large">
+         <img src="res/skipp_leveleditor.png" class="large zoomable" title="Rapid tool development at its finest.">
       </p>
    </div>
-   
+
    <div class="page">
       <p>
          Ask me about the story one hour before the deadline, when I
-         decided the game needed a final boss. 
+         decided the game needed a final boss.
          <a href="https://en.wikipedia.org/wiki/Cyclone_Aila">Cyclone Aila</a>
          was right outside.
       </p>
    </div>
-   
+
+   <div class="page">
+      <p>
+         A few years after the release, Piko Interactive contacted me to
+         have Skipp and Friends <a href="https://www.hyperkin.com/snes-super-4-in-1-multicart.html">published on cartridge</a>.
+      </p>
+   </div>
+
    <div class="page">
       <h2>XMSNES</h2>
       <p>
@@ -539,6 +549,7 @@
          programming than writing the hardest things possible?
       </p>
    </div>
+
    <div class="page">
       <p>
          Similar to SNESMOD, XMSNES comes with a converter and sound
@@ -554,14 +565,14 @@
          The joys of programming, right?
       </p>
       <p>
-         <video width="100%" controls>
+         <video width="100%" controls id="video_xmsnes">
             <source src="res/xmsnes.mp4" type="video/mp4">
          </video>
       </p>
    </div>
 </template>
 
-<template id="panel_unbound" class="panel" 
+<template id="panel_unbound" class="panel"
           data-year="2011-" data-title="The Unbound Project"
           data-color="feff81">
    <div class="page">
@@ -570,7 +581,7 @@
          to finishing it, one day.
       </p>
       <p class="centered">
-         <video autoplay muted width="100%" loop controls>
+         <video autoplay muted width="100%" loop controls id="video_archubos">
             <source src="res/archubos.mp4" type="video/mp4">
          </video>
       </p>
@@ -583,10 +594,10 @@
          realtime generated clouds.
       </p>
       <p class="centered">
-         <img class="large" src="res/ab15.jpg" title="A huge mountain of instanced cubes.">
+         <img class="large zoomable" src="res/ab15.jpg" title="A huge mountain of instanced cubes.">
       </p>
       <p class="centered">
-         <img class="large" src="res/ab22.jpg" title="Testing realtime cloud generation techniques (GPU-side).">
+         <img class="large zoomable" src="res/ab22.jpg" title="Testing realtime cloud generation techniques (GPU-side).">
       </p>
    </div>
 </template>
@@ -601,12 +612,11 @@
       <p>
          I was one of few demon hunters in the
          world to tackle early patch (HARD) Inferno with an extremely
-         weak gearset. Nothing but perfect play would allow survival.
-         I livestreamed a complete clear. Ghom was a nearly impossible
-         boss.
+         weak gearset. Nothing but perfect play would allow survival,
+         and I live-streamed a complete clear.
       </p>
       <p class="centered">
-         <video autoplay controls width="100%" loop muted>
+         <video autoplay controls width="100%" loop muted id="video_diablo">
             <source src="res/diablo.mp4" type="video/mp4">
          </video>
       </p>
@@ -619,17 +629,17 @@
          with your friends.
       </p>
       <p class="centered">
-         <video controls width="100%">
+         <video controls width="100%" id="video_blackhand">
             <source src="res/blackhand.mp4" type="video/mp4">
          </video>
       </p>
       <p class="centered">
-         <video controls width="100%">
+         <video controls width="100%" id="video_nefarian">
             <source src="res/nefarian.mp4" type="video/mp4">
          </video>
       </p>
    </div>
-   
+
 </template>
 
 <template id="panel_sourcemodding" class="panel"
@@ -656,13 +666,13 @@
          flexibility.
       </p>
       <p class="centered">
-         <img src="res/csgomap1.jpg" title="RXG Gravity Arms Race map."><!--
-      --><img src="res/csgomap2.jpg" title="Tested some water effects, too."><!--
-      --><img src="res/csgomap3.jpg" title="Lighting effects."><!--
-      --><img src="res/csgomap4.jpg" title="A curious button."><!--
-      --><img src="res/gravity_overview.png" title="Loading screen." class="large"><!--
-      --><img src="res/hammer1.jpg" title="Editing the map in Hammer." class="large">
-         
+         <img src="res/csgomap1.jpg" title="RXG Gravity Arms Race map." class="zoomable"><!--
+      --><img src="res/csgomap2.jpg" title="Tested some water effects, too." class="zoomable"><!--
+      --><img src="res/csgomap3.jpg" title="Lighting effects." class="zoomable"><!--
+      --><img src="res/csgomap4.jpg" title="A curious button." class="zoomable"><!--
+      --><img src="res/gravity_overview.png" title="Loading screen." class="large zoomable"><!--
+      --><img src="res/hammer1.jpg" title="Editing the map in Hammer." class="large zoomable">
+
       </p>
    </div>
    <div class="page">
@@ -671,7 +681,7 @@
          the anti-gravity well!
       </p>
       <p class="centered">
-         <video controls width="100%">
+         <video controls width="100%" id="video_gravity">
             <source src="res/gravity.mp4" type="video/mp4">
          </video>
       </p>
@@ -681,7 +691,7 @@
          I used Sony Vegas to compose the sound effects.
       </p>
       <p class="centered">
-         <video controls width="100%">
+         <video controls width="100%" id="video_vegas1">
             <source src="res/vegas1.mp4" type="video/mp4">
          </video>
       </p>
@@ -689,16 +699,16 @@
    <div class="page">
       <h2>Pirate Wars</h2>
       <p>
-         This was an event that I hosted with a custom map,
+         This was an event that I created and hosted featuring a custom map,
          ridiculously modified elements, and completely destroyble ships.
       </p>
       <p class="centered">
-         <video controls width="100%" onloadstart="this.volume=0.5">
+         <video controls width="100%" onloadstart="this.volume=0.5" id="video_piratewars">
             <source src="res/pw.mp4" type="video/mp4">
          </video>
       </p>
    </div>
-   
+
    <div class="page">
       <h2>Game-server Plugins</h2>
       <p>
@@ -707,7 +717,7 @@
          experiment with.
       </p>
       <p class="centered">
-         <video controls width="100%">
+         <video controls width="100%" id="video_dominoes">
             <source src="res/dominoes.mp4" type="video/mp4">
          </video>
       </p>
@@ -715,12 +725,12 @@
    <div class="page">
       <h2>ServerTools</h2>
       <p>
-         To manage our growing plugin list and server files, 
+         To manage our growing plugin list and server files,
          I wrote a <a href="https://github.com/mukunda-/servertools">handful of tools</a>
          to help out, complete with a plugin packaging system.
       </p>
       <p class="centered">
-         <img class="large" src="res/servertools.png">
+         <img class="large zoomable" src="res/servertools.png">
       </p>
    </div>
 </template>
@@ -736,7 +746,7 @@
       </p>
       <p class="centered">
          <a href="https://www.pcgamer.com/csgo-super-mareo-bruhs/">
-            "The plugin's coder deserves a barrage of internet 
+            "The plugin's coder deserves a barrage of internet
             high-fives for this feat." - PC Gamer
          </a>
       </p>
@@ -745,9 +755,11 @@
          by several news sites, a unique feat that featured a
          complete video game console inside of Counter-Strike.
       </p>
-      <iframe src="https://www.youtube.com/embed/5pMQ7oBHdPE" 
-         frameborder="0" 
-         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+      <iframe src="https://www.youtube.com/embed/5pMQ7oBHdPE?enablejsapi=1"
+         id="yt_smes"
+         class="youtube"
+         frameborder="0"
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
          allowfullscreen>
       </iframe>
    </div>
@@ -756,9 +768,11 @@
          This is a video of the early development phase of my Tetris game.
          I made the office lounge map, too, my personal test environment with a TV.
       </p>
-      <iframe src="https://www.youtube.com/embed/ycbxk5JCH_s" 
-         frameborder="0" 
-         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+      <iframe src="https://www.youtube.com/embed/ycbxk5JCH_s?enablejsapi=1"
+         id="yt_tetrisearly"
+         class="youtube"
+         frameborder="0"
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
          allowfullscreen>
       </iframe>
    </div>
@@ -766,28 +780,41 @@
       <p>
          And this is the finished product.
       </p>
-      <iframe 
-         src="https://www.youtube.com/embed/nNIPB3oM5N4" 
-         frameborder="0" 
-         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+      <iframe src="https://www.youtube.com/embed/nNIPB3oM5N4?enablejsapi=1"
+         id="yt_tetrisdone"
+         class="youtube"
+         frameborder="0"
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
          allowfullscreen>
       </iframe>
+      <p class="centered">
+         <img src="res/tetriscart.png" class="large zoomable" title="The original SNES model and accessories are created by 'KNUCKLES'. I just retextured them.">
+      </p>
    </div>
    <div class="page">
       <h2>Super Mareo Bruhs</h2>
       <p>
-         Tetris wasn't the only game I made for this virtual console. I made a Mario game, first.
-         The level was purposely designed for expert players to be able to
-         speed-run through it while killing everything and collecting all coins.
-         Here is me doing a perfect clear.
+         Tetris wasn't the only game I made for this virtual console. I made a
+         Mario game, first.
       </p>
-      <iframe src="https://www.youtube.com/embed/qV5Ky9aOe-k" 
-         frameborder="0" 
-         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+      <p>
+         The gameplay was purposely designed for expert players to be able to
+         speed-run through it while killing everything and collecting all of the
+         coins. Here is me doing a perfect clear.
+      </p>
+      <iframe src="https://www.youtube.com/embed/qV5Ky9aOe-k?enablejsapi=1"
+         id="yt_mareo"
+         class="youtube"
+         frameborder="0"
+         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
          allowfullscreen>
       </iframe>
       <p>
-         The sound effects for the game are ripped from an
+         A smooth scrolling tilemap with clipped edges? The more familar you are with
+         the Source engine, the more impossible this seems.
+      </p>
+      <p>
+         The sound effects were ripped from an
          <a href="https://www.youtube.com/watch?v=u9wp6cz0A1o">amazing video made by Jake "virt" Kaufman</a>,
          another extremely talented someone I met in #mod_shrine.
       </p>
@@ -804,7 +831,7 @@
          I built most of the PayPal integration while he worked on a fantastic frontend.
       </p>
       <p class="centered">
-         <img src="res/rxgstore1.png" title="RXG Store landing page." class="large">
+         <img src="res/rxgstore1.png" title="RXG Store landing page." class="large zoomable">
       </p>
       <p>
          I designed the interface between the site and our game-servers, and then created
@@ -818,8 +845,8 @@
          Well worth the price? Yes! According to one of our customer's positive review.
       </p>
       <p class="centered">
-         <img src="res/rxgstore2.png" title="Nuke item description."><!--
-      --><img src="res/rxgstore3.png" title="Positive customer review.">
+         <img src="res/rxgstore2.png" title="Nuke item description." class="zoomable"><!--
+      --><img src="res/rxgstore3.png" title="Positive customer review." class="zoomable">
       </p>
    </div>
    <div class="page">
@@ -835,14 +862,14 @@
          complete with meta information.
       </p>
       <p class="centered">
-         <img src="res/rxgdemos.png" title="RXG demos repository." class="large">
+         <img src="res/rxgdemos.png" title="RXG demos repository." class="large zoomable">
       </p>
       <p>
          The web side is written in PHP, with a sort of REST API exposed to upload
          and register demos.
       </p>
    </div>
-   
+
    <div class="page">
       <h2>A Fancy Application</h2>
       <p>
@@ -850,31 +877,31 @@
          application site.
       </p>
       <p class="centered">
-         <img src="res/tfrapp.jpg" class="large" title="The application page.">
+         <img src="res/tfrapp.jpg" class="large zoomable" title="The application page.">
       </p>
       <p>
          I felt like the Google Forms aesthetic was unappealing, so I had some fun implementing
          this solution.
       </p>
    </div>
-   
+
    <div class="page">
       <p>The front-end is HTML/CSS and JavaScript + jQuery, with
          a back-end written in Python and JavaScript, using Google Apps Scripts
          to generate and modify Google Documents for record keeping.
       </p>
       <p class="centered">
-         <img src="res/tfrapp3.jpg" class="large" title="Google Apps Scripts.">
+         <img src="res/tfrapp3.jpg" class="large zoomable" title="Google Apps Scripts.">
       </p>
    </div>
-   
+
    <div class="page">
       <p>
          It also integrates with Discord to post notifications whenever an application is submitted
          or changed.
       </p>
       <p class="centered">
-         <img src="res/tfrapp2.jpg" class="large" title="Code to build a Discord embed object.">
+         <img src="res/tfrapp2.jpg" class="large zoomable" title="Code to build a Discord embed object.">
       </p>
    </div>
    <!--
@@ -884,17 +911,17 @@
          A notable mention of a tiny project. How to integrate Google Groups with
          something, when Google Groups doesn't have any flexible notifications API?
          Simple, I added my webserver as a subscriber, and then parsed the emails
-         that it received, forwarding a formatted 
+         that it received, forwarding a formatted
          sent
          subscribed my webserver While I was at it, I wrote a bunch of other neat integrations, like linking
          Google Groups to Discord (by parsing )a handful of Python to integrate
-         Google Groups with Discord 
+         Google Groups with Discord
          And why make it simple? This thing uses a JavaScript and
          Google Apps Script backend to generate Google Documents from the input
          and then notify our Discord when an application is submitted or modified.
          This year, I felt like Google Forms looked rather primitive, so I
          had some fun with implementing my own solution. It used a JavaScript and HTML
-         frontend 
+         frontend
       </p>
    </div>-->
 </template>
@@ -922,7 +949,7 @@
          put that project on the shelf.
       </p>
       <p class="centered">
-         <img src="res/java1.png" title="Java was fairly pleasing to work with." class="large">
+         <img src="res/java1.png" class="large zoomable" title="Java was fairly pleasing to work with.">
       </p>
       <p>
          I haven't written Java in a while, but it is certainly up there
@@ -943,40 +970,40 @@
          with my family. The entire thing.
       </p>
       <p class="centered">
-         <img src="res/home/1.jpg" title="Plotting."><!--
-      --><img src="res/home/2.jpg" title="Steel being planted."><!--
-      --><img src="res/home/3.jpg" title="My dirty hand."><!--
-      --><img src="res/home/4.jpg" title="Forms for concrete.">
+         <img src="res/home/1.jpg" title="Plotting." class="zoomable"><!--
+      --><img src="res/home/2.jpg" title="Steel being planted." class="zoomable"><!--
+      --><img src="res/home/3.jpg" title="My dirty hand." class="zoomable"><!--
+      --><img src="res/home/4.jpg" title="Forms for concrete." class="zoomable">
       </p>
    </div>
    <div class="page">
       <p class="centered">
-         <img src="res/home/5.jpg" title="Pouring the concrete."><!--
-      --><img src="res/home/6.jpg" title="The finished forms."><!--
-      --><img src="res/home/7.jpg" title="Post slab-pouring."><!--
-      --><img src="res/home/8.jpg" title="Framing.">
+         <img src="res/home/5.jpg" title="Pouring the concrete." class="zoomable"><!--
+      --><img src="res/home/6.jpg" title="The finished forms." class="zoomable"><!--
+      --><img src="res/home/7.jpg" title="Post slab-pouring." class="zoomable"><!--
+      --><img src="res/home/8.jpg" title="Framing." class="zoomable">
       </p>
    </div>
    <div class="page">
       <p class="centered">
-         <img src="res/home/9.jpg" title="Scared of heights?"><!--
-      --><img src="res/home/10.jpg" title="Crane and rafters."><!--
-      --><img src="res/home/11.jpg" title="A long day."><!--
-      --><img src="res/home/12.jpg" title="Sheathing.">
+         <img src="res/home/9.jpg" title="Scared of heights?" class="zoomable"><!--
+      --><img src="res/home/10.jpg" title="Crane and rafters." class="zoomable"><!--
+      --><img src="res/home/11.jpg" title="A long day." class="zoomable"><!--
+      --><img src="res/home/12.jpg" title="Sheathing." class="zoomable">
       </p>
    </div>
    <div class="page">
       <p class="centered">
-         <img src="res/home/13.jpg" title="Roofing."><!--
-      --><img src="res/home/14.jpg" title="Shingles."><!--
-      --><img src="res/home/15.jpg" title="Siding."><!--
-      --><img src="res/home/16.jpg" title="A simple design.">
+         <img src="res/home/13.jpg" title="Roofing." class="zoomable"><!--
+      --><img src="res/home/14.jpg" title="Shingles." class="zoomable"><!--
+      --><img src="res/home/15.jpg" title="Siding." class="zoomable"><!--
+      --><img src="res/home/16.jpg" title="A simple design." class="zoomable">
       </p>
    </div>
    <div class="page">
       <p class="centered">
-         <img src="res/home/17.jpg" title="Early kitchen."><!--
-      --><img src="res/home/18.jpg" title="Living space.">
+         <img src="res/home/17.jpg" title="Early kitchen." class="zoomable"><!--
+      --><img src="res/home/18.jpg" title="Living space." class="zoomable">
       </p>
    </div>
    <div class="page">
@@ -997,7 +1024,7 @@
          the annual Tournament of Ages on Moon Guard.
       </p>
       <p class="centered">
-         <img class="large"src="res/crossrp1.jpg" title="Tournament of Ages 2018 closing ceremony.">
+         <img class="large zoomable" src="res/crossrp1.jpg" title="Tournament of Ages 2018 closing ceremony.">
       </p>
       <p>
          That year was particularly special because my project
@@ -1018,7 +1045,7 @@
          being the first to use it.
       </p>
       <p class="centered">
-         <img src="res/crossrp3.jpg" title="A happy customer." class="large">
+         <img src="res/crossrp3.jpg" title="A happy customer." class="large zoomable">
       </p>
    </div>
    <div class="page">
@@ -1028,7 +1055,7 @@
          bulleted in the source code at the start.
       </p>
       <p class="centered">
-         <img src="res/crossrp2.png" class="large" title="Cross RP design notes.">
+         <img src="res/crossrp2.png" class="large zoomable" title="Cross RP design notes.">
       </p>
    </div>
    <div class="page">
@@ -1046,7 +1073,7 @@
          don't have the short delay shown. Instant and seamless.
       </p>
       <p class="centered">
-         <video width="100%" muted loop autoplay>
+         <video width="100%" muted loop autoplay id="video_crossrp">
             <source src="res/crossrp.mp4" type="video/mp4">
          </video>
       </p>
@@ -1065,7 +1092,7 @@
    <div class="page">
       <p>
          I still had to rework my code to transfer character profile data across the
-         faction divide, basically doing the impossible.
+         faction divide (basically doing the impossible).
       </p>
       <p>
          I'll spare you the details unless
@@ -1077,7 +1104,7 @@
       <h2>I Love UI Tinkering</h2>
       <p>
          I've written <a href="https://www.curseforge.com/members/tammymg/projects">multiple popular addons</a>
-         that their users can't live without, as well as 
+         that their users can't live without, as well as
          <a href="https://www.reddit.com/r/wow/comments/368v5i/mythiccool_weakauras/">a ton of other UI modifications</a>.
          I can really appreciate platforms and games that offer this
          flexibility for developers like myself.
@@ -1085,12 +1112,12 @@
       <p>
          I was the #1 survival hunter in the world for a few days during
          Emerald Nightmare mythic progression. It was one of the hardest
-         specializations to play, but I designed an 
+         specializations to play, but I designed an
          <a href="https://wago.io/4JarwDVg7">incredible UI</a> to
          trivialize it.
       </p>
       <p class="centered">
-         <video width="100%" controls>
+         <video width="100%" controls  id="video_svnewmok">
             <source src="res/svnewmok.mp4" type="video/mp4">
          </video>
       </p>
@@ -1105,20 +1132,21 @@
          all powered by vanilla JavaScript.
       </p>
       <p>
-         That's right, this isn't using any libraries or frameworks. It was all
-         written by me from scratch. Have a look at the code - I didn't minify
+         That's right, this isn't using any libraries or frameworks (except for the YouTube API).
+         It was all written by me from scratch. Have a look at the code - I didn't minify
          or webpack it.
       </p>
    </div>
    <div class="page">
       <p>
-         The math was <a href="https://math.stackexchange.com/questions/3688837/find-the-rotation-of-a-box-to-project-a-corner-to-a-point-on-a-line">especially tedious</a>, for a mathematics amateur like me at least.
+         The math was <a href="https://math.stackexchange.com/questions/3688837/find-the-rotation-of-a-box-to-project-a-corner-to-a-point-on-a-line">especially tedious</a>,
+         for a mathematics amateur like me at least.
       </p>
       <p class="centered">
-         <img src="res/math.png" class="large" title="Lining the cube edges with the content.">
+         <img src="res/math.png" class="large zoomable" title="Notice how the edges of the cube stay aligned with the content when scrolling?">
       </p>
       <p class="centered">
-         <video width="100%" autoplay loop>
+         <video width="100%" autoplay loop id="video_earlydemo" title="Early development.">
             <source src="res/earlydemo.mp4" type="video/mp4">
          </video>
       </p>
@@ -1133,34 +1161,44 @@
          for how things should behave. There's a lot of attention to detail here.
       </p>
    </div>
+   <div class="page">
+      <p>
+         Of course it painstakingly works on mobile, too.
+      </p>
+      <p class="centered">
+         <img src="res/portfoliodev1.png" class="large zoomable" title="Remote debugging Android on PC.">
+      </p>
+   </div>
 </template>
-<template id="panel_andnow" class="panel" 
-         data-year="And Now" data-title="I'm ready for more."
+<template id="panel_andnow" class="panel"
+         data-year="And Now" data-title="Always Learning"
          data-color="303030">
    <div class="page">
       <p>
          It's been a long, fun journey, through C, C++, assembly code, JavaScript,
-         Python, PHP, Lua, Basic, HTML/CSS...
-      </p>
-      <p>
-         But I have so much more to learn about - too much, in fact.
+         Python, PHP, Lua, Basic, HTML, CSS... but I've hardly scratched the surface
+         of the ever-evolving world of technology.
       </p>
    </div>
    <div class="page">
-      <h2>Raising the Bar</h2>
+      <h2>What's Your Story?</h2>
       <p>
-         Where do I go from here? Well, one person can only do so much.
+         That's enough about me. What about you? How did you become who you are? 
       </p>
+
       <p>
-         What really impresses me is when people combine their efforts. 
-         A single movie for instance - people take for granted the
-         one million plus man-hours to create it. About two and a half
-         entire lives. It's amazing.
+         I'd like to know.
       </p>
+
       <p>
-         I've done a lot of my projects solo, but I think it's time to change
-         that. Perhaps we'll be working together sometime?
+         <a href="tel:+16014635358" title="Yes, do it, stranger.">Call me</a>,
+         <a href="mailto:mukunda@mukunda.com">write me</a>,
+         or maybe <a href="https://twitter.com/_mukunda">tweet</a>?
+         Let's <a href="https://www.linkedin.com/in/mukunda-johnson/">connect</a>.
       </p>
+      
+      <p>Maybe we'll work on something great together.</p>
+      
    </div>
 </template>
 <!-- ////////////////////////////////////////////////////////////////////// -->
@@ -1169,14 +1207,10 @@
 
       <canvas id="background"></canvas>
 
-      <button id="reloader" style="position:fixed; left:0px; bottom:0px; width:10vh; height:10vh; z-index: 20" onclick="javascript.location.reload(true)">rload</button>
-      <button id="reloader2" style="position:fixed; left:10vh; bottom:0px; width:10vh; height:10vh; z-index: 20" onclick="">rload</button>
-      <div id="testout" style="position:fixed; left:0px; top:0px; width:100%; z-index: 20">test oudtput</div>
-
       <div id="bottomleft" class="hide">© 2020 Mukunda Johnson</div>
 
       <div id="content"></div>
-      
+
       <div id="bigtext_container">
          <div id="bigtext"></div>
          <div id="bigtext_subtitle"></div>

@@ -1,26 +1,32 @@
-listen for changes to page sizes and redo padding for them.
-make sure the up/down arrows are not visible when at the top/bottom
-make sure up/down work properly:
-   scroll up one page if touching the gutter, otherwise 60% of a page, clipped to the gutter
-   
-make sure that content squishes properly when the window is slimmer than the box width
-
-change the cube to use one lit side?
+change the cube to use one lit side (maybe?)
 
 pause video elements when out of range.
-
-move templates to different file
+- i dont like this, it should pause only if you play another video
+- new solution:
+  listen for "play" events. if any video starts playing with sound, pause
+  all other videos that are playing with sound.
 
 change .page to html5 section
-
-gaming chapter
-
-game-servers chapter
-
-pause everything when faded out
-
-dont forget skipp was published
 
 need a fullscreen/exit fullscreen button for mobile.
 
 floating point precision stuff on mobile
+
+give the cube an airy feel (random model rotations)
+
+hide original image when zoomed.
+
+
+clicking images while in zoom mode breaks it
+---------------------------------------------------------------
+make sure that content squishes properly when the window is slimmer than the box width (done, keep this in mind)
+
+gaming chapter (done?)
+game-servers chapter (done?)
+pause everything when faded out (done)
+dont forget skipp was published (done)
+zooming on images (done)
+listen for changes to page sizes and redo padding for them.(done, using table-cell layout)
+make sure the up/down arrows are not visible when at the top/bottom (done)
+make sure up/down work properly:
+   scroll up one page if touching the gutter, otherwise 60% of a page, clipped to the gutter (done)

@@ -21,9 +21,9 @@ let m_state_handlers = {
          clicker.addEventListener( "click", () => {
             document.body.removeChild( clicker );
             SetState( "zoom" );
-            //if( IsMobile() ) {
+            if( IsMobile() ) {
                document.documentElement.requestFullscreen();
-            //}
+            }
          });
 
          Animate.Start( "cube_intensity", (time, elapsed) => {
