@@ -100,6 +100,9 @@ function Render( matProjView, screenSize ) {
       hc.gl.uniform1f( uIntensity, m_intensity );
    }
    
+   hc.gl.enable( hc.gl.BLEND );
+   hc.gl.blendFunc( hc.gl.ONE, hc.gl.ONE );
+   
    const a_position = m_shader.GetAttribute( "a_position" );
    hc.Context.EnableVertexAttribArrays( [ a_position ] );
    m_buffer.Bind();

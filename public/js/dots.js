@@ -7,6 +7,7 @@ let m_buffer, m_shader;
 let m_bufferShape;
 
 let m_time = 0;
+let m_time_elapsed = 0;
 
 let m_renderTexture = null;
 let m_frameBuffer   = null;
@@ -14,6 +15,7 @@ let m_frameBuffer   = null;
 const m_particleCount = 4000;
 
 let m_postdotShader;
+let m_fadeShader;
 
 async function Setup() {
 
@@ -54,18 +56,23 @@ async function Setup() {
 
    m_shader = new hc.Shader();
    m_postdotShader = new hc.Shader();
+   m_fadeShader = new hc.Shader();
    await Promise.all( [
       m_shader.AttachFromURL( "shaders/dots.v.glsl", "vertex" ),
       m_shader.AttachFromURL( "shaders/dots.f.glsl", "fragment" ),
-      m_postdotShader.AttachFromURL( "shaders/postdot.v.glsl", "vertex" ),
-      m_postdotShader.AttachFromURL( "shaders/postdot.f.glsl", "fragment" )
+      m_postdotShader.AttachFromURL( "shaders/generic_fullscreen.v.glsl", "vertex" ),
+      m_postdotShader.AttachFromURL( "shaders/postdot.f.glsl", "fragment" ),
+      m_fadeShader.AttachFromURL( "shaders/generic_fullscreen.v.glsl", "vertex" ),
+      m_fadeShader.AttachFromURL( "shaders/fade.f.glsl", "fragment" )
    ]);
 
    m_shader.Link();
    m_postdotShader.Link();
+   m_fadeShader.Link();
 
-   Animate.Start( "dots_time", (time) => {
-      m_time = time;
+   Animate.Start( "dots_time", (time, elapsed) => {
+      m_time         = time;
+      m_time_elapsed = elapsed;
    });
 
    // Create render buffer.
@@ -80,6 +87,7 @@ function GetDeviceDimensions() {
            Math.max( document.documentElement.clientHeight, window.innerHeight || 0 )];
 }
 
+//-----------------------------------------------------------------------------
 function CreateRenderBuffer() {
    let dimensions = GetDeviceDimensions();
 
@@ -91,13 +99,13 @@ function CreateRenderBuffer() {
       // Mip level (just one level)
       0,
       // Internal format.
-      hc.gl.RGBA,
+      hc.gl.RGB,
       // Dimensions.
       dimensions[0], dimensions[1],
       // Border size (which is???)
       0,
       // Texture format. (?)
-      hc.gl.RGBA,
+      hc.gl.RGB,
       // Component type.
       hc.gl.UNSIGNED_BYTE,
       // Null to just create the texture with no data.
@@ -119,9 +127,34 @@ function CreateRenderBuffer() {
    hc.gl.bindFramebuffer( hc.gl.FRAMEBUFFER, null );
 }
 
+//-----------------------------------------------------------------------------
 function Render( projview ) {
 
+   // Render to our temporary buffer.
+   hc.gl.bindFramebuffer( hc.gl.FRAMEBUFFER, m_frameBuffer );
+
+   hc.gl.enable( hc.gl.BLEND );
+   hc.gl.blendFunc( hc.gl.DST_COLOR, hc.gl.ZERO );
+
+   { // Clear operation.
+      m_fadeShader.Use();
+      const u_factor = m_fadeShader.GetUniform( "u_factor" );
+      
+      hc.gl.uniform1f( u_factor, 0.1 ** (m_time_elapsed / 100) );
+      
+      const a_position = m_fadeShader.GetAttribute( "a_position" );
+      hc.Context.EnableVertexAttribArrays( [a_position] );
+      m_bufferShape.Bind();
+      hc.gl.vertexAttribPointer( a_position, 2, hc.gl.FLOAT, false, 8, 0 );
+      hc.gl.drawArrays( hc.gl.TRIANGLES, 0, 6 );
+      
+      // Cleanup.
+      hc.Context.DisableVertexAttribArrays( [a_position] );
+   }
+
    m_shader.Use();
+
+   hc.gl.blendFunc( hc.gl.ONE, hc.gl.ONE );
 
    { // Set camera parameters.
       const u_camera = m_shader.GetUniform( "u_camera" );
@@ -142,6 +175,7 @@ function Render( projview ) {
       hc.gl.uniform1f( u_time, m_time / 1000.0 );
    }
 
+
    { // Render 
       const a_position = m_shader.GetAttribute( "a_position" );
       const a_corner   = m_shader.GetAttribute( "a_corner" );
@@ -154,10 +188,8 @@ function Render( projview ) {
 
       //hc.gl.drawArrays( hc.gl.TRIANGLES, 0, 6 );
 
-      // Render to our temporary buffer.
-      hc.gl.bindFramebuffer( hc.gl.FRAMEBUFFER, m_frameBuffer );
-      hc.gl.clearColor( 0, 0, 0, 1.0 );
-      hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
+      //hc.gl.clearColor( 0, 0, 0, 1.0 );
+      //hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
 
       hc.gl.aia.drawArraysInstancedANGLE(
          hc.gl.TRIANGLES,

@@ -25,7 +25,7 @@ void main(void) {
       float i = distanceToEye - deadZone;
 
       float intensity = (distanceToEye - deadZone) / 10.0;
-      intensity *= pow( 0.1, distanceToEye / 50.0 );
+//      intensity *= pow( 0.1, distanceToEye / 50.0 );
       f_intensity = clamp( intensity, 0.0, 1.0 );
    }
    f_uv = a_corner;

@@ -128,8 +128,6 @@ async function Setup() {
    
    hc.gl.clearColor( 0.01, 0.01, 0.05, 1.0 );
    hc.gl.disable( hc.gl.DEPTH_TEST );
-   hc.gl.enable( hc.gl.BLEND );
-   hc.gl.blendFunc( hc.gl.ONE, hc.gl.ONE );
    hc.gl.disable( hc.gl.CULL_FACE );
 
    await Promise.all([
