@@ -31,7 +31,6 @@ function SetAction( id, action, actionUp ) {
 }
 
 function OnArrowEvent( type, e ) {
-   console.log( "arrow event", type, e );
    let snippedID = e.currentTarget.id.split("Arrow")[0];
    if( m_actions[snippedID] ) {
       return m_actions[snippedID]( type, e );

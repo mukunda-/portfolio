@@ -20,14 +20,33 @@ let m_state_handlers = {
          let clicker = document.createElement("div");
          clicker.className = "cubeclicker";
          document.body.appendChild( clicker );
+
+         if( !window.ontouchstart ) {
+            // They don't have taps. :)
+            document.getElementById( "splash_text_bottom" ).innerText = "Click to begin."
+         }
+
+         Animate.Start( "splash", time => {
+            if( time >= 2000 ) {
+               document.getElementById( "splash_text_top" ).classList.add( "show" );
+               Animate.Start( "splash", time => {
+                  if( time >= 2000 ) {
+                     document.getElementById( "splash_text_bottom" ).classList.add( "show" );
+                     return true;
+                  }
+               });
+            }
+         });
+         
          clicker.addEventListener( "click", () => {
             document.body.removeChild( clicker );
             
+            Animate.Stop("splash");
             document.getElementById( "splash_text_top" ).classList.remove( "show" );
             document.getElementById( "splash_text_bottom" ).classList.remove( "show" );
             document.getElementById( "splash_text_top" ).classList.add( "fade" );
             document.getElementById( "splash_text_bottom" ).classList.add( "fade" );
-            
+
             setTimeout( () => {
                document.getElementById( "splash_text_top" ).style.display = "none";
                document.getElementById( "splash_text_bottom" ).style.display = "none";

@@ -59,14 +59,17 @@ console.log("MINE", result2);
 
 //-----------------------------------------------------------------------------
 // Returns the pixel dimensions of the user's client area.
-function GetDeviceDimensions() {
-   return [Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
-           Math.max( document.documentElement.clientHeight, window.innerHeight || 0 )];
+export function GetDeviceDimensions() {
+   // Hope this works LOL.
+   return [background.offsetWidth, background.offsetHeight];
+   //return [Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
+   //        Math.max( document.documentElement.clientHeight, window.innerHeight || 0 )];
 }
 
 function ResizeViewport() {
    // The device/client viewport rectangle.
    const [vw, vh] = GetDeviceDimensions();
+   console.log( vw, vh );
    
    if( vw !== currentScreenSize[0] || vh !== currentScreenSize[1] ) {
       currentScreenSize = [vw, vh];
@@ -152,6 +155,10 @@ async function Setup() {
    //content.innerHTML = document.getElementById( "panel1" ).innerHTML;
    
    requestAnimationFrame( Update );
+
+   requestAnimationFrame( () => {
+      document.getElementById( "bottomleft" ).classList.remove( "hide" );
+   });
 }
 
 Setup();

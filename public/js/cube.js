@@ -3,6 +3,7 @@ import Smath from "./smath.js";
 import Camera from "./camera.js";
 import PerlinStream from "./PerlinStream.js";
 import Animate from "./animate.js";
+import {GetDeviceDimensions} from "./index.js";
 ///////////////////////////////////////////////////////////////////////////////
 
 let m_packer, m_buffer, m_shader;
@@ -63,12 +64,7 @@ function SetColor( color ) {
    Smath.Copy( m_color, color );
 }
 
-//-----------------------------------------------------------------------------
-// Returns the pixel dimensions of the user's client area.
-function GetDeviceDimensions() {
-   return [Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
-           Math.max( document.documentElement.clientHeight, window.innerHeight || 0 )];
-}
+
 
 function GetAspect() {
    let [x,y] = GetDeviceDimensions();

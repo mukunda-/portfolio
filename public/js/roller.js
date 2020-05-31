@@ -6,6 +6,7 @@ import Animate from "./animate.js";
 import Arrows  from "./arrows.js";
 import Color   from "./color.js";
 import Zoomer  from "./zoomer.js";
+import {GetDeviceDimensions} from "./index.js";
 ///////////////////////////////////////////////////////////////////////////////
 
 //-----------------------------------------------------------------------------
@@ -86,7 +87,9 @@ function Start() {
    const content = document.getElementById( "content" );
 
    content.style.top = (vrange - cubesize/2) * 50 / vrange + "vh";
-   content.style.bottom = (vrange - cubesize/2) * 50 / vrange + "vh";
+   //content.style.bottom = (vrange - cubesize/2) * 50 / vrange + "vh";
+   
+   content.style.height = (cubesize) * 100 / (vrange*2) + "vh";
    content.style.display = "block";
 
    StartFlicker();
@@ -190,8 +193,7 @@ function SetupSwiping() {
 
    window.addEventListener( "touchmove", e => {
 
-      const windowWidth = Math.max( document.documentElement.clientWidth, window.innerWidth || 0 );
-      const windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
+      const [windowWidth, windowHeight] = GetDeviceDimensions();
 
       for( let i = 0; i < e.changedTouches.length; i++ ) {
          let touch = e.changedTouches[i];
@@ -324,7 +326,9 @@ function StartPanelDisplay() {
 let m_currentScrollHeight = 0;
 
 function UpdateScrollSpace() {
-   let windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
+   
+   let [,windowHeight] = GetDeviceDimensions();
+   //let windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
    // [Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
 
 
@@ -529,7 +533,8 @@ function OnAnimate( time, elapsed ) {
       window.scrollBy( 0, VHToPixels(m_arrowScroll * elapsed / 1000 * 100) );
    }
 
-   let windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
+   let [,windowHeight] = GetDeviceDimensions();
+   //let windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
 
    if( m_currentScroll != m_desiredScroll ) {
       let d = m_verticalScrollSlide ** (elapsed / 250);
@@ -581,7 +586,7 @@ function SetupContentPadding() {
    const content = document.getElementById( "content" );
    if( !content.classList.contains( "show" )) return;
 
-   let windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
+//   let windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
    const pages = content.getElementsByTagName( "section" );
    //let st = content.scrollTop;
    /*
@@ -606,30 +611,30 @@ function SetupContentPadding() {
    //content.scrollTop = st;
 
    //m_desiredScroll = content.scrollTop / GetDeviceHeight() * 100;
-   
-   //m_desiredScroll = PixelsToVH(window.scrollTop);
-   
+ 
+   m_desiredScroll = PixelsToVH(document.documentElement.scrollTop);
+   console.log("snapping scroll to", m_desiredScroll);
    //SetScroll( m_desiredScroll );
 }
 
 //-----------------------------------------------------------------------------
 // Returns the pixel dimensions of the user's client area.
-function GetDeviceHeight() {
-    return Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
-}
+//function GetDeviceHeight() {
+//    return Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
+//}
 
 function VHToPixels( vh ) {
-    return vh * GetDeviceHeight() / 100;
+    return vh * GetDeviceDimensions()[1] / 100;
 }
 
 function PixelsToVH( pixels ) {
-    return pixels / GetDeviceHeight() * 100;
+    return pixels / GetDeviceDimensions()[1] * 100;
 }
 
 // Returns max scroll value in vh units.
 function MaxScroll() {
     const content = document.getElementById( "content" );
-    return (content.scrollHeight - content.offsetHeight) / GetDeviceHeight() * 100;
+    return (content.scrollHeight - content.offsetHeight) / GetDeviceDimensions()[1] * 100;
 }
 
 //-----------------------------------------------------------------------------
@@ -841,7 +846,7 @@ function SetScroll( vh ) {
    UpdateScrollSpace();
 
    let content = document.getElementById( "content" );
-   let pixels = Math.round(vh * GetDeviceHeight() / 100);
+   let pixels = Math.round(vh * GetDeviceDimensions()[1] / 100);
 
 
    // The input will be clamped to the content height.
@@ -1117,7 +1122,8 @@ function PanelLeft() {
 }
 
 function RotateWithTouch( pixels ) {
-   const windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
+   const [,windowHeight] = GetDeviceDimensions();
+   //const windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
    m_touchingSwivel = true;
    let offset = pixels / (windowHeight * 0.8) * 90;
    m_swivelDesiredOffset += offset;

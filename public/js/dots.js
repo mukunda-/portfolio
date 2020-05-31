@@ -2,6 +2,7 @@ import hc from "./hc/hc.js";
 import Camera from "./camera.js";
 import Smath from "./smath.js";
 import Animate from "./animate.js";
+import {GetDeviceDimensions} from "./index.js";
 
 let m_buffer, m_shader;
 let m_bufferShape;
@@ -96,12 +97,6 @@ async function Setup() {
    CreateRenderBuffer();
 }
 
-//-----------------------------------------------------------------------------
-// Returns the pixel dimensions of the user's client area.
-function GetDeviceDimensions() {
-   return [Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
-           Math.max( document.documentElement.clientHeight, window.innerHeight || 0 )];
-}
 
 function HandleResize() {
    CreateRenderTexture();
@@ -122,7 +117,7 @@ function BindRenderTexture() {
 
 function CreateRenderTexture() {
    let dimensions = GetDeviceDimensions();
-
+   
    let originalTexture = m_renderTexture;
    if( originalTexture ) requestAnimationFrame( () => {
       hc.gl.deleteTexture( originalTexture );

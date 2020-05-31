@@ -1,4 +1,5 @@
 // ok zoomer
+import {GetDeviceDimensions} from "./index.js";
 
 let m_image;
 
@@ -39,8 +40,7 @@ function Unzoom() {
 function ShowImage( img ) {
    m_ignoreClicks = true;
    Unzoom();
-   const windowWidth = Math.max( document.documentElement.clientWidth, window.innerWidth || 0 );
-   const windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
+   const [windowWidth,windowHeight] = GetDeviceDimensions();
 
    m_zoomed_image = img;
    m_image.src = img.src;

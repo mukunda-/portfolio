@@ -41,7 +41,7 @@ a {
 
 #background {
    width: 100%;
-   height: 100%;
+   height: 100vh;
    position: fixed;
    left: 0px;
    top: 0px;
@@ -73,7 +73,7 @@ a {
    height:           80vh;
    position:         fixed;
    left:             calc(50% - 40vh);
-   top:              calc(50% - 40vh);
+   top:              calc(50vh - 40vh);
    cursor:           pointer;
    background-color: transparent;
    border-radius:    10vh;
@@ -89,7 +89,7 @@ a {
    text-align: center;
    position:   fixed;
    left:       0px;
-   top:        calc( 50% - 5vh );
+   top:        calc( 50vh - 5vh );
    width:      100%;
    user-select: none;
 
@@ -155,8 +155,10 @@ a {
    font-size: 3.5vh;
    
    position: fixed;
+   /*
    top: 20vh;
-   bottom: 20vh;
+   
+   bottom: 20vh;*/
    width: 60vh;
    max-width: 95%;
    left: 0;
@@ -349,7 +351,7 @@ a {
 }
 
 #leftArrow, #rightArrow {
-   bottom: calc( 50% - 5vh );
+   bottom: calc( 50vh - 5vh );
 }
 
 #upArrow, #downArrow {
@@ -385,32 +387,24 @@ a {
    position: fixed;
    transform: translateY( -50% );
    opacity: 0;
+   transition: opacity 1s, filter 1.5s;
 }
 
 #splash_text_top {
-   top: 25%;
+   top: 25vh;
 }
 
 #splash_text_bottom {
-   top: 75%;
+   top: 75vh;
 }
 
-#splash_text_top.show {
+.splash_text.show {
    opacity: 1;
-   transition: opacity 1s 4s;
-}
-
-#splash_text_bottom.show {
-   opacity: 1;
-   transition: opacity 1s 6s;
 }
 
 .splash_text.fade {
-   opacity: 0;
    filter: blur( 4px );
-   transition: opacity 1.5s, filter 1.5s;
 }
-
 
 @media screen and (max-width: 76vh) {
    #leftArrow, #rightArrow {
