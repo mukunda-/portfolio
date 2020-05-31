@@ -1,4 +1,4 @@
-change the cube to use one lit side (maybe?)
+change the cube to use one lit side (maybe?) x
 
 pause video elements when out of range.
 - i dont like this, it should pause only if you play another video
@@ -6,21 +6,21 @@ pause video elements when out of range.
   listen for "play" events. if any video starts playing with sound, pause
   all other videos that are playing with sound.
 
-change .page to html5 section
+change .page to html5 section x
 
-need a fullscreen/exit fullscreen button for mobile.
+need a fullscreen/exit fullscreen button for mobile.x 
 
-floating point precision stuff on mobile
+floating point precision stuff on mobile ??
 
-give the cube an airy feel (random model rotations)
+give the cube an airy feel (random model rotations) x
 
-hide original image when zoomed.
+hide original image when zoomed. x
 
-resizing fade buffer
+resizing fade buffer x
 
-splash start text
+splash start text x
 
-clicking images while in zoom mode breaks it
+clicking images while in zoom mode breaks it x
 ---------------------------------------------------------------
 make sure that content squishes properly when the window is slimmer than the box width (done, keep this in mind)
 

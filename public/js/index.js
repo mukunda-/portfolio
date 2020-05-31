@@ -156,4 +156,5 @@ async function Setup() {
 
 Setup();
 
-document.getElementById( "bottomleft" ).classList.remove( "hide" );
+
+

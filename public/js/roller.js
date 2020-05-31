@@ -265,7 +265,7 @@ function StartPanelDisplay() {
 
    let firstPage = true;
 
-   for( const page of content.getElementsByClassName( "page" )) {
+   for( const page of content.getElementsByTagName("section") ) {
       if( firstPage ) {
          page.innerHTML = header_element + page.innerHTML;
          firstPage = false;
@@ -580,7 +580,7 @@ function SetupContentPadding() {
    if( !content.classList.contains( "show" )) return;
 
    let windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
-   const pages = content.getElementsByClassName( "page" );
+   const pages = content.getElementsByTagName( "section" );
    //let st = content.scrollTop;
    /*
    for( let index = 0; index < pages.length; index++ ) {
@@ -640,7 +640,7 @@ function GetPagingInfo( scroll ) {
    } else {
       scroll = VHToPixels( scroll );
    }
-   const pages = content.getElementsByClassName("page");
+   const pages = content.getElementsByTagName("section");
    if( pages.length == 0 ) return null;
    let i = 0;
    for( i = 0; i < pages.length; i++ ) {
@@ -675,7 +675,7 @@ function ScrollDownPage() {
    let top = VHToPixels(m_desiredScroll);
    let tolerance = pi.displayHeight * 0.05;
 
-   const pages = content.getElementsByClassName("page");
+   const pages = content.getElementsByTagName("section");
    if( !pages ) return;
 
    // default to max.
@@ -744,7 +744,7 @@ function ScrollUpPage() {
    let top = VHToPixels(m_desiredScroll);
    let tolerance = pi.displayHeight * 0.05;
 
-   const pages = content.getElementsByClassName("page");
+   const pages = content.getElementsByTagName("section");
    if( !pages ) return;
 
    let bottom = top + content.offsetHeight;
@@ -849,7 +849,7 @@ function SetScroll( vh ) {
    // make sure one bar corresponds to each page.
    // first 90deg turn is the first page, second for the second ,etc.
 
-   const pages = content.getElementsByClassName("page");
+   const pages = content.getElementsByTagName("section");
 
    const pi = GetPagingInfo();
    /*

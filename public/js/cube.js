@@ -6,6 +6,7 @@ import Animate from "./animate.js";
 ///////////////////////////////////////////////////////////////////////////////
 
 let m_packer, m_buffer, m_shader;
+let m_bufferVectors;
 
 let m_intensity = 0;
 let m_color = [0, 0, 0];
@@ -39,6 +40,8 @@ async function Setup() {
    
    m_buffer = new hc.Buffer();
    m_buffer.Load( m_packer.Buffer(), hc.gl.STATIC_DRAW );
+
+   m_bufferVectors = new hc.Buffer();
    
    m_shader = new hc.Shader();
    await Promise.all( [
@@ -61,8 +64,23 @@ function SetColor( color ) {
 }
 
 //-----------------------------------------------------------------------------
+// Returns the pixel dimensions of the user's client area.
+function GetDeviceDimensions() {
+   return [Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
+           Math.max( document.documentElement.clientHeight, window.innerHeight || 0 )];
+}
+
+function GetAspect() {
+   let [x,y] = GetDeviceDimensions();
+   return x/y;
+}
+
+//-----------------------------------------------------------------------------
 function Render( matProjView, screenSize ) {
    m_shader.Use();
+   const a_position = m_shader.GetAttribute( "a_position" );
+   const a_angles = m_shader.GetAttribute( "a_angles" );
+   hc.Context.EnableVertexAttribArrays( [ a_position, a_angles ] );
 
    //   4_______7
    //   /      /|      1       -1
@@ -85,8 +103,49 @@ function Render( matProjView, screenSize ) {
       [ 1,  1, -1]
    ];
 
-   const [cameraEye] = Camera.Get();
+   const [cameraEye,cameraTarget,cameraUp] = Camera.Get();
 
+   {
+      // Setup angles for background.
+      
+      let forward = Smath.Normalize( Smath.SubtractVectors( cameraTarget,cameraEye   ) );
+      let left    = Smath.Normalize( Smath.Cross(cameraUp, forward) );
+      let up      = Smath.Normalize( Smath.Cross(forward, left) );
+
+      const aspect = GetAspect();
+      //hc.gl.uniform1f( u_aspect, deviceWidth/deviceHeight );
+
+      let points = [
+         [aspect, 1, 1],
+         [aspect, -1, 1],
+         [-aspect, -1, 1],
+
+         [-aspect, -1, 1],
+         [-aspect, 1, 1],
+         [aspect, 1, 1],
+      ];
+
+      let stan = Math.tan(45.0);
+
+      let packer = new hc.Packer( "fff" );
+
+      for( const p of points ) {
+         let v = [];
+         v[0] = p[0] * left[0] + p[1] * up[0] + p[2] * forward[0] * stan;
+         v[1] = p[0] * left[1] + p[1] * up[1] + p[2] * forward[1] * stan;
+         v[2] = p[0] * left[2] + p[1] * up[2] + p[2] * forward[2] * stan;
+         v = Smath.Normalize( v );
+         
+         packer.Push(v );
+      }
+      
+      m_bufferVectors.Load( packer.Buffer(), hc.gl.STREAM_DRAW );
+         
+      m_bufferVectors.Bind();
+      hc.gl.vertexAttribPointer( a_angles, 3, hc.gl.FLOAT, false, 12, 0 );
+   }
+
+   // TODO: merge this again.
    let m2 = //Smath.MultiplyMatrices(
          //matProjView, 
          Smath.RotationMatrixFromYawPitchRoll(
@@ -105,7 +164,7 @@ function Render( matProjView, screenSize ) {
    let geometryT = [];
    for( const i in geometry ) {
       let g = geometry[i];
-      
+
       let p1 = Smath.MultiplyMatrixAndPoint( m2, g );
       let [x,y,z,w] = Smath.MultiplyMatrixAndPoint( matProjView, p1 );
       let d = Smath.Distance( g, cameraEye );
@@ -140,12 +199,10 @@ function Render( matProjView, screenSize ) {
    hc.gl.enable( hc.gl.BLEND );
    hc.gl.blendFunc( hc.gl.ONE, hc.gl.ONE );
 
-   const a_position = m_shader.GetAttribute( "a_position" );
-   hc.Context.EnableVertexAttribArrays( [ a_position ] );
    m_buffer.Bind();
    hc.gl.vertexAttribPointer( a_position, 2, hc.gl.FLOAT, false, 8, 0 );
    hc.gl.drawArrays( hc.gl.TRIANGLES, 0, 6 );
-   hc.Context.DisableVertexAttribArrays( [ a_position ] );
+   hc.Context.DisableVertexAttribArrays( [ a_position, a_angles ] );
 }
 
 ///////////////////////////////////////////////////////////////////////////////

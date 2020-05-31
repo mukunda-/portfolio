@@ -43,7 +43,6 @@ function ShowImage( img ) {
    const windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
 
    m_zoomed_image = img;
-   img.classList.add( "zoomhide" );
    m_image.src = img.src;
    let rect = img.getBoundingClientRect();
    
@@ -85,6 +84,7 @@ function ShowImage( img ) {
    //m_image.style.top = `50%`;
    //m_image.style.transform = `translateY(-50%)`;
    requestAnimationFrame( () => {
+      img.classList.add( "zoomhide" );
       m_image.style.opacity = `1`;
       m_image.style.transition = `left 0.25s, top 0.25s, width 0.25s, height 0.25s, opacity 0.4s, filter 0.4s`;
       m_image.style.filter = null;

@@ -5,6 +5,7 @@ import Smath from "./smath.js";
 import Roller from "./roller.js";
 import {IsMobile} from "./index.js";
 import Dots from "./dots.js";
+import Arrows from "./arrows.js";
 
 let m_state = {
    name : "",
@@ -21,8 +22,19 @@ let m_state_handlers = {
          document.body.appendChild( clicker );
          clicker.addEventListener( "click", () => {
             document.body.removeChild( clicker );
+            
+            document.getElementById( "splash_text_top" ).classList.remove( "show" );
+            document.getElementById( "splash_text_bottom" ).classList.remove( "show" );
+            document.getElementById( "splash_text_top" ).classList.add( "fade" );
+            document.getElementById( "splash_text_bottom" ).classList.add( "fade" );
+            setTimeout( () => {
+               document.getElementById( "splash_text_top" ).style.display = "none";
+               document.getElementById( "splash_text_bottom" ).style.display = "none";
+            }, 1500 );
+
             SetState( "zoom" );
             if( IsMobile() ) {
+               Arrows.EnableFullscreenButton();
                document.documentElement.requestFullscreen();
             }
          });

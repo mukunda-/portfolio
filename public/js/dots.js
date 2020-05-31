@@ -21,6 +21,8 @@ let m_time_scale = new Animate.Slider( 0.1, 1.0 );
 
 let m_color = [1,1,1];
 
+let m_mouse = [0,0];
+
 async function Setup() {
 
    // one vertex per dot.
@@ -79,6 +81,14 @@ async function Setup() {
    Animate.Start( "dots_time", (time, elapsed) => {
       m_time_elapsed = elapsed;
       m_time += elapsed * m_time_scale.update( elapsed/1000 );
+   });
+
+   document.addEventListener( "mousemove", (e) => {
+      let [width,height] = GetDeviceDimensions();
+      let x = (e.clientX / width - 0.5) * 2;
+      let y = (e.clientY / height - 0.5) * 2;
+      m_mouse[0] = x;
+      m_mouse[1] = -y;
    });
 
    // Create render buffer.
@@ -164,6 +174,7 @@ function CreateRenderBuffer() {
 //-----------------------------------------------------------------------------
 function Render( projview ) {
 
+   let [deviceWidth, deviceHeight] = GetDeviceDimensions();
    // Render to our temporary buffer.
    hc.gl.bindFramebuffer( hc.gl.FRAMEBUFFER, m_frameBuffer );
    hc.gl.enable( hc.gl.BLEND );
@@ -223,6 +234,10 @@ function Render( projview ) {
 
       //hc.gl.drawArrays( hc.gl.TRIANGLES, 0, 6 );
 
+      const u_mouse = m_shader.GetUniform( "u_mouse" );
+      const u_aspect = m_shader.GetUniform( "u_aspect" );
+      hc.gl.uniform2f( u_mouse, m_mouse[0], m_mouse[1] );
+      hc.gl.uniform1f( u_aspect, deviceWidth / deviceHeight );
 
       if( fadeFactor == 0 ) {
          hc.gl.clearColor( 0, 0, 0, 1.0 );
@@ -258,7 +273,6 @@ function Render( projview ) {
       hc.gl.bindTexture( hc.gl.TEXTURE_2D, m_renderTexture );
       hc.gl.uniform1i( u_sampler, 0 );
       
-      let [deviceWidth, deviceHeight] = GetDeviceDimensions();
       const u_aspect = m_postdotShader.GetUniform( "u_aspect" );
       hc.gl.uniform1f( u_aspect, deviceWidth/deviceHeight );
       const u_color = m_postdotShader.GetUniform( "u_color" );

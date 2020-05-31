@@ -4,9 +4,11 @@ uniform lowp vec3 points[8];
 uniform float aspect;
 
 varying lowp vec2 fragmentPoint;
+varying lowp vec3 fragmentAngle;
 
 uniform lowp vec3 color;
 uniform float intensity;
+
 
 vec2 dist( vec3 a, vec3 b, vec2 e ) {
    // Create vectors, a->b, a->e, b->e
@@ -149,5 +151,15 @@ void main(void) {
            
    //i = clamp( i, 0.0, 1.0 );
    i *= intensity;//0.05;
-   gl_FragColor = vec4( color * i, 1.0);
+   //gl_FragColor = vec4( color * i, 1.0);
+   vec3 add = abs(normalize(fragmentAngle));// * 0.1;
+   add = add * (add.y + 1.0) / 2.0;
+   add.y *= 0.25;
+   add = add * add;
+   //float y = atan( add.x, add.z );
+   
+   //add *= 0.1+(1.0- (fragmentAngle.y + 1.0) / 2.0)*0.9;
+   //float pitch = fragmentAngle.y;
+   //add = vec3( add.z);
+   gl_FragColor = vec4( color * i * (1.0 + add ) + add * 0.2, 1.0);
 }

@@ -2,11 +2,15 @@
 
 const m_actions = {}
 
+let m_fullscreenButton;
+
 function Setup() {
    let leftArrow  = CreateArrow( "leftArrow", 180 );
    let rightArrow = CreateArrow( "rightArrow", 0 );
    let downArrow  = CreateArrow( "downArrow", 90 );
    let upArrow    = CreateArrow( "upArrow", -90 );
+
+   CreateFullScreenButton();
 
    downArrow.holdable = true;
    upArrow.holdable = true;
@@ -37,7 +41,7 @@ function OnArrowEvent( type, e ) {
 function CreateArrow( id, angle ) {
    let arrow = document.createElementNS( "http://www.w3.org/2000/svg", "svg" );
    arrow.setAttribute( "id", id );
-   arrow.setAttribute( "class", "arrow" );
+   arrow.setAttribute( "class", "hud-button arrow" );
    arrow.style.width = "10vh";
    arrow.style.height = "10vh";
 
@@ -87,7 +91,83 @@ function CreateArrow( id, angle ) {
    return arrow;
 }
 
+function CreateFullScreenButton() {
+   let elem = document.createElementNS( "http://www.w3.org/2000/svg", "svg" );
+   elem.setAttribute( "id", "fullscreenButton" );
+   elem.setAttribute( "class", "hud-button" );
+   elem.style.right = "0vh";
+   elem.style.top = "0vh";
+
+   elem.setAttribute( "viewBox", "0 0 40 40" );
+   
+   {
+      let paths = [
+         [-1, -0.25, -1, -1, -0.25, -1],
+         [-1, 0.25, -1, 1,  -0.25, 1],
+         [0.25, 1, 1,1, 1, 0.25],
+         [0.25, -1, 1, -1, 1, -0.25]
+         
+      ];
+
+      for( const p of paths ) {
+         for( const i in p ) {
+            p[i] = 20 + p[i] * 12;
+         }
+      }
+      for( const p of paths ) {
+         const pl = document.createElementNS("http://www.w3.org/2000/svg", "polyline" );
+         pl.setAttribute( "points", p.join(" ") );//p.join(" ")"5,15,  5,5, 15,5" );
+         pl.setAttribute( "style", "fill:none;stroke:rgb(255,255,255);stroke-width:4" );
+         elem.appendChild( pl );
+      }
+   }
+   document.body.appendChild( elem );
+
+   elem.addEventListener( "click", () => {
+      if( elem.classList.contains( "enabled" )) {
+         document.documentElement.requestFullscreen();
+      }
+   });
+
+   m_fullscreenButton = elem;
+}
+
+function EnableFullscreenButton() {
+   m_fullscreenButton.classList.add( "enabled" );
+}
+/*
+function CreateExitButton() {
+   let elem = document.createElementNS( "http://www.w3.org/2000/svg", "svg" );
+   elem.setAttribute( "id", "exitButton" );
+   elem.setAttribute( "class", "hud-button enabled" );
+   elem.style.right = "0vh";
+   elem.style.top = "0vh";
+
+   elem.setAttribute( "viewBox", "0 0 40 40" );
+   
+   {
+      let paths = [
+         [-1, -1,  1,  1],
+         [-1,  1,  1, -1]
+      ];
+
+      for( const p of paths ) {
+         for( const i in p ) {
+            p[i] = 20 + p[i] * 12;
+         }
+      }
+
+      for( const p of paths ) {
+         const pl = document.createElementNS("http://www.w3.org/2000/svg", "polyline" );
+         pl.setAttribute( "points", p.join(" ") );//p.join(" ")"5,15,  5,5, 15,5" );
+         pl.setAttribute( "style", "fill:none;stroke:rgb(255,255,255);stroke-width:7" );
+         elem.appendChild( pl );
+      }
+   }
+   document.body.appendChild( elem );
+}*/
+
 ///////////////////////////////////////////////////////////////////////////////
 export default {
-   Setup, SetAction
+   Setup, SetAction, EnableFullscreenButton
 }
