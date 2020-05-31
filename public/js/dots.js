@@ -16,8 +16,8 @@ const m_particleCount = 15000;
 
 let m_postdotShader;
 let m_fadeShader;
-let m_fade_factor = new Animate.Slider( 0.1, 150.0 );
-let m_time_scale = new Animate.Slider( 0.1, 20.0 );
+let m_fade_factor = new Animate.Slider( 0.1, 50.0 );
+let m_time_scale = new Animate.Slider( 0.1, 1.0 );
 
 let m_color = [1,1,1];
 
@@ -93,9 +93,30 @@ function GetDeviceDimensions() {
            Math.max( document.documentElement.clientHeight, window.innerHeight || 0 )];
 }
 
-//-----------------------------------------------------------------------------
-function CreateRenderBuffer() {
+function HandleResize() {
+   CreateRenderTexture();
+   BindRenderTexture();
+}
+
+function BindRenderTexture() {
+
+   hc.gl.bindFramebuffer( hc.gl.FRAMEBUFFER, m_frameBuffer );
+
+   hc.gl.framebufferTexture2D(
+      hc.gl.FRAMEBUFFER, hc.gl.COLOR_ATTACHMENT0,
+      hc.gl.TEXTURE_2D, m_renderTexture, 0
+   );
+   
+   hc.gl.bindFramebuffer( hc.gl.FRAMEBUFFER, null );
+}
+
+function CreateRenderTexture() {
    let dimensions = GetDeviceDimensions();
+
+   let originalTexture = m_renderTexture;
+   if( originalTexture ) requestAnimationFrame( () => {
+      hc.gl.deleteTexture( originalTexture );
+   });
 
    m_renderTexture = hc.gl.createTexture();
    hc.gl.bindTexture( hc.gl.TEXTURE_2D, m_renderTexture );
@@ -122,7 +143,14 @@ function CreateRenderBuffer() {
    hc.gl.texParameteri( hc.gl.TEXTURE_2D, hc.gl.TEXTURE_WRAP_S, hc.gl.CLAMP_TO_EDGE );
    hc.gl.texParameteri( hc.gl.TEXTURE_2D, hc.gl.TEXTURE_WRAP_T, hc.gl.CLAMP_TO_EDGE );
 
+}
+
+//-----------------------------------------------------------------------------
+function CreateRenderBuffer() {
+   CreateRenderTexture();
+
    m_frameBuffer = hc.gl.createFramebuffer();
+   BindRenderTexture();
    hc.gl.bindFramebuffer( hc.gl.FRAMEBUFFER, m_frameBuffer );
 
    hc.gl.framebufferTexture2D(
@@ -257,5 +285,5 @@ function SetTimeScale( speed ) {
 }
 
 export default {
-    Setup, Render, SetColor, SetFadeFactor, SetTimeScale
+    Setup, Render, SetColor, SetFadeFactor, SetTimeScale, HandleResize
 }

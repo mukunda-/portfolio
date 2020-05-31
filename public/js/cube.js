@@ -1,6 +1,8 @@
 import hc from "./hc/hc.js";
 import Smath from "./smath.js";
 import Camera from "./camera.js";
+import PerlinStream from "./PerlinStream.js";
+import Animate from "./animate.js";
 ///////////////////////////////////////////////////////////////////////////////
 
 let m_packer, m_buffer, m_shader;
@@ -13,6 +15,11 @@ let m_zFar           = 1000.0;
 let m_zNearIntensity = 1.0;
 let m_zFarIntensity  = 1.0;
 
+let m_jitter = [
+   new PerlinStream( 4, 1.4 ),
+   new PerlinStream( 4, 1.4 ),
+   new PerlinStream( 4, 1.4 )
+]
 
 //-----------------------------------------------------------------------------
 async function Setup() {
@@ -40,6 +47,12 @@ async function Setup() {
    ]);
 
    m_shader.Link();
+
+   Animate.Start( "cube_jitter", (time, elapsed) => {
+      for( const j of m_jitter ) {
+         j.update( elapsed / 2000 );
+      }
+   });
 }
 
 //-----------------------------------------------------------------------------
@@ -74,15 +87,39 @@ function Render( matProjView, screenSize ) {
 
    const [cameraEye] = Camera.Get();
 
+   let m2 = //Smath.MultiplyMatrices(
+         //matProjView, 
+         Smath.RotationMatrixFromYawPitchRoll(
+               m_jitter[0].value*0.02, m_jitter[1].value*0.02, m_jitter[2].value *0.02 )
+   //);
+
+   let angle = cameraEye.slice();
+   Smath.Snap( angle );
+   let highlight = [];
+   for( let i = 0; i < 8; i++ ) {
+      highlight[i] = geometry[i][0] == angle[0] || geometry[i][1] == angle[1] || geometry[i][2] == angle[2];
+   }
+   //highlight[0] = angle[0] == -1 || angle[1] == 1 || angle[2] == 1;
+   //highlight[0] = angle[0] == -1 || angle[1] == -1 || angle[2] == 1;
+
    let geometryT = [];
-   for( const g of geometry ) {
-      const [x, y, z, w] = Smath.MultiplyMatrixAndPoint( matProjView, g );
+   for( const i in geometry ) {
+      let g = geometry[i];
+      
+      let p1 = Smath.MultiplyMatrixAndPoint( m2, g );
+      let [x,y,z,w] = Smath.MultiplyMatrixAndPoint( matProjView, p1 );
       let d = Smath.Distance( g, cameraEye );
       d -= m_zNear;
       d /= (m_zFar - m_zNear);
       d = d < 0 ? 0 : d;
       d = d > 1 ? 1 : d;
       d = m_zNearIntensity + (m_zFarIntensity - m_zNearIntensity) * d;
+
+      if( highlight[i] ) {
+         d = m_zNearIntensity;
+      } else {
+         d = m_zFarIntensity;
+      }
       
       geometryT.push( x / w, y / w, d );
    }
@@ -102,7 +139,7 @@ function Render( matProjView, screenSize ) {
    
    hc.gl.enable( hc.gl.BLEND );
    hc.gl.blendFunc( hc.gl.ONE, hc.gl.ONE );
-   
+
    const a_position = m_shader.GetAttribute( "a_position" );
    hc.Context.EnableVertexAttribArrays( [ a_position ] );
    m_buffer.Bind();

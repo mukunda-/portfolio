@@ -3,6 +3,9 @@
 let m_image;
 
 let m_showing = false;
+let m_zoomed_image = null;
+
+let m_ignoreClicks = false;
 
 function Setup() {
    m_image = document.createElement( "img" );
@@ -10,29 +13,37 @@ function Setup() {
    m_image.className = "zoomer";
    document.body.appendChild( m_image );
 
-   m_image.addEventListener( "click", () => {
-     // m_image.style.display = "none";
-   });
-
    document.addEventListener( "keydown", e => {
       if( e.key == "Escape" ) {
-         m_image.style.display = "none";
-         m_showing = false;
+         Unzoom();
       }
    });
+
    document.addEventListener( "click", e => {
-      if( m_showing ) {
-         m_image.style.display = "none";
-         m_showing = false;
-      }
-      
+      if( m_ignoreClicks ) return;
+      Unzoom();
    });
 }
 
+function Unzoom() {
+   if( m_zoomed_image ) {
+      m_zoomed_image.classList.remove( "zoomhide" );
+      m_zoomed_image = null;
+   }
+   if( m_showing ) {
+      m_image.style.display = "none";
+      m_showing = false;
+   }
+}
+
 function ShowImage( img ) {
+   m_ignoreClicks = true;
+   Unzoom();
    const windowWidth = Math.max( document.documentElement.clientWidth, window.innerWidth || 0 );
    const windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
 
+   m_zoomed_image = img;
+   img.classList.add( "zoomhide" );
    m_image.src = img.src;
    let rect = img.getBoundingClientRect();
    
@@ -59,7 +70,7 @@ function ShowImage( img ) {
    m_image.style.top       = `${(rect.top+rect.bottom)/2}px`;
    m_image.style.width     = `${rect.right-rect.left}px`;
    m_image.style.height    = `${rect.bottom-rect.top}px`;
-   m_image.style.opacity   = `0.0`;
+   m_image.style.opacity   = `1.0`;
    m_image.style.transform = `translate( -50%, -50% )`;
    //m_image.style.filter    = "blur(16px)";
    m_image.transition      = null;
@@ -82,6 +93,7 @@ function ShowImage( img ) {
       m_image.style.width = width;//`${width}px`;
       m_image.style.height = height;//`${height}px`;
       m_showing = true;
+      m_ignoreClicks = false;
    });
    
    /*

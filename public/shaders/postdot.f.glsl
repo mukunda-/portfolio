@@ -6,7 +6,7 @@ uniform float u_aspect;
 
 void main(void) {
    float d = 1.0;//length( vec2(fragmentPoint.x * u_aspect, fragmentPoint.y) );
-   vec2 uv = fragmentPoint * (1.0 - length(fragmentPoint) * 0.15);
+   vec2 uv = fragmentPoint;// * (1.0 - length(fragmentPoint) * 0.15);
    //fragmentPoint = fragmentPoint * 1.5;
    //d = d*d;//pow(d,2.0);
    gl_FragColor = texture2D( u_sampler, (uv + 1.0) / 2.0 ) * vec4(u_color,1.0) * d*d;

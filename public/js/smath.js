@@ -1,4 +1,32 @@
-// shitmath
+// (ShitMath)
+
+function RotationMatrixFromYawPitchRoll( y, p, r ) {
+   const c1 = Math.cos(y), s1 = Math.sin(y),
+         c2 = Math.cos(p), s2 = Math.sin(p),
+         c3 = Math.cos(r), s3 = Math.sin(r)
+
+ 
+   return [
+      c2, -c3*s2, s2*s3, 0,
+      c1*s2, c1*c2*c3 - s1*s3, -c3*s1 - c1*c2*s3, 0,
+      s1*s2, c1*s3 + c2*c3*s1, c1*c3 - c2*s1*s3, 0,
+      0, 0, 0, 1
+   ]/*
+   return [
+      1, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1 , 0,
+      0, 0, 0, 1
+   ]*/
+   /*
+   return [
+      ca*cb, sa*cb, -sb, 0,
+      ca*sb*sy - sa*cy, sa*sb*sy + ca+cy, cb*sy, 0,
+      ca*sb*cy + sa*sy,  sa*sb*cy - ca*sy, cb*cy, 0,
+      0, 0, 0, 1
+   ]*/
+}
+
 function RotateAroundAxis( axis, angle ) {
    //http://ksuweb.kennesaw.edu/~plaval//math4490/rotgen.pdf
    let C = Math.cos( angle );
@@ -190,5 +218,5 @@ export default {
    LookAt, SubtractVectors, IdentityMatrix, Cross, Normalize,
    MultiplyMatrixAndPoint, MultiplyMatrices, MakeProjectionMatrix,
    Copy, Distance, Snap, RotateAroundAxis, MultiplyVec3ByMatrix3,
-   Clamp
+   Clamp, RotationMatrixFromYawPitchRoll
 }

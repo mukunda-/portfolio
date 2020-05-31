@@ -581,7 +581,7 @@ function SetupContentPadding() {
 
    let windowHeight = Math.max( document.documentElement.clientHeight, window.innerHeight || 0 );
    const pages = content.getElementsByClassName( "page" );
-   let st = content.scrollTop;
+   //let st = content.scrollTop;
    /*
    for( let index = 0; index < pages.length; index++ ) {
       const page = pages[index];
@@ -601,7 +601,8 @@ function SetupContentPadding() {
       page.style.paddingTop    = `${padding}vh`;
       page.style.paddingBottom = `${padding}vh`;
    }*/
-   content.scrollTop = st;
+   //content.scrollTop = st;
+
    //m_desiredScroll = content.scrollTop / GetDeviceHeight() * 100;
    SetScroll( m_desiredScroll );
 }

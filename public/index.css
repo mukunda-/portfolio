@@ -259,6 +259,10 @@ a {
    cursor: pointer;
 }
 
+#content img.zoomhide {
+   opacity: 0;
+}
+
 .zoomer {
    position: fixed;
    z-index: 12;

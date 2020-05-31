@@ -9,7 +9,7 @@ void main(void) {
    //d *= f_intensity;
    float d = f_uv.x*f_uv.x+f_uv.y*f_uv.y;
    if( d > 1.0 ) discard;
-   //d = pow(1.0 - sqrt(d), 0.15) + pow(1.0 - sqrt(d), 4.0) * 2.5 ;
+   //d = pow(d,4.1);//sqrt(d);//pow(1.0 - sqrt(d), 0.15) + pow(1.0 - sqrt(d), 4.0) * 2.5 ;
    //d = pow(1.0-max(abs(f_uv.x), abs(f_uv.y)), 16.0) * 16.0;
    //d = pow(d, 4.0) + 
        //pow(d, 2.0) * 0.5 + 

@@ -79,6 +79,7 @@ function OnResize() {
    //var h = window.innerHeight & ~1;
    ResizeViewport();
    Roller.SetupContentPadding();
+   Dots.HandleResize();
 }
 
 let cameraAngle = 0.0;

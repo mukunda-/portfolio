@@ -71,9 +71,9 @@ vec2 dist( vec3 a, vec3 b, vec2 e ) {
    float dy = e.y - yy;
    return vec2( sqrt(dx * dx + dy * dy), 1.0 );
 */
-
-   //a.z = min( a.z, b.z );
-   //b.z = min( a.z, b.z );
+   float minaz = min( a.z, b.z ); 
+   a.z = minaz;
+   b.z = minaz;
 
    a.x *= aspect;
    b.x *= aspect;
@@ -114,10 +114,10 @@ float line_d( vec3 start, vec3 end ) {
    float i = di.y;
    
    d *= 1.0;
-   //d -= 0.001; // for wider hot beam
+   d -= 0.001; // for wider hot beam
    d = clamp( d, 0.0, 1.0 );
    d = 1.0-d;
-   return (pow( d, 145.0 ) + pow( d, 10.0 )*0.17) * i;//0.0005, d );
+   return (pow( d, 128.0 ) + pow( d, 8.0 )*0.17) * i;//0.0005, d );
 }
 
 void main(void) {
