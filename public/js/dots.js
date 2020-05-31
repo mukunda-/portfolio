@@ -12,10 +12,14 @@ let m_time_elapsed = 0;
 let m_renderTexture = null;
 let m_frameBuffer   = null;
 
-const m_particleCount = 4000;
+const m_particleCount = 15000;
 
 let m_postdotShader;
 let m_fadeShader;
+let m_fade_factor = new Animate.Slider( 0.1, 150.0 );
+let m_time_scale = new Animate.Slider( 0.1, 20.0 );
+
+let m_color = [1,1,1];
 
 async function Setup() {
 
@@ -26,10 +30,10 @@ async function Setup() {
       const packer = new hc.Packer( "fff" );
 
       for( let i = 0; i < m_particleCount; i++ ) {
-         let x = (Math.random() - 0.5) * 150.0;
-         let y = (Math.random() - 0.5) * 150.0;
-         let z = (Math.random() - 0.5) * 150.0;
-         let size = 0.25 + (Math.random() ** 4) * (0.75 + 3)
+         let x = (Math.random() - 0.5) * 120.0;
+         let y = (Math.random() - 0.5) * 120.0;
+         let z = (Math.random() - 0.5) * 120.0;
+         let size = 0.05 + (Math.random() ** 16) * 0.05;//(0.75 + 2)
          //let size = 5+ (Math.random() ** 2) * (10)
          packer.Push( [ x, y, z, size ] );
       }
@@ -70,9 +74,11 @@ async function Setup() {
    m_postdotShader.Link();
    m_fadeShader.Link();
 
+   m_time = 0;
+
    Animate.Start( "dots_time", (time, elapsed) => {
-      m_time         = time;
       m_time_elapsed = elapsed;
+      m_time += elapsed * m_time_scale.update( elapsed/1000 );
    });
 
    // Create render buffer.
@@ -132,15 +138,16 @@ function Render( projview ) {
 
    // Render to our temporary buffer.
    hc.gl.bindFramebuffer( hc.gl.FRAMEBUFFER, m_frameBuffer );
-
    hc.gl.enable( hc.gl.BLEND );
-   hc.gl.blendFunc( hc.gl.DST_COLOR, hc.gl.ZERO );
 
-   { // Clear operation.
+   let fadeFactor = m_fade_factor.update(m_time_elapsed/1000);
+   if( fadeFactor > 0 ) { 
+      // Clear operation.
+      hc.gl.blendFunc( hc.gl.DST_COLOR, hc.gl.ZERO );
       m_fadeShader.Use();
       const u_factor = m_fadeShader.GetUniform( "u_factor" );
       
-      hc.gl.uniform1f( u_factor, 0.1 ** (m_time_elapsed / 100) );
+      hc.gl.uniform1f( u_factor, 0.2 ** (m_time_elapsed / fadeFactor) );
       
       const a_position = m_fadeShader.GetAttribute( "a_position" );
       hc.Context.EnableVertexAttribArrays( [a_position] );
@@ -188,8 +195,12 @@ function Render( projview ) {
 
       //hc.gl.drawArrays( hc.gl.TRIANGLES, 0, 6 );
 
-      //hc.gl.clearColor( 0, 0, 0, 1.0 );
-      //hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
+
+      if( fadeFactor == 0 ) {
+         hc.gl.clearColor( 0, 0, 0, 1.0 );
+         hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
+
+      }
 
       hc.gl.aia.drawArraysInstancedANGLE(
          hc.gl.TRIANGLES,
@@ -218,13 +229,33 @@ function Render( projview ) {
       const u_sampler = m_postdotShader.GetUniform( "u_sampler" );
       hc.gl.bindTexture( hc.gl.TEXTURE_2D, m_renderTexture );
       hc.gl.uniform1i( u_sampler, 0 );
-      hc.gl.drawArrays( hc.gl.TRIANGLES, 0, 6 );
       
+      let [deviceWidth, deviceHeight] = GetDeviceDimensions();
+      const u_aspect = m_postdotShader.GetUniform( "u_aspect" );
+      hc.gl.uniform1f( u_aspect, deviceWidth/deviceHeight );
+      const u_color = m_postdotShader.GetUniform( "u_color" );
+      hc.gl.uniform3fv( u_color, m_color, 0, 1 );
+      
+
+      hc.gl.drawArrays( hc.gl.TRIANGLES, 0, 6 );
+
       // Cleanup.
       hc.Context.DisableVertexAttribArrays( [a_position] );
    }
 }
 
+function SetColor( color ) {
+   Smath.Copy( m_color, color );
+}
+
+function SetFadeFactor( factor ) {
+   m_fade_factor.desired = factor;
+}
+
+function SetTimeScale( speed ) {
+   m_time_scale.desired = speed;
+}
+
 export default {
-    Setup, Render
+    Setup, Render, SetColor, SetFadeFactor, SetTimeScale
 }

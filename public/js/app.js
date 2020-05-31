@@ -4,6 +4,7 @@ import Animate from "./animate.js";
 import Smath from "./smath.js";
 import Roller from "./roller.js";
 import {IsMobile} from "./index.js";
+import Dots from "./dots.js";
 
 let m_state = {
    name : "",
@@ -32,7 +33,7 @@ let m_state_handlers = {
          });
 
          Animate.Start( "cube_rotate", ( time, elapsed ) => {
-            let distance = Animate.Slide( 1000, 65, "fall", time, 0, 1000 );
+            let distance = Animate.Slide( 1000, 64 /*65*/, "fall", time, 0, 1000 );
             m_state.cameraDistance = distance;
             m_state.cameraAngle += elapsed * 0.0006;
             
@@ -74,6 +75,9 @@ let m_state_handlers = {
          if( desiredAngle < originalAngle ) {
             desiredAngle += Math.PI * 2;
          }
+
+         Dots.SetFadeFactor( 0 );
+         Dots.SetTimeScale( 1.0 );
          
          // Slide the cube ZScale parameters to make the back of the cube
          //  fade into the background.

@@ -69,6 +69,10 @@ let m_swivelTouchSwing = 0;
 //  their IDs.
 let m_activeVideos = {}
 
+function Setup() {
+   UpdateColorTheme( 0, 0 );
+}
+
 function Start() {
    let [eye] = Camera.Get();
    m_scrollCam = eye;
@@ -1144,5 +1148,5 @@ function readTurnTable( fraction ) {
 }
 
 export default {
-    Start, SetScroll, LoadContent, SetupContentPadding
+    Start, SetScroll, LoadContent, SetupContentPadding, Setup
 }

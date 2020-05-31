@@ -2,6 +2,7 @@
 //
 import hc from "./hc/hc.js";
 import Cube from "./cube.js";
+import Dots from "./dots.js";
 ///////////////////////////////////////////////////////////////////////////////
 
 let m_style; // Style element.
@@ -47,6 +48,8 @@ function Set( color, linkcolor ) {
    m_style.sheet.deleteRule( 0 );
    m_style.sheet.insertRule( 
       `a { color: rgb( ${linkcolor[0]*255}, ${linkcolor[1]*255}, ${linkcolor[2]*255}` );
+
+   Dots.SetColor( color );
 }
 
 export default {

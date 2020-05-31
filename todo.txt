@@ -16,6 +16,9 @@ give the cube an airy feel (random model rotations)
 
 hide original image when zoomed.
 
+resizing fade buffer
+
+splash start text
 
 clicking images while in zoom mode breaks it
 ---------------------------------------------------------------

@@ -143,6 +143,8 @@ async function Setup() {
    Arrows.Setup();
    Color.Setup();
    Zoomer.Setup();
+
+   Roller.Setup();
    
    let content = document.getElementById( "content" )
    content.style.display = "none";
