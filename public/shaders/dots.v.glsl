@@ -29,7 +29,7 @@ void main(void) {
       //intensity *= 1.0 - pow( length(tpos) / (loopSize / 2.0), 32.0 );
       intensity *= pow( 1.0 - min( length(tpos) / (loopSize / 2.0), 1.0 ), 1.0 );
       //intensity *= min( 1.0, pow( (intensity - 10.0) / 50.0, 2.0) );
-      f_intensity = clamp( intensity, 0.0, 1.0 ) * 0.4;
+      f_intensity = clamp( intensity, 0.0, 1.0 );// * 0.4;
       
    }
    f_uv = a_corner;
@@ -51,10 +51,13 @@ void main(void) {
    
    vec3 vert = tpos;
     //+ u_cameraUp * mouse.y + u_cameraRight * mouse.x;
-   vert += u_cameraUp * (a_corner.y * a_position.w + mouse.y);
-   vert += u_cameraRight * (a_corner.x * a_position.w + mouse.x);
+   //vert += u_cameraUp * (a_corner.y * a_position.w + mouse.y);
+   //vert += u_cameraRight * (a_corner.x * a_position.w + mouse.x);
 
    vec4 pos = u_camera * vec4( vert, 1.0 );
+   vec2 corner = a_corner;
+   corner.x /= u_aspect;
+   pos.xy += corner.xy * a_position.w  * pos.w;
    
    gl_Position = pos;
 }

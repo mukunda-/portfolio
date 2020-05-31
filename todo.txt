@@ -21,6 +21,8 @@ resizing fade buffer x
 splash start text x
 
 clicking images while in zoom mode breaks it x
+
+iphone....safari..... we needto move away from vh.
 ---------------------------------------------------------------
 make sure that content squishes properly when the window is slimmer than the box width (done, keep this in mind)
 

@@ -12,8 +12,8 @@ function Setup() {
 
    CreateFullScreenButton();
 
-   downArrow.holdable = true;
-   upArrow.holdable = true;
+   //downArrow.holdable = true;
+   //upArrow.holdable = true;
 }
 
 function SetAction( id, action, actionUp ) {

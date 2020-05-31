@@ -13,6 +13,10 @@ body {
    display: none;
 }
 
+html {
+   min-height: -webkit-fill-available;
+}
+
 a {
    text-decoration: none;
 }
@@ -65,11 +69,11 @@ a {
 }
 
 .cubeclicker {
-   width:            20vh;
-   height:           20vh;
+   width:            80vh;
+   height:           80vh;
    position:         fixed;
-   left:             calc(50% - 10vh);
-   top:              calc(50% - 10vh);
+   left:             calc(50% - 40vh);
+   top:              calc(50% - 40vh);
    cursor:           pointer;
    background-color: transparent;
    border-radius:    10vh;
@@ -194,10 +198,15 @@ a {
    transition: opacity 1s, transform 1s;
 }
 
+#content h2 {
+   text-align: left;
+}
+
 #content h2.header {
    text-align: center;
    width: 100%;
 }
+
 
 #content.show {
    opacity: 1;
@@ -379,21 +388,21 @@ a {
 }
 
 #splash_text_top {
-   top: 25vh;
+   top: 25%;
 }
 
 #splash_text_bottom {
-   top: 75vh;
+   top: 75%;
 }
 
 #splash_text_top.show {
    opacity: 1;
-   transition: opacity 1s 2s;
+   transition: opacity 1s 4s;
 }
 
 #splash_text_bottom.show {
    opacity: 1;
-   transition: opacity 1s 3s;
+   transition: opacity 1s 6s;
 }
 
 .splash_text.fade {

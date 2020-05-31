@@ -27,6 +27,7 @@ let m_state_handlers = {
             document.getElementById( "splash_text_bottom" ).classList.remove( "show" );
             document.getElementById( "splash_text_top" ).classList.add( "fade" );
             document.getElementById( "splash_text_bottom" ).classList.add( "fade" );
+            
             setTimeout( () => {
                document.getElementById( "splash_text_top" ).style.display = "none";
                document.getElementById( "splash_text_bottom" ).style.display = "none";
@@ -34,7 +35,10 @@ let m_state_handlers = {
 
             SetState( "zoom" );
             if( IsMobile() ) {
-               Arrows.EnableFullscreenButton();
+               if( !/iPhone|iPod/i.test(navigator.userAgent) ) {
+                  // iPhone doesn't'support fullscreen.
+                  Arrows.EnableFullscreenButton();
+               }
                document.documentElement.requestFullscreen();
             }
          });

@@ -11,6 +11,17 @@
       
 
 <!-- ////////////////////////////////////////////////////////////////////// -->
+<!--
+<template id="panel1" class="panel"
+          data-year="Hello" data-title=""
+          data-color="ffb2ff">
+   <section>
+      <p>
+         Welcome to my portfolio. You can scroll vertically to read more in each
+         section, or swipe left/right (or click the arrows) to navigate projects.
+      </p>
+   </section>
+</template>-->
 <template id="panel1" class="panel"
           data-year="1998" data-title="Day Zero"
           data-color="ffb2ff">
@@ -29,11 +40,8 @@
    <section>
       <p>
          Without teachers or books, it was a lot of experimentation,
-         building small apps and games in the worst way imaginable.
-      </p>
-      <p>
-         I've written a lot of embarrassing code, but we all started
-         somewhere, right?
+         making small apps and games in the worst way imaginable, but
+         we all started somewhere, right?
       </p>
       <p>
          Eventually I would connect with other developers on the world
@@ -65,8 +73,8 @@
    <section>
       <p>
          When I was 14, I sold my first game. It was a GameBoy Advance console port
-         of one of my PC games, Jetpack 4, published in MaxPlay Classic Games Volume 1.
-         Read more about the story below if you want, or just watch the review on it.
+         of one of my PC games, Jetpack 4, published in <a href="https://en.wikipedia.org/wiki/MaxPlay_Classic_Games_Volume_1">MaxPlay Classic Games Volume 1</a>.
+         Scroll down to read more or watch a review.
       </p>
    </section>
 
@@ -443,8 +451,10 @@
          <a href="https://github.com/mukunda-/s3m2nsf">s3m2nsf</a> is
          a simpler version that
          supports basic waveforms and allows tracker fans to easily
-         write music that plays on the NES. The conversion software was
-         coded by the amazing
+         write music that plays on the NES.
+      </p>
+      <p>
+         The conversion app was coded by the amazing
          <a href="https://twitter.com/reduzio">@reduz</a>, a member of
          the #mod_shrine community. I wrote the 6502-based S3M player in
          assembly code.
@@ -1050,8 +1060,8 @@
    </section>
    <section>
       <p>
-         Not to boast, but I would credit a lot of Cross RP's viral adoption
-         and success to its expert design. Here are some points that were
+         I would credit a lot of Cross RP's viral adoption
+         to its design principles. Here are some points that were
          bulleted in the source code at the start.
       </p>
       <p class="centered">
@@ -1151,20 +1161,22 @@
    </section>
    <section>
       <p>
-         UX design isn't my specialization, but this feels pretty smooth, doesn't
-         it?
+         This all feels pretty smooth, doesn't it?
       </p>
       <p>
-         Having worked so long with software and computers, I have a good feel
+         Having worked so long with apps and computers, I have a good feel
          for how things should behave. There's a lot of attention to detail here.
       </p>
    </section>
    <section>
       <p>
-         Of course it painstakingly works on mobile, too.
+         It works pretty good on Android, too.
       </p>
       <p class="centered">
          <img src="res/portfoliodev1.png" class="large zoomable" title="Remote debugging Android on PC.">
+      </p>
+      <p>
+         iOS/Safari is a work in progress...
       </p>
    </section>
 </template>
@@ -1211,11 +1223,11 @@
       </div>
       
       <div id="splash_text_top" class="splash_text">
-         I'm a coder
+         I'm a coder.
       </div>
 
       <div id="splash_text_bottom" class="splash_text">
-         and this is my story
+         Click to begin.
       </div>
 
       <script>
@@ -1223,6 +1235,8 @@
             document.getElementById( "splash_text_top" ).classList.add( "show" );
             document.getElementById( "splash_text_bottom" ).classList.add( "show" );
             document.getElementById( "bottomleft" ).classList.remove( "hide" );
+
+
          });
       </script>
 

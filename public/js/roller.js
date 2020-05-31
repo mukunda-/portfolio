@@ -205,7 +205,7 @@ function SetupSwiping() {
 
             const swipeThreshold = Math.min( windowWidth * 0.3, windowHeight * 0.3 );
 
-            if( Math.abs(y) > windowHeight * 0.1 ) {
+            if( Math.abs(y) > windowHeight * 0.3 ) {
                // This swipe went out of range.
                delete touches[touch.identifier];
                continue;
@@ -337,7 +337,7 @@ function UpdateScrollSpace() {
       //document.getElementById( "scroller_height" ).style.height = `calc( 100% + ${m_currentScrollHeight}px)`;
       //document.body.style.height = `calc(100vh + ${m_currentScrollHeight}px)`;
       document.getElementById( "scroller_height" ).style.height = `calc(100vh + ${m_currentScrollHeight}px)`;
-      window.scrollTo( 0, VHToPixels(m_desiredScroll) );
+      //window.scrollTo( 0, VHToPixels(m_desiredScroll) );
       
    }
 
@@ -402,9 +402,10 @@ function UpdateUpDownArrows() {
 
    if( m_desiredScroll > 1 ) {
       Arrows.SetAction( "up", (type, e) => {
-         if( type == "mousedown" && e.button == 0 ) {
-            m_arrowScroll = -1;
-            m_verticalScrollSlide = 0.1;
+         if( type == "click" && e.button == 0 ) {
+            //m_arrowScroll = -1;
+            m_verticalScrollSlide = 0.5;
+            ScrollUpPage();
          }
       });
    } else {
@@ -413,9 +414,10 @@ function UpdateUpDownArrows() {
 
    if( m_desiredScroll < MaxScroll() - 1 ) {
       Arrows.SetAction( "down", (type, e) => {
-         if( type == "mousedown" && e.button == 0 ) {
-            m_arrowScroll = 1;
-            m_verticalScrollSlide = 0.1;
+         if( type == "click" && e.button == 0 ) {
+            //m_arrowScroll = 1;
+            m_verticalScrollSlide = 0.5;
+            ScrollDownPage();
          }
       });
    } else {
@@ -604,7 +606,10 @@ function SetupContentPadding() {
    //content.scrollTop = st;
 
    //m_desiredScroll = content.scrollTop / GetDeviceHeight() * 100;
-   SetScroll( m_desiredScroll );
+   
+   //m_desiredScroll = PixelsToVH(window.scrollTop);
+   
+   //SetScroll( m_desiredScroll );
 }
 
 //-----------------------------------------------------------------------------

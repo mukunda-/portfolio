@@ -9,6 +9,5 @@
   "author": "Mukunda Johnson",
   "license": "MIT",
   "dependencies": {
-    "gl-matrix": "^3.3.0"
   }
 }
