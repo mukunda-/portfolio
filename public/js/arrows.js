@@ -112,8 +112,8 @@ function CreateFullScreenButton() {
    let elem = document.createElementNS( "http://www.w3.org/2000/svg", "svg" );
    elem.setAttribute( "id", "fullscreenButton" );
    elem.setAttribute( "class", "hud-button" );
-   elem.style.right = "0vh";
-   elem.style.top   = "0vh";
+   elem.style.right = "0.5vh";
+   elem.style.top   = "0.5vh";
 
    elem.setAttribute( "viewBox", "0 0 40 40" );
    
@@ -129,14 +129,14 @@ function CreateFullScreenButton() {
 
       for( const p of paths ) {
          for( const i in p ) {
-            p[i] = 20 + p[i] * 12;
+            p[i] = 20 + p[i] * 8;
          }
       }
 
       for( const p of paths ) {
          const pl = document.createElementNS("http://www.w3.org/2000/svg", "polyline" );
          pl.setAttribute( "points", p.join(" ") );
-         pl.setAttribute( "style", "fill:none;stroke:rgb(255,255,255);stroke-width:4" );
+         pl.setAttribute( "style", "fill:none;stroke:rgb(255,255,255);stroke-width:2" );
          elem.appendChild( pl );
       }
    }

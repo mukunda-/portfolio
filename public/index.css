@@ -437,6 +437,7 @@ a {
    mobile? */
 :fullscreen #fullscreenButton {
    opacity: 0;
+   pointer-events: none;
 }
 
 /* This is the text at the very start "tap to begin", etc. */
