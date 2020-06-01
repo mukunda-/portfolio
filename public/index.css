@@ -475,6 +475,7 @@ a {
    opacity:     0;
    transition:  opacity 2s;
    pointer-events: none;
+   user-select: none;
 }
 
 #music_note.show {
@@ -501,8 +502,8 @@ a {
    user-select:    none;
    cursor:         pointer;
    pointer-events: none;
-   background:     url("res/music_button.png");
-   background-size: 100%;
+   background:     url("res/music_button.png") center no-repeat;
+   background-size: 60%;
 }
 
 #music_button.show {

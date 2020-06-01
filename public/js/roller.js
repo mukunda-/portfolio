@@ -65,7 +65,7 @@ let m_touchingSwivel = false;
 let m_touchingSwivelTime = 0;
 let m_swivelTouchSwing = 0;
 
-const MUSIC_VOLUME = 0.4;
+const MUSIC_VOLUME = 0.55;
 const MUSIC_DIM_VOLUME = 0.00;
 let m_music_volume = new Animate.Slider( 0.1, MUSIC_VOLUME );
 
