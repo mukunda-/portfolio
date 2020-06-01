@@ -5,7 +5,7 @@ import Smath                 from "./smath.js";
 import Camera                from "./camera.js";
 import PerlinStream          from "./PerlinStream.js";
 import Animate               from "./animate.js";
-import {GetDeviceDimensions} from "./index.js";
+import {GetDeviceDimensions, FOV} from "./index.js";
 ///////////////////////////////////////////////////////////////////////////////
 
 // This buffer is for a simple full-screen overlay. (2D vertexes at each
@@ -153,7 +153,7 @@ function Render( matProjView, screenSize ) {
          [ aspect,  1, 1],
       ];
 
-      let stan = Math.tan(45.0);
+      let stan = Math.tan(FOV);
 
       let packer = new hc.Packer( "fff" );
 

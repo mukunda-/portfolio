@@ -17,6 +17,8 @@ import Background from "./background.js";
 
 let currentScreenSize = [0, 0];
 
+const FOV = 60.0;
+
 console.log( "%cwondering how this puppy works? 😏", 
    "background-color:#222; color:white; font-size: 1.4em" );
 
@@ -35,7 +37,7 @@ export function GetDeviceDimensions() {
 function ResizeViewport() {
    // The device/client viewport rectangle.
    const [vw, vh] = GetDeviceDimensions();
-   console.log( vw, vh );
+   console.log( "Resizing viewport:", vw, vh );
    
    if( vw !== currentScreenSize[0] || vh !== currentScreenSize[1] ) {
       currentScreenSize = [vw, vh];
@@ -55,7 +57,7 @@ function OnResize() {
 function Render() {
 
    let projMatrix  = Smath.MakeProjectionMatrix(
-            45.0, currentScreenSize[0] / currentScreenSize[1], 0.1, 1000.0 );
+            FOV, currentScreenSize[0] / currentScreenSize[1], 0.1, 1000.0 );
    let viewMatrix = Camera.GetViewMatrix();
    
    let projview = Smath.MultiplyMatrices( projMatrix, viewMatrix );
@@ -127,5 +129,5 @@ async function Setup() {
 
 Setup();
 
-
-
+///////////////////////////////////////////////////////////////////////////////
+export { FOV };

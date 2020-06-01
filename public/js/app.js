@@ -8,6 +8,7 @@ import Roller     from "./roller.js";
 import {IsMobile} from "./index.js";
 import Dots       from "./dots.js";
 import Arrows     from "./arrows.js";
+import {FOV}      from "./index.js";
 ///////////////////////////////////////////////////////////////////////////////
 
 // This all really needs to be cleaned up. This was planned to be more overall
@@ -138,9 +139,10 @@ let m_state_handlers = {
          // (This slide is continued in the animation below.)
          Cube.SetZScale( 0, 10, 1.0, 1.0 );
          let originalCubeZscale = Cube.GetZScale();
+         let desiredDistance = 1.25 / Math.tan(FOV/2 * Math.PI / 180) + 1;
          let newCubeZscale = [
-            Smath.Distance( [0,0,4], [1,1,1] ), // Near plane (distance to front).
-            Smath.Distance( [0,0,4], [1,1,0] ), // Far plane (distance to back).
+            Smath.Distance( [0,0,desiredDistance], [1,1,1] ), // Near plane (distance to front).
+            Smath.Distance( [0,0,desiredDistance], [1,1,0] ), // Far plane (distance to back).
             1.0, 0.1 ]; // near visibility, far visibility.
             
          Animate.Start( "cube_zoom", ( time, elapsed ) => {
@@ -148,7 +150,7 @@ let m_state_handlers = {
             Cube.SetZScale( cubeZscale[0], cubeZscale[1], cubeZscale[2], cubeZscale[3] );
 
             m_state.cameraAngle = Animate.Slide( originalAngle, desiredAngle, "ease", time, 0, 1500 );
-            let distanceH = Animate.Slide( originalDistance, 4, "fall", time, 0, 1500 );
+            let distanceH = Animate.Slide( originalDistance, desiredDistance, "fall", time, 0, 1500 );
             let distanceV = Animate.Slide( originalDistance, 0, "fall", time, 0, 1500 );
 
             // Slide the camera towards our starting position, level with the cube.
