@@ -382,7 +382,7 @@ function UpdateScrollSpace() {
       //document.getElementById( "scroller_height" ).style.height = `calc( 100% + ${m_currentScrollHeight}px)`;
       //document.body.style.height = `calc(100vh + ${m_currentScrollHeight}px)`;
       document.getElementById( "scroller_height" ).style.height = `calc(100vh + ${m_currentScrollHeight}px)`;
-      //window.scrollTo( 0, VHToPixels(m_desiredScroll) );
+      window.scrollTo( 0, VHToPixels(m_desiredScroll) );
       
    }
 
@@ -653,8 +653,9 @@ function SetupContentPadding() {
 
    //m_desiredScroll = content.scrollTop / GetDeviceHeight() * 100;
  
-   m_desiredScroll = PixelsToVH(document.documentElement.scrollTop);
-   console.log("snapping scroll to", m_desiredScroll);
+ //  m_desiredScroll = PixelsToVH(document.documentElement.scrollTop);
+ //  console.log("snapping scroll to", m_desiredScroll);
+
    //SetScroll( m_desiredScroll );
 }
 
@@ -1314,12 +1315,45 @@ function StartMusic() {
       setTimeout( () => {
          music_button.classList.add( "show" );
       }, 1000 );
-   }, 6000 );
+   }, 10000 );
 
    music_button.addEventListener( "click", () => {
       m_music_manual_dim = !m_music_dimmed;
       UpdateMusicPlaying();
    });
+
+   SetupVisibilityHandler();
+}
+
+function SetupVisibilityHandler() {
+   let hidden, visibilityChange; 
+   if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
+      hidden = "hidden";
+      visibilityChange = "visibilitychange";
+   } else if (typeof document.msHidden !== "undefined") {
+      hidden = "msHidden";
+      visibilityChange = "msvisibilitychange";
+   } else if (typeof document.webkitHidden !== "undefined") {
+      hidden = "webkitHidden";
+      visibilityChange = "webkitvisibilitychange";
+   }
+
+   if( !visibilityChange ) return;
+
+   // We need to be very careful in here. I think this will work okay because
+   // all update loops should pause when the page goes to the background.
+   const music = document.getElementById( "music" );
+
+   document.addEventListener( visibilityChange, () => {
+      if( document[hidden] ) {
+         if( !music.paused ) {
+            music.pause();
+         }
+      } else {
+         UpdateMusicPlaying();
+      }
+   });
+
 }
 
 export default {
