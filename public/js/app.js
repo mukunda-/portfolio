@@ -21,7 +21,7 @@ let m_state_handlers = {
          clicker.className = "cubeclicker";
          document.body.appendChild( clicker );
 
-         if( !window.ontouchstart ) {
+         if( !('ontouchstart' in window) ) {
             // They don't have taps. :)
             document.getElementById( "splash_text_bottom" ).innerText = "Click to begin."
          }
