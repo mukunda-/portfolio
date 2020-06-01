@@ -35,7 +35,7 @@ void main(void) {
    f_uv = a_corner;
 
    
-
+/*
    vec4 center = u_camera * vec4( tpos, 1.0 );
    vec2 mouse = (u_mouse - center.xy/center.w);
    mouse.x *= u_aspect;
@@ -48,16 +48,27 @@ void main(void) {
    //   mouse = vec2( 0.0 );
    //}
    //mouse = mouse*mouse;
-   
+  */ 
    vec3 vert = tpos;
     //+ u_cameraUp * mouse.y + u_cameraRight * mouse.x;
    //vert += u_cameraUp * (a_corner.y * a_position.w + mouse.y);
    //vert += u_cameraRight * (a_corner.x * a_position.w + mouse.x);
 
    vec4 pos = u_camera * vec4( vert, 1.0 );
+   
+
+   vec2 mouse = (u_mouse - (pos.xy / pos.w));
+   mouse.x *= u_aspect;
+   float mouseLen = mouse.x * mouse.x + mouse.y * mouse.y;
+   if( mouseLen < 0.5*0.5 ) {
+      mouse.x /= u_aspect;
+      pos.xy += mouse * pow( (1.0 - sqrt(mouseLen)/0.5), 3.0) * pos.w;
+      //mouse = mouse * 0.99 * pow( 0.5, sqrt(mouseLen) / 0.2 ) * center.w / 3.0;
+   }
+
    vec2 corner = a_corner;
    corner.x /= u_aspect;
-   pos.xy += corner.xy * a_position.w  * pos.w;
+   pos.xy += corner.xy * a_position.w  * pos.w ;
    
    gl_Position = pos;
 }
