@@ -1,22 +1,30 @@
-// The navigation arrows.
-
+// The navigation arrows. This also handles the fullscreen button.
+///////////////////////////////////////////////////////////////////////////////
 const m_actions = {}
 
 let m_fullscreenButton;
 
+//-----------------------------------------------------------------------------
+// Called at app start.
 function Setup() {
-   let leftArrow  = CreateArrow( "leftArrow", 180 );
-   let rightArrow = CreateArrow( "rightArrow", 0 );
-   let downArrow  = CreateArrow( "downArrow", 90 );
-   let upArrow    = CreateArrow( "upArrow", -90 );
+   CreateArrow( "leftArrow", 180 );
+   CreateArrow( "rightArrow", 0 );
+   CreateArrow( "downArrow", 90 );
+   CreateArrow( "upArrow", -90 );
 
    CreateFullScreenButton();
-
-   //downArrow.holdable = true;
-   //upArrow.holdable = true;
 }
 
-function SetAction( id, action, actionUp ) {
+//-----------------------------------------------------------------------------
+// If a button has an action set, then it becomes visible. `null` as an action
+// disables the button and hides it. `id` can be "left", "up", "right", or
+// "down", to set the action for that button. `action` is a callback with
+// parameters( type, e )
+// type: type of event (click, mousedown, or mouseup). Touches are converted
+//                     into mousedown/mouseup.
+// e: event data
+//
+function SetAction( id, action ) {
    let elem = document.getElementById( id + "Arrow" );
    if( !elem ) throw "Invalid ID.";
 
@@ -30,6 +38,8 @@ function SetAction( id, action, actionUp ) {
    }
 }
 
+//-----------------------------------------------------------------------------
+// Internal handler.
 function OnArrowEvent( type, e ) {
    let snippedID = e.currentTarget.id.split("Arrow")[0];
    if( m_actions[snippedID] ) {
@@ -37,11 +47,14 @@ function OnArrowEvent( type, e ) {
    }
 }
 
+//-----------------------------------------------------------------------------
+// Sets up a button. `id` is the ID of the element. `angle` is the rotation
+//  amount to apply in degrees. (0 = right arrow).
 function CreateArrow( id, angle ) {
    let arrow = document.createElementNS( "http://www.w3.org/2000/svg", "svg" );
    arrow.setAttribute( "id", id );
    arrow.setAttribute( "class", "hud-button arrow" );
-   arrow.style.width = "10vh";
+   arrow.style.width  = "10vh";
    arrow.style.height = "10vh";
 
    let ca = Math.cos(angle * Math.PI / 180);
@@ -52,21 +65,21 @@ function CreateArrow( id, angle ) {
       -6.5, 15
    ];
 
+   // Points transformed.
    let pointst = [];
 
    for( let i = 0; i < points.length ; i += 2 ) {
       let [x,y] = [points[i], points[i+1]];
       pointst.push( `${(x * ca - y * sa) + 20}, ${x * sa + y * ca + 20}` );
-      //points[i] = x * ca - y * sa;
-      //points[i+1] = x * sa + y * ca;
    }
 
    arrow.setAttribute( "viewBox", "0 0 40 40" );
    const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline" );
-   polyline.setAttribute( "points", pointst.join(" ") );//"5,5  20,18  35,5" );
+   polyline.setAttribute( "points", pointst.join(" ") );
    polyline.setAttribute( "style", "fill:none;stroke:rgb(255,255,255);stroke-width:7" );
    arrow.appendChild( polyline );
 
+   // Hook events.
    arrow.addEventListener( "click", e => OnArrowEvent( "click", e ) );
    arrow.addEventListener( "mousedown", e => OnArrowEvent( "mousedown", e ) );
    arrow.addEventListener( "mouseup", e => OnArrowEvent( "mouseup", e ) );
@@ -90,22 +103,28 @@ function CreateArrow( id, angle ) {
    return arrow;
 }
 
+//-----------------------------------------------------------------------------
+// This doesn't really belong here, and I would see the button creation being
+// abstracted away with this file being repurposed for this app's specific
+// buttons. But you know what? A bit of balance between perfect and "easy" is
+// important for development time. Just so long as you don't get too crazy.
 function CreateFullScreenButton() {
    let elem = document.createElementNS( "http://www.w3.org/2000/svg", "svg" );
    elem.setAttribute( "id", "fullscreenButton" );
    elem.setAttribute( "class", "hud-button" );
    elem.style.right = "0vh";
-   elem.style.top = "0vh";
+   elem.style.top   = "0vh";
 
    elem.setAttribute( "viewBox", "0 0 40 40" );
    
    {
+      // These are specified in -1 to 1 units and transformed below to make
+      // things less boggling.
       let paths = [
-         [-1, -0.25, -1, -1, -0.25, -1],
-         [-1, 0.25, -1, 1,  -0.25, 1],
-         [0.25, 1, 1,1, 1, 0.25],
-         [0.25, -1, 1, -1, 1, -0.25]
-         
+         [-1, -0.25,  -1, -1,  -0.25, -1],
+         [-1,  0.25,  -1,  1,  -0.25,  1],
+         [0.25,   1,   1,  1,   1,  0.25],
+         [0.25,  -1,   1, -1,   1, -0.25]
       ];
 
       for( const p of paths ) {
@@ -113,15 +132,18 @@ function CreateFullScreenButton() {
             p[i] = 20 + p[i] * 12;
          }
       }
+
       for( const p of paths ) {
          const pl = document.createElementNS("http://www.w3.org/2000/svg", "polyline" );
-         pl.setAttribute( "points", p.join(" ") );//p.join(" ")"5,15,  5,5, 15,5" );
+         pl.setAttribute( "points", p.join(" ") );
          pl.setAttribute( "style", "fill:none;stroke:rgb(255,255,255);stroke-width:4" );
          elem.appendChild( pl );
       }
    }
+
    document.body.appendChild( elem );
 
+   // And the handler, nice and hardcoded. :)
    elem.addEventListener( "click", () => {
       if( elem.classList.contains( "enabled" )) {
          document.documentElement.requestFullscreen();
@@ -134,37 +156,6 @@ function CreateFullScreenButton() {
 function EnableFullscreenButton() {
    m_fullscreenButton.classList.add( "enabled" );
 }
-/*
-function CreateExitButton() {
-   let elem = document.createElementNS( "http://www.w3.org/2000/svg", "svg" );
-   elem.setAttribute( "id", "exitButton" );
-   elem.setAttribute( "class", "hud-button enabled" );
-   elem.style.right = "0vh";
-   elem.style.top = "0vh";
-
-   elem.setAttribute( "viewBox", "0 0 40 40" );
-   
-   {
-      let paths = [
-         [-1, -1,  1,  1],
-         [-1,  1,  1, -1]
-      ];
-
-      for( const p of paths ) {
-         for( const i in p ) {
-            p[i] = 20 + p[i] * 12;
-         }
-      }
-
-      for( const p of paths ) {
-         const pl = document.createElementNS("http://www.w3.org/2000/svg", "polyline" );
-         pl.setAttribute( "points", p.join(" ") );//p.join(" ")"5,15,  5,5, 15,5" );
-         pl.setAttribute( "style", "fill:none;stroke:rgb(255,255,255);stroke-width:7" );
-         elem.appendChild( pl );
-      }
-   }
-   document.body.appendChild( elem );
-}*/
 
 ///////////////////////////////////////////////////////////////////////////////
 export default {

@@ -42,7 +42,8 @@ function Stop( slot ) {
 //-----------------------------------------------------------------------------
 // This is an interpolation utility. Returns a value between `a` and `b`
 //  depending on the `type` of interpolation, the `time` to sample from,
-//  and the range--a time slice to sample between.
+//  and the range--a time slice to sample between. `a` and `b` can be arrays,
+//  where an array is returned as well (like vector interpolation).
 //
 // Example:
 //  returns (a * .25 + b * .75) for time 1750 in range [1000,2000] with linear
