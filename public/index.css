@@ -4,15 +4,22 @@ body {
    background-color: black;
    color: white;
    font-family: sans-serif;
+
+   /* Fullscreen layout. */
    margin: 0;
+
+   /* Overflow we are abusing a little. The #scroller_height element controls
+      the scroll space that we can use. */
    overflow-x: hidden;
    overflow-y: scroll;
 }
 
+/* Hide scrollbars. This doesn't work on Firefox or mobile, but that's okay. */
 ::-webkit-scrollbar {
    display: none;
 }
 
+/* I'm not sure if this is necessary - it's an artifact from some other tests. */
 html {
    min-height: -webkit-fill-available;
 }
@@ -20,106 +27,124 @@ html {
 a {
    text-decoration: none;
 }
-/*
-#scroller {
-   position: fixed;
-   left: 0px;
-   top: 0px;
-   width: 100%;
-   height: 50%;
-   overflow-y: scroll;
-   background-color:red;
-}
 
-#scroller_height {
-   width: 10px;
-}*/
-
+/* Scripts set the absolute height of this to the document height plus however
+   much scroll space they want there to be. */
 #scroller_height {
    width: 1px;
 }
 
+/* A NOTE ABOUT VERTICAL HEIGHT UNITS:
+   Percent height should not be used anywhere at the top level. vh units won't
+   change constantly when the mobile address bar appears. Percent units will,
+   and that's bad. */
+
+/* This is the WebGL canvas. */
 #background {
    width: 100%;
+
+   /* See note about vertical height. */
+   /* This WILL cause some of the canvas to be cut-off when the address bar
+      pops up, but that's okay - we have plenty of margin space to work with. */
    height: 100vh;
+
    position: fixed;
-   left: 0px;
-   top: 0px;
-   z-index: -1;
+   left:     0px;
+   top:      0px;
+   z-index:  -1;
 }
 
+/* This is the copyright text. There's a rule in the @media section at the
+   bottom to just hide it when on a slim display (the left arrow touches
+   against it). */
 #bottomleft {
-   user-select: none;
+   user-select:    none;
    pointer-events: none;
-   position: fixed;
-   left: 4px;
-   bottom: 4px;
-   font-size: 2vh;
-   font-family: Squada One;
-   color: #909090;
-   opacity: 1;
 
+   position:       fixed;
+   left:           0.5vh;
+   bottom:         0.5vh;
+   font-size:      2vh;
+   font-family:    Squada One;
+   color:        #909090;
+   opacity:        1;
+
+   /* Delay for this much before displaying. */
    --showtime: 2.5s;
    transition: opacity 1s var(--showtime), bottom 1s var(--showtime);
 }
 
+/* This is the initial state. */
 #bottomleft.hide {
    opacity: 0;
-   bottom: 0px;
+   bottom:  0px;
 }
 
+/* This is a special overlay added by the app to intercept the starting
+   click. */
 .cubeclicker {
+   /* Made this much wider than the center cube - someone might be confused
+                             as to what they're supposed to be clicking on. */
    width:            80vh;
    height:           80vh;
    position:         fixed;
    left:             calc(50% - 40vh);
-   top:              calc(50vh - 40vh);
+   top:              calc(50vh - 40vh); /* See note about VH units. */
    cursor:           pointer;
    background-color: transparent;
-   border-radius:    10vh;
+   border-radius:    10vh; /* A little rounded... */
 }
 
+/* Is this used anywhere...? */
 .panel {
    width:       20vh;
    height:      20vh;
    font-family: Squada One;
 }
 
+/* The 'bigtext' is the splash text that shows the date and title before fading
+                                                           into the content. */
 #bigtext_container {
-   text-align: center;
-   position:   fixed;
-   left:       0px;
-   top:        calc( 50vh - 5vh );
-   width:      100%;
-   user-select: none;
-
+   text-align:     center;
+   position:       fixed;
+   left:           0px;
+   top:            calc( 50vh - 5vh );
+   width:          100%;
+   user-select:    none;
    pointer-events: none;
 }
 
+/* The big big text, for showing the year/date/etc. */
 #bigtext {
-   font-size: 10vh;
+   font-size:   10vh;
    font-family: Squada One;
-   opacity: 0;
-   transition: opacity 0.5s;
+   opacity:     0;
+   transition:  opacity 0.5s;
 }
 
+/* The subtitle under the date/year/etc. */
 #bigtext_subtitle {
-   font-size: 5vh;
+   font-size:   5vh;
    font-family: Squada One;
-   opacity: 0;
-   transition: opacity 0.5s;
+   opacity:     0;
+   transition:  opacity 0.5s;
 }
 
+/* Top text fades in first, with the bottom having a delay. */
 #bigtext_container.show #bigtext {
    opacity: 1;
 }
 
+/* In the future I might want to change this to a more manual script animation.
+   As of right now, if you turn cube when the fadeout is in progress, it
+                                                freezes the transition. */
 #bigtext_container.show #bigtext_subtitle {
    opacity: 1;
    transition: opacity 1s 0.5s;
 }
 
-
+/* This is a full-screen overlay to juice mobile batteries, a subtle scanlines
+   texture. */
 #scanlines {
    position: fixed;
    left:     0px;
@@ -144,34 +169,47 @@ a {
 
 /* The main content display. */
 #content {
+   /* I wanted to have a glow effect when the content fades in, but I'm not
+      sure if that will impact performance without taking extra care to make
+      sure it's disabled after the animation. */
    /*
    animation-name: glowtext;
    animation-duration: 3.0s;
    animation-iteration-count: infinite;
    animation-direction: alternate;
    animation-timing-function: ease-in-out;
-*/
+   */
+
    font-family: Squada One;
    font-size: 3.5vh;
    
+   /* Position is setup manually in the code, aligned with the 3D background. */
    position: fixed;
-   /*
-   top: 20vh;
    
-   bottom: 20vh;*/
-   width: 60vh;
+   /* This is somewhat inside of the cube margins, but will expand a bit when
+      the screen is squashed. */
+   width:     60vh;
    max-width: 95%;
-   left: 0;
-   right: 0;
-   margin-left: auto;
+
+   /* Center horizontally. */
+   left:         0;
+   right:        0;
+   margin-left:  auto;
    margin-right: auto;
 
-   overflow: hidden;
+   /* The scroll for this window is handled manually - whenever the window
+      scrolls, we apply that to the content. */
+   overflow:   hidden;
+
+   /* This is overwritten by a @media width rule. Left align is only for
+      extra-slim displays. */
    text-align: left;
 
-   opacity: 0;
+   /* #content.show activates. */
+   opacity:    0;
    transition: opacity 1s 0s;
-   
+
+   /* This is for the edges of the content fading out at the top and bottom. */
    -webkit-mask-image: linear-gradient(
       to bottom,
       transparent 2%,
@@ -186,10 +224,23 @@ a {
       black 90%,
       transparent 98%
    );
-
+   
+   /* I wanted to have user select enabled, but there are some weird things
+      to fix, like tapping arrows will select everything, and that needs
+      to be reset. I think it just works better without user-select. (And
+      what would people even select/copy?) */
    user-select: none;
 }
 
+/* This toggles the content on. Typically paired with .slideleft/.slideright
+   when turning the cube. */
+#content.show {
+   opacity: 1;
+   transition: opacity 1s 0.25s;
+}
+
+/* .slideleft and .slideright are for when the cube swivels, for a swipe
+   effect. */
 #content.slideleft {
    transform: translateX( -50vh );
    transition: opacity 1s, transform 1s;
@@ -200,85 +251,113 @@ a {
    transition: opacity 1s, transform 1s;
 }
 
+/* On small widths, some of the headers might be longer than one line, and that
+                                                   looks hideous as justify. */
 #content h2 {
    text-align: left;
 }
 
+/* This is the topmost header, the panel titles. */
 #content h2.header {
    text-align: center;
    width: 100%;
 }
 
-
-#content.show {
-   opacity: 1;
-   transition: opacity 1s 0.25s;
-}
-
+/* Only use justify text at this minimum width. When the screen is super slim,
+   justify is ugly. (TODO: I think this should be widened a bit more?)*/
 @media screen and (min-width: 50vh) {
    #content {
       text-align: justify;
    }
 }
 
+/* A <section> corresponds to a "page" in the content. A single "page" is shown
+                                                              per cube face. */
 #content section {
    margin: 0;
-   width: 100%;
-   
-   /*min-height: 100%;
-   display: table-cell;
-   vertical-align: middle;*/
+   width:  100%;
 
+   /* This is so that we get padding for the top and bottom when the content
+      doesn't fill a cube face completely. 100% is the height of the #content
+                                  box, which is the height of the cube face. */
    min-height: 100%;
 
-   /*background-color: #fff8;*/
-   display: table;
+   /* Nobody likes tables, but this seems like literally the only way to make
+                    this content centered vertically with automatic padding. */
+   display:        table;
    vertical-align: middle;
 }
 
-
-
+/* The .inner section is for the table-cell layout. These are inserted by a
+   script to wrap all <section> contents, and should not appear in the html
+   manually. */
 #content section .inner {
-   padding-top: 15vh;
+
+   /* And this is the minimum padding to form the gutters between pages. */
+   padding-top:    15vh;
    padding-bottom: 15vh;
-   /*//position: relative;
-   top: 50%;
-   transform: translateY( -50% ); /* I can't believe I'm doing this. */
-   display: table-cell;
+   display:        table-cell;
    vertical-align: middle;
 }
+
+/* Break our gutter rule for the first section. This is to offset the first
+   header/title element. */
 #content section:first-child .inner {
    padding-top: 4vh;
 }
 
+/* Delete the excess padding for <p>.
+   TODO: should this be done for h2 as well? I haven't noticed anything
+         glaring. */
+#content section p:first-child {
+   margin-top: 0;
+}
+
+#content section p:last-child {
+   margin-bottom: 0;
+}
+
+/* A simple rule for paragraphs or other elements that should be centered in
+   the content view. */
 #content .centered {
    text-align: center;
 }
 
+/* Chained <img> tags should not have whitespace between them. This is setup
+   to fit them together with no space. */
 #content img {
    width: 50%;
    margin: 0;
-   /*margin-top: 0.7vh;*/
    vertical-align: middle;
 }
 
+/* .large is for larger images that span the whole width. */
 #content img.large {
    width: 100%;
 }
 
+/* This class enables clicking to zoom (zoomer.js). */
 #content img.zoomable {
    cursor: pointer;
 }
 
+/* This class is applied when an image is being zoomed. It hides the original
+             while another (free from the layout) displays the zoomed image. */
 #content img.zoomhide {
    opacity: 0;
 }
 
+/* The class of the zoomed image display. Position is filled manually. Should
+   also appear above the #scanlines. The "data-pixel" attribute can also be
+   specified as an <img> attribute to make zooming use pixelated
+   interpolation. */
 .zoomer {
    position: fixed;
-   z-index: 12;
+   z-index:  12;
 }
 
+/* Not currently used. The .flash class can be used to make an element flash
+   briefly. */
 @keyframes flash {
    0% {
       filter: brightness( 1 );
@@ -295,61 +374,51 @@ a {
    animation: flash 3.5s;
 }
 
+/* For slim widths, double up the normal image size. One per row instead of
+   two. */
 @media screen and (max-width: 50vh) {
    #content img {
       width: 100%;
    }
 }
 
+/* Not 100% sure if we should have a height parameter set or what that might
+   do. iframe/youtube uses it because it's more flexible. */
 #content video {
    max-width: 100%;
 }
 
-#content section p:first-child {
-   margin-top: 0;
-}
-
-#content section p:last-child {
-   margin-bottom: 0;
-}
-
-#content section iframe {
+#content iframe {
    width: 100%;
    height: 45vh; /* Percentage was acting really weird */
    background-color:#000;
-   /*box-shadow: 0px 0px 8px #fff;*/
-   /*transform: scale( 0.1 );*/
 }
-/*
-#content section iframe.fadein {
-   background-color: black;
-   transition: background-color 0.5s, box-shadow 0.5s;
-   box-shadow: none;
-   transform: scale( 1.0 );
 
-}*/
-
+/* These are the arrows on-screen (and the elusive fullscreen button). */
 .hud-button {
    position: fixed;
    width:    10vh;
    height:   10vh;
    opacity:  0;
-   pointer-events: auto;
+   pointer-events: none;
    transition: opacity 0.5s, left 1.0s, bottom 1.0s;
 }
 
-
+/* Without .enabled, they fade to the background with no pointer events. */
 .hud-button.enabled {
    pointer-events: auto;
-   opacity: 1.0;
-   cursor: pointer;
+   opacity:        1.0;
+   cursor:         pointer;
 }
 
+/* Mouse-down effect. Kind of awkward/tricky, because we don't want a
+   transition on it. */
 .hud-button.enabled:active {
-   opacity: 0.25;
+   opacity:    0.25;
    transition: opacity 0s, left 1.0s, bottom 1.0s;
 }
 
+/* Positioning for arrows. */
 #leftArrow, #rightArrow {
    bottom: calc( 50vh - 5vh );
 }
@@ -358,54 +427,46 @@ a {
    left: calc( 50% - 5vh );
 }
 
+#leftArrow  { left:   0vh; }
+#rightArrow { right:  0vh; }
+#upArrow    { top:    0vh; }
+#downArrow  { bottom: 0vh; }
 
-#leftArrow {
-   left: 0vh;
-}
-
-#rightArrow {
-   right: 0vh;
-}
-
-#upArrow {
-   top: 0vh;
-}
-
-#downArrow {
-   bottom: 0vh;
-}
-
+/* Hide the fullscreen button when in fullscreen mode. The fullscreen button
+   should only show on devices where it matters. Maybe only chrome for
+   mobile? */
 :fullscreen #fullscreenButton {
    opacity: 0;
 }
 
+/* This is the text at the very start "tap to begin", etc. */
 .splash_text {
-   text-align:center;
-   width: 100%;
-   font-size: 5vh;
+   text-align:  center;
+   width:       100%;
+   font-size:   5vh;
    font-family: Squada One;
-   position: fixed;
-   transform: translateY( -50% );
-   opacity: 0;
-   transition: opacity 1s, filter 1.5s;
+   position:    fixed;
+   /* To center vertically on the offset given. */
+   transform:   translateY( -50% );
+   opacity:     0;
+   transition:  opacity 1s, filter 1.5s;
 }
 
-#splash_text_top {
-   top: 25vh;
-}
+#splash_text_top    { top: 25vh; }
+#splash_text_bottom { top: 75vh; }
 
-#splash_text_bottom {
-   top: 75vh;
-}
-
+/* Applied by a script timer. */
 .splash_text.show {
    opacity: 1;
 }
 
+/* Applied when the zooming starts. */
 .splash_text.fade {
    filter: blur( 4px );
 }
 
+/* For smaller screens, move the side arrows to the bottom to give more width
+   for content text. */
 @media screen and (max-width: 76vh) {
    #leftArrow, #rightArrow {
       bottom: 0vh;
