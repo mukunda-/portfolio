@@ -153,15 +153,15 @@ function Render( matProjView, screenSize ) {
          [ aspect,  1, 1],
       ];
 
-      let stan = Math.tan(FOV);
+      let stan = Math.tan(FOV / 2 * Math.PI / 180);
 
       let packer = new hc.Packer( "fff" );
 
       for( const p of points ) {
          let v = [];
-         v[0] = p[0] * left[0] + p[1] * up[0] + p[2] * forward[0] * stan;
-         v[1] = p[0] * left[1] + p[1] * up[1] + p[2] * forward[1] * stan;
-         v[2] = p[0] * left[2] + p[1] * up[2] + p[2] * forward[2] * stan;
+         v[0] = p[0] * left[0] * stan + p[1] * up[0] * stan + p[2] * forward[0];
+         v[1] = p[0] * left[1] * stan + p[1] * up[1] * stan + p[2] * forward[1];
+         v[2] = p[0] * left[2] * stan + p[1] * up[2] * stan + p[2] * forward[2];
          v = Smath.Normalize( v );
          
          packer.Push(v );

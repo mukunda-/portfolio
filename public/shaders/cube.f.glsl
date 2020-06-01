@@ -1,5 +1,7 @@
 precision mediump float;
 
+const float PI = 3.1415926535897932384626433832795;
+
 uniform lowp vec3 points[8];
 uniform float aspect;
 
@@ -122,11 +124,7 @@ float line_d( vec3 start, vec3 end ) {
    return (pow( d, 128.0 ) + pow( d, 8.0 )*0.17) * i;//0.0005, d );
 }
 
-void main(void) {
-	//lowp vec4 texel = texture2D( u_sampler, f_uv );
-	//if( texel.a == 0.0 ) discard;
-	//texel *= f_color;
-   //float d = 0.0;
+void main() {
    float i = 0.0;
    
    i += line_d( points[0], points[1] );
@@ -143,23 +141,34 @@ void main(void) {
    i += line_d( points[2], points[6] );
    i += line_d( points[3], points[7] );
 
-   //float m = max( a, b );
-   //m = max( m, c );
-
-   //float dd = a + b + c + d + e + f + g + h;
-   //d = max( d, m + 0.01 ) - 0.01;
-           
-   //i = clamp( i, 0.0, 1.0 );
-   i *= intensity;//0.05;
-   //gl_FragColor = vec4( color * i, 1.0);
+   i *= intensity;
+   
+   
    vec3 add = abs(normalize(fragmentAngle));// * 0.1;
    add = add * (add.y + 1.0) / 2.0;
    add.y *= 0.25;
    add = add * add;
-   //float y = atan( add.x, add.z );
+
+   add = normalize(fragmentAngle);// * 0.1;
+   float y = asin(add.y) / (PI / 2.0);
+   //if( add.x == 0.0 ) add.x += 0.00001; // Is this needed?
+   float h = atan( add.z, add.x ); // returns range -pi to pi
+
+   float depthIntensity = max( -y * 0.3, 0.0 );
+   vec3 depthsColor = vec3( 0.05, 0.6, 1.0 ) * depthIntensity;
+
+   float leftColorIntensity = abs(h) / PI;
+   float rightColorIntensity = 1.0 - leftColorIntensity;
+   float hMult = (1.0 - abs(y)) * 0.15;
+   leftColorIntensity = pow( leftColorIntensity, 1.0) * hMult;
+   rightColorIntensity= pow( rightColorIntensity, 1.0) * hMult;
+   vec3 leftColor = vec3( 1.0, 0.3, 0.2 ) * leftColorIntensity;
+   vec3 rightColor = vec3( 0.0, 0.0, 1.0 ) * rightColorIntensity;
+
+   vec3 backgroundShade = leftColor + rightColor + depthsColor;
    
-   //add *= 0.1+(1.0- (fragmentAngle.y + 1.0) / 2.0)*0.9;
-   //float pitch = fragmentAngle.y;
-   //add = vec3( add.z);
-   gl_FragColor = vec4( color * i * (1.0 + add ) + add * 0.27, 1.0);
+   //gl_FragColor = vec4( backgroundShade, 1.0);
+   gl_FragColor = vec4( color * i * (1.0 + backgroundShade * 8.0) + backgroundShade, 1.0);
+
+   //gl_FragColor = vec4( color * i * (1.0 + add ) + add * 0.27, 1.0);
 }
