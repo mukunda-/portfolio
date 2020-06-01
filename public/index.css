@@ -465,6 +465,58 @@ a {
    filter: blur( 4px );
 }
 
+#music_note {
+   position:    fixed;
+   text-align:  left;
+   left:        0.5vh;
+   top:         0.5vh;
+   font-size:   3vh;
+   font-family: Squada One;
+   opacity:     0;
+   transition:  opacity 2s;
+   pointer-events: none;
+}
+
+#music_note.show {
+   opacity: 1;
+   pointer-events: auto;
+}
+
+#music_note a {
+   color:inherit;
+   text-decoration:none;
+}
+
+#music_button {
+   position:       fixed;
+   text-align:     left;
+   left:           0.5vh;
+   top:            0.5vh;
+   width: 10vh;
+   height: 10vh;
+   font-size:      3vh;
+   font-family:    Squada One;
+   opacity:        0;
+   transition:     font-size 1s, opacity 1s;
+   user-select:    none;
+   cursor:         pointer;
+   pointer-events: none;
+   background:     url("res/music_button.png");
+   background-size: 100%;
+}
+
+#music_button.show {
+   font-size:   10vh;
+   font-family: Squada One;
+   opacity:     1;
+   display:block;
+   pointer-events: auto;
+}
+
+#music_button.show.muted {
+   opacity: 0.20;
+}
+
 /* For smaller screens, move the side arrows to the bottom to give more width
    for content text. */
 @media screen and (max-width: 76vh) {
@@ -475,4 +527,5 @@ a {
       opacity: 0;
       transition: opacity 1s;
    }
+   
 }

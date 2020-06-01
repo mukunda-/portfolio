@@ -64,7 +64,8 @@
    <section>
       <p>
          When I was 14, I sold my first game. It was a GameBoy Advance console port
-         of one of my PC games, Jetpack 4, published in <a href="https://en.wikipedia.org/wiki/MaxPlay_Classic_Games_Volume_1">MaxPlay Classic Games Volume 1</a>.
+         of one of my PC games, Jetpack, published in
+         <a href="https://en.wikipedia.org/wiki/MaxPlay_Classic_Games_Volume_1">MaxPlay Classic Games Volume 1</a>.
          Scroll down to read more or watch a review.
       </p>
    </section>
@@ -145,7 +146,7 @@
       </p>
    </section>
    <section>
-      <video autoplay muted width="100%" loop id="adventurer">
+      <video autoplay muted width="100%" loop id="video_adventurer">
          <source src="res/adventurer.mp4" type="video/mp4">
       </video>
    </section>
@@ -1146,7 +1147,7 @@
          <img src="res/math.png" class="large zoomable" title="Notice how the edges of the cube stay aligned with the content when scrolling?">
       </p>
       <p class="centered">
-         <video width="100%" autoplay loop id="video_earlydemo" title="Early development.">
+         <video width="100%" autoplay loop id="video_earlydemo" title="Early development, which doesn't have the edge alignment code." muted>
             <source src="res/earlydemo.mp4" type="video/mp4">
          </video>
       </p>
@@ -1174,7 +1175,8 @@
 </template>
 <template id="panel_andnow" class="panel"
          data-year="And Now" data-title="Always Learning"
-         data-color="303030">
+         data-color="303030"
+         data-linkcolor="ffb22d">
    <section>
       <p>
          It's been a long, fun journey, through C, C++, assembly code, JavaScript,
@@ -1222,9 +1224,26 @@
          Tap to begin.
       </div>
 
+      <audio id="music">
+         <source src="res/the_intangible_interdimensional_amity.mp3" type="audio/mp3">
+      </audio>
+
+      <div id="music_button">
+         
+      </div>
+
+      <div id="music_note">
+         <a href="https://ambrosia57.bandcamp.com/track/interdimensional-amity" target="_blank">
+            ♫ Interdimensional Amity<br>
+            Album 12 - "Entanglement"<br>
+            © 2018 The Intangible<br>
+            All Rights Reserved
+         </a>
+      </div>
 
       <div id="scanlines"></div>
 
       <div id="scroller_height"></div>
+
    </body>
 </html>

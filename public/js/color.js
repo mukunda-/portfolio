@@ -12,7 +12,7 @@ let m_style;
 function Setup() {
    m_style = document.createElement( "style" );
    document.head.appendChild( m_style );
-   m_style.sheet.insertRule( "a { color: #ffffff }" );
+   m_style.sheet.insertRule( "#content a { color: #ffffff }" );
 }
 
 //-----------------------------------------------------------------------------
@@ -58,7 +58,7 @@ function Set( color, linkcolor ) {
    // before the index specified?
    m_style.sheet.deleteRule( 0 );
    m_style.sheet.insertRule( 
-      `a { color: rgb( ${linkcolor[0]*255}, ${linkcolor[1]*255}, ${linkcolor[2]*255}` );
+      `#content a { color: rgb( ${linkcolor[0]*255}, ${linkcolor[1]*255}, ${linkcolor[2]*255}` );
 
    Dots.SetColor( color );
 }

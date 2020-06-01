@@ -161,5 +161,5 @@ void main(void) {
    //add *= 0.1+(1.0- (fragmentAngle.y + 1.0) / 2.0)*0.9;
    //float pitch = fragmentAngle.y;
    //add = vec3( add.z);
-   gl_FragColor = vec4( color * i * (1.0 + add ) + add * 0.2, 1.0);
+   gl_FragColor = vec4( color * i * (1.0 + add ) + add * 0.27, 1.0);
 }

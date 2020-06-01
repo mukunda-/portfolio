@@ -1,71 +1,37 @@
-import hc from "./hc/hc.js";
-import Smath from "./smath.js";
-import Camera from "./camera.js";
-import Cube from "./cube.js";
-import App from "./app.js";
+// (C) 2020 Mukunda Johnson
+//-----------------------------------------------------------------------------
+import hc      from "./hc/hc.js";
+import Smath   from "./smath.js";
+import Camera  from "./camera.js";
+import Cube    from "./cube.js";
+import App     from "./app.js";
 import Animate from "./animate.js";
-import Roller from "./roller.js";
-import Arrows from "./arrows.js";
-import Color from "./color.js";
-import Zoomer from "./zoomer.js";
-import Dots from "./dots.js";
+import Roller  from "./roller.js";
+import Arrows  from "./arrows.js";
+import Color   from "./color.js";
+import Zoomer  from "./zoomer.js";
+import Dots    from "./dots.js";
+
+import Background from "./background.js";
 ///////////////////////////////////////////////////////////////////////////////
 
 let currentScreenSize = [0, 0];
 
-let appState = "startup";
-
-const renderState = {
-   cubeBuffer : null,
-   cubeShader : null,
-};
-
 console.log( "%cwondering how this puppy works? 😏", 
    "background-color:#222; color:white; font-size: 1.4em" );
-
-   ///////////////////////////////////////////////////////////////////
-   /*
-const testp = mat4.create();
-mat4.perspective( testp, 45 * Math.PI / 180, 1, 1, 100 );
-
-const test2 = getProjection( 45, 1, 1, 100 );
-
-let point = [5, 5, 0, 1];
-let point2 = [];
-
-console.log(testp);
-console.log(test2);
-
-console.log( "MINE",  multiplyMatrixAndPoint( test2, point ));
-vec4.transformMat4( point2, point, testp );
-console.log( "YOURS", point2 );
-
-const ctest1 = mat4.create();
-mat4.lookAt( ctest1, [35,22,1], [33,22,11], [0,1,0] );
-const ctest2 = lookAt( [35,22,1], [33, 22, 11], [0,1,0] );
-console.log( "MINE", ctest2 );
-console.log( "YOURS", ctest1 );
-
-const result1 = mat4.create();
-const result2 = multiplyMatrices( test2, ctest2 );
-mat4.multiply( result1, testp, ctest1 );
-
-console.log( "YOURS", result1 );
-console.log("MINE", result2);
-
-
-//debugger;*/
-///////////////////////////////////////////////////////////////////
 
 //-----------------------------------------------------------------------------
 // Returns the pixel dimensions of the user's client area.
 export function GetDeviceDimensions() {
-   // Hope this works LOL.
+   // Hope this works LOL. We don't want to use the clientHeight. We want to
+   // use something that is 100vh tall (which ignores some annoying shrinkages
+   // on mobile).
    return [background.offsetWidth, background.offsetHeight];
    //return [Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
    //        Math.max( document.documentElement.clientHeight, window.innerHeight || 0 )];
 }
 
+//-----------------------------------------------------------------------------
 function ResizeViewport() {
    // The device/client viewport rectangle.
    const [vw, vh] = GetDeviceDimensions();
@@ -77,27 +43,25 @@ function ResizeViewport() {
    }
 }
 
+//-----------------------------------------------------------------------------
 function OnResize() {
-	//var w = window.innerWidth & ~1;
-   //var h = window.innerHeight & ~1;
+
    ResizeViewport();
    Roller.SetupContentPadding();
    Dots.HandleResize();
 }
 
-let cameraAngle = 0.0;
-
+//-----------------------------------------------------------------------------
 function Render() {
 
    let projMatrix  = Smath.MakeProjectionMatrix(
             45.0, currentScreenSize[0] / currentScreenSize[1], 0.1, 1000.0 );
-   let modelMatrix = Smath.IdentityMatrix();
-   
    let viewMatrix = Camera.GetViewMatrix();
    
    let projview = Smath.MultiplyMatrices( projMatrix, viewMatrix );
    
    //hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
+   Background.Render( projview );
    Cube.Render( projview, currentScreenSize );
    Dots.Render( projview );
 
@@ -136,7 +100,8 @@ async function Setup() {
 
    await Promise.all([
       Cube.Setup(),
-      Dots.Setup()
+      Dots.Setup(),
+      Background.Setup()
    ]);
 
    Cube.color[0] = 1.0;
@@ -147,7 +112,6 @@ async function Setup() {
    Arrows.Setup();
    Color.Setup();
    Zoomer.Setup();
-
    Roller.Setup();
    
    let content = document.getElementById( "content" )

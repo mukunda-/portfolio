@@ -65,6 +65,17 @@ let m_touchingSwivel = false;
 let m_touchingSwivelTime = 0;
 let m_swivelTouchSwing = 0;
 
+const MUSIC_VOLUME = 0.4;
+const MUSIC_DIM_VOLUME = 0.00;
+let m_music_volume = new Animate.Slider( 0.1, MUSIC_VOLUME );
+
+//-----------------------------------------------------------------------------
+// Collection of video IDs that are playing, either youtube iframes or
+// video tags.
+let m_videos_playing = {};
+let m_music_manual_dim = false;
+let m_music_dimmed = false;
+
 //-----------------------------------------------------------------------------
 // This keeps track of videos that enter the content view range, indexed by
 //  their IDs.
@@ -279,12 +290,40 @@ function StartPanelDisplay() {
       a.setAttribute( "target", "_blank" );
    }
 
+   for( const video of content.getElementsByTagName( "video" )) {
+      video.addEventListener( "play", () => {
+         if( video.volume > 0.01 && !video.muted ) {
+            VideoStartedPlaying( video.id );
+            PauseOtherVideosWithSound( video.id );
+         }
+      });
+      video.addEventListener( "volumechange", () => {
+         if( video.volume > 0.01 && !video.paused && !video.muted ) {
+            VideoStartedPlaying( video.id );
+         } else {
+            VideoStoppedPlaying( video.id );
+         }
+      });
+      video.addEventListener( "pause", () => {
+         VideoStoppedPlaying( video.id );
+      });
+   }
+
    for( const yt of content.getElementsByClassName( "youtube" )) {
       yt.isYoutube = true;
       yt.player = new YT.Player( yt.id, {
          events: {
             onReady() {
                yt.ytready = true;
+            },
+            onStateChange( e ) {
+               if( e.data == YT.PlayerState.PLAYING ) {
+                  VideoStartedPlaying( yt.id );
+                  PauseOtherVideosWithSound( yt.id );
+               } else if( e.data == YT.PlayerState.PAUSED
+                        || e.data == YT.PlayerState.ENDED ) {
+                  VideoStoppedPlaying( yt.id );
+               }
             }
          }
       });
@@ -321,6 +360,8 @@ function StartPanelDisplay() {
    m_activeVideos = {};
 
    Animate.Start( "roller", OnAnimate );
+
+   
 }
 
 let m_currentScrollHeight = 0;
@@ -920,6 +961,7 @@ function ClampSwivelDesiredOffset() {
 
 function StartSwivelMode( startDirection, swivelOffset ) {
    if( m_swivelMode ) return;
+   AllVideosStoppedPlaying();
 
    let content = document.getElementById( "content" );
    content.classList.remove( "show" );
@@ -989,6 +1031,7 @@ function StartSwivelMode( startDirection, swivelOffset ) {
       }
 
       if( time > 1500 ) {
+         AllVideosStoppedPlaying();
          return true;
       }
    });
@@ -1159,6 +1202,126 @@ function readTurnTable( fraction ) {
    return upperHalf ? 90 - r : r;
 }
 
+function DimMusic() {
+   m_music_dimmed = true;
+   const music_button = document.getElementById( "music_button" );
+   music_button.classList.add( "muted" );
+
+   const music = document.getElementById( "music" );
+   if( music.ended ) return;
+   if( music.paused ) {
+      m_music_volume.reset(0);
+      return;
+   }
+
+   m_music_volume.desired = 0;
+   Animate.Start( "music_volume", ( time, elapsed ) => {
+      if( music.ended ) return true;
+      music.volume = m_music_volume.update( elapsed / 1000 );
+      if( m_music_volume.value < 0.01 ) {
+         music.pause();
+         return true;
+      }
+   });
+}
+
+function UndimMusic() {
+   m_music_dimmed = false;
+   const music_button = document.getElementById( "music_button" );
+   music_button.classList.remove( "muted" );
+
+   const music = document.getElementById( "music" );
+   if( music.ended ) return;
+
+   m_music_volume.desired = MUSIC_VOLUME;
+   if( music.paused ) music.play();
+
+   Animate.Start( "music_volume", ( time, elapsed ) => {
+      if( music.ended ) return true;
+      music.volume = m_music_volume.update( elapsed / 1000 );
+      if( m_music_volume.value >= MUSIC_VOLUME - 0.01 ) {
+         return true;
+      }
+   });
+}
+
+function UpdateMusicPlaying() {
+   let videoPlaying = false;
+   for( const x in m_videos_playing ) {
+      videoPlaying = true;
+      break;
+   }
+
+   if( m_music_manual_dim || videoPlaying ) {
+      DimMusic();
+   } else {
+      UndimMusic();
+   }
+}
+
+function VideoStartedPlaying( id ) {
+   m_videos_playing[id] = true;
+   UpdateMusicPlaying();
+}
+
+function VideoStoppedPlaying( id ) {
+   delete m_videos_playing[id];
+   for( const x in m_videos_playing ) return;
+   UpdateMusicPlaying();
+}
+
+function PauseOtherVideosWithSound( id ) {
+
+   const youtubes = document.getElementsByClassName( "youtube" );
+   for( const youtube of youtubes ) {
+      if( youtube.ytready && youtube.id != id ) {
+         youtube.player.pauseVideo();
+      }
+   }
+
+   const videos = document.getElementsByTagName( "video" );
+   for( const video of videos ) {
+      if( video.id != id ) {
+         if( video.volume > 0.01 && !video.muted ) {
+            video.pause();
+            // Not sure if this triggers the state event?
+         }
+      }
+   }
+}
+
+function AllVideosStoppedPlaying() {
+   m_videos_playing = {};
+   UpdateMusicPlaying();
+}
+
+function StartMusic() {
+   const music = document.getElementById( "music" );
+   const music_note = document.getElementById( "music_note" );
+   const music_button = document.getElementById( "music_button" );
+   m_music_volume.reset( MUSIC_VOLUME );
+   music.volume = MUSIC_VOLUME;
+
+   document.getElementById( "music_note" ).classList.add( "show" );
+   music.play();
+
+   music.addEventListener( "ended", () => {
+      music_button.classList.remove( "show" );
+   });
+
+   setTimeout( () => {
+      music_note.classList.remove( "show" );
+      setTimeout( () => {
+         music_button.classList.add( "show" );
+      }, 1000 );
+   }, 6000 );
+
+   music_button.addEventListener( "click", () => {
+      m_music_manual_dim = !m_music_dimmed;
+      UpdateMusicPlaying();
+   });
+}
+
 export default {
-    Start, SetScroll, LoadContent, SetupContentPadding, Setup
+    Start, SetScroll, LoadContent, SetupContentPadding, Setup, StartMusic
 }

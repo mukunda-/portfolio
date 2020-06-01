@@ -67,7 +67,7 @@ let m_state_handlers = {
             let distance = Animate.Slide( 1000, 64 /*65*/, "fall", time, 0, 1000 );
             m_state.cameraDistance = distance;
             m_state.cameraAngle += elapsed * 0.0006;
-            
+
             Camera.Set( 
                [
                   Math.cos(m_state.cameraAngle) * distance,
@@ -90,6 +90,7 @@ let m_state_handlers = {
    //--------------------------------------------------------------------------
    zoom: {
       Start() {
+         Roller.StartMusic();
          // Hide the big splash text. Cancel any active animation slot.
          Animate.Stop( "splash" );
          document.getElementById( "splash_text_top" ).classList.remove( "show" );
@@ -140,7 +141,7 @@ let m_state_handlers = {
          let newCubeZscale = [
             Smath.Distance( [0,0,4], [1,1,1] ), // Near plane (distance to front).
             Smath.Distance( [0,0,4], [1,1,0] ), // Far plane (distance to back).
-            1.0, 0.05 ]; // near visibility, far visibility.
+            1.0, 0.1 ]; // near visibility, far visibility.
             
          Animate.Start( "cube_zoom", ( time, elapsed ) => {
             const cubeZscale = Animate.Slide( originalCubeZscale, newCubeZscale, "ease", time, 1000, 1500 );
@@ -173,6 +174,7 @@ let m_state_handlers = {
       // From here we just pass execution to the Roller code.
       Start() {
          Roller.Start();
+
       }
    }
 }

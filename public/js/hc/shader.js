@@ -104,7 +104,7 @@ class Shader {
    Link() {
       gl.linkProgram( this.program );
       if( !gl.getProgramParameter( this.program, gl.LINK_STATUS ) ) {
-         console.error( "Unable to link shader!" );  
+         console.error( "Unable to link shader!", gl.getProgramInfoLog( this.program ) );
          throw "Shader link error.";
       }
    };
