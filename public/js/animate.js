@@ -1,4 +1,4 @@
-
+// Animation/timer stuff.
 ///////////////////////////////////////////////////////////////////////////////
 let m_active = [];
 let m_time   = 0;
@@ -7,9 +7,19 @@ function GetTime() {
    return m_time;
 }
 
-// start an animation. this will overwrite any animation in the slot
-//  this calls the func every frame until the func returns true. that means
-//  the animation is finished.
+//-----------------------------------------------------------------------------
+// Start an animation. This will overwrite any existing animation in the slot.
+// i.e. this is effectively the same as calling Stop first on it.
+//
+// The `func` will be called every render frame until it returns `true`, which
+// means the animation is finished. `func` is passed two args (time, elapsed).
+//
+// `time` is the total time since Start. and `elapsed` is how much time passed
+// since the last callback. Both are in milliseconds.
+//
+// Take care when Starting another animation inside of a handler. If the slot
+// is the same, returning true will kill the new one.
+//
 function Start( slot, func) {
     m_active[slot] = {
         func,
@@ -18,6 +28,9 @@ function Start( slot, func) {
     return m_active[slot];
 }
 
+//-----------------------------------------------------------------------------
+// Stops an animation slot. It will not receive further callbacks.
+//
 function Stop( slot ) {
    if( m_active[slot] ) {
       delete m_active[slot];
@@ -26,6 +39,17 @@ function Stop( slot ) {
    return false;
 }
 
+//-----------------------------------------------------------------------------
+// This is an interpolation utility. Returns a value between `a` and `b`
+//  depending on the `type` of interpolation, the `time` to sample from,
+//  and the range--a time slice to sample between.
+//
+// Example:
+//  returns (a * .25 + b * .75) for time 1750 in range [1000,2000] with linear
+//  type.
+//
+// Types are "lerp" (linear), "ease" (cosine), and "fall" (squared slope, sharp
+// attack).
 function Slide( a, b, type, time, from, to ) {
    // i'd use ?? but then i'd have to add transpiling.
    if( from === undefined ) from = 0;
@@ -36,16 +60,12 @@ function Slide( a, b, type, time, from, to ) {
    d = d > 1 ? 1 : d;
    
    if( type == "lerp" ) {
-      //return a + (b - a) * d;
+      // `d` doesn't need adjustment.
    } else if( type == "ease" ) {
       d = (1 - Math.cos( d * Math.PI )) / 2;
-      // d = 1 to -1
-      
-      //return a + (b - a) * d;
    } else if( type == "fall" ) {
       d = (1 - d) ** 2;
       d = 1 - d;
-      //return a + (b - a) * d;
    }
 
    if( Array.isArray(a) ) {
@@ -59,10 +79,12 @@ function Slide( a, b, type, time, from, to ) {
    }
 }
 
+//-----------------------------------------------------------------------------
+// Update all animations active, called from the main render loop.
+//
 function Update( time ) {
     
    let ms = new Date().getTime();
-   ms = new Date().getTime();
    let elapsed = ms - m_time;
    // Maximum of 200ms step per frame - the threshold where things
    //  start to choke.
@@ -77,44 +99,11 @@ function Update( time ) {
       }
    }
 }
-/*
-class Slider {
-	
-   constructor( speed, slide, start ) {
-      start = start || 0;
-      this.currentLinear = start;
-      this.currentReal   = start;
-      this.desired       = start;
-      this.value         = start;
-     
-      this.speed   = speed;//500;   // every period = 1 unit closer.
-      this.slide   = slide;//0.025; // every period = 50% closer.
-   }
-  
-  update( elapsed ) {
-      if( this.currentLinear < this.desired ) {
-         this.currentLinear += this.speed * elapsed;
-         this.currentLinear = this.currentLinear > this.desired ? this.desired : this.currentLinear;
-      } else {
-         this.currentLinear -= this.speed * elapsed;
-         this.currentLinear = this.currentLinear < this.desired ? this.desired : this.currentLinear;
-      }
-       
-      let d = this.slide ** elapsed;
-     
-      let diff = this.currentLinear - this.value;
-      this.value += diff * (1-d);
-      return this.value;
-   }
-  
-   reset( y ) {
-      this.from = this.to = this.value = y;
-   }
-  
-   slideTo( y ) {
-      this.desired = y;
-   }
-}*/
+
+//-----------------------------------------------------------------------------
+// A utility class that slides values towards other values. The key here is
+//  that it has a slower/easing start and finish with the flexibility of
+//                               constantly changing the desired endpoint.
 class Slider {
 	
  	constructor( slide, start ) {
@@ -125,9 +114,17 @@ class Slider {
       this.slide         = slide;
 	}
    
+   //--------------------------------------------------------------------------
+   // Call this to update the current value and return it. `elapsed` is
+   // received from an animation function, although direct milliseconds is
+   //                                           probably not what you want.
    update( elapsed ) {
+      if( !elapsed || elapsed == 0 ) return this.value;
+
       let d = this.slide ** elapsed;
-      // i admit i have no idea what i did here
+      // I admit I have no idea what I did here.
+      // The .25 extra is to help out the decay not being too slow.
+      // v1 follows desired. v2 follows v1, and value follows v2.
       this.v1 += (this.desired - this.v1) * 1.25 * (1-d);
       this.v2 += (this.v1 - this.v2) * 1.25 * (1-d);
       if( this.value < this.desired ) {
@@ -141,10 +138,15 @@ class Slider {
       return this.value;
    }
 
+   //--------------------------------------------------------------------------
+   // Returns the absolute difference between the desired value and the
+   // current value (update must be called first).
    remaining() {
       return Math.abs(this.desired - this.value);
    }
    
+   //--------------------------------------------------------------------------
+   // Snap the current value to `y` without sliding.
    reset( y ) {
       this.v1 = this.v2 = this.value = this.desired = y;
 	}
