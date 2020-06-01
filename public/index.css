@@ -281,6 +281,8 @@ a {
       doesn't fill a cube face completely. 100% is the height of the #content
                                   box, which is the height of the cube face. */
    min-height: 100%;
+   height: 100%; /* This is a weird CSS quirk with tables. Not sure 100% how 
+                    this should be done */
 
    /* Nobody likes tables, but this seems like literally the only way to make
                     this content centered vertically with automatic padding. */
