@@ -7,11 +7,13 @@
       <meta name="description" content="Mukunda Johnson's 2020 portfolio.">
       <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0">
       <link rel="stylesheet" type="text/css" href="index.css"/>
+      <!-- Youtube API -->
       <script src="https://www.youtube.com/iframe_api" type="text/javascript"></script>
       <script src="js/index.js" type="module"></script>
       
-
 <!-- ////////////////////////////////////////////////////////////////////// -->
+<!-- The great big panel collection. I would have put this in its own file, but
+     evidently importing an html file is the most impossible thing. -->
 
 <template id="panel1" class="panel"
           data-year="1998" data-title="Day Zero"
@@ -19,8 +21,8 @@
    <section>
       <p>
          I remember my first line of code, a conditional statement to handle
-         pressing Enter, copied from the Microsoft Visual Basic
-         6.0 manual when I was 8 years old.
+         pressing Enter, copied from the Microsoft Visual Basic 6.0 manual when
+         I was 8 years old.
       </p>
       <p style="text-align:center">
          "If KeyAscii = 13 Then"
@@ -30,13 +32,13 @@
 
    <section>
       <p>
-         Without teachers or books, it was a lot of experimentation,
-         making small apps and games in the worst way imaginable, but
-         we all started somewhere, right?
+         Without teachers or books, it was a lot of experimentation, making
+         small apps and games in the worst way imaginable, but we all started
+         somewhere, right?
       </p>
       <p>
-         Eventually I would connect with other developers on the world
-         wide web, and I owe a lot to them for helping me along the way.
+         Eventually I would connect with other developers on the world wide web,
+         and I owe a lot to them for helping me along the way.
       </p>
    </section>
 
@@ -47,8 +49,8 @@
          (I really love tilemaps.)
       </p>
       <p>
-         After finding a ripped sprite sheet of Mario graphics, I made my
-         own iteration of "Super Mario."
+         After finding a ripped sprite sheet of Mario graphics, I made my own
+         iteration of "Super Mario."
       </p>
       <p>
          Having never played the original game before, it was a...unique result.
@@ -63,9 +65,11 @@
           data-color="fffd62">
    <section>
       <p>
-         When I was 14, I sold my first game. It was a GameBoy Advance console port
-         of one of my PC games, Jetpack, published in
-         <a href="https://en.wikipedia.org/wiki/MaxPlay_Classic_Games_Volume_1">MaxPlay Classic Games Volume 1</a>.
+         When I was 14, I sold my first game. It was a GameBoy Advance console
+         port of one of my PC games, Jetpack, published in
+         <a href="https://en.wikipedia.org/wiki/MaxPlay_Classic_Games_Volume_1">
+            MaxPlay Classic Games Volume 1
+         </a>.
          Scroll down to read more or watch a review.
       </p>
    </section>
@@ -80,22 +84,27 @@
    </section>
 
    <section>
-      <div class="centered"><img src="res/cprog.png" title="This logo hasn't changed since then..."></div>
-      <p>
-         I taught myself C from resources like cprogramming.com, and I learned about console
-         programming from The PERN Project (Nintendo Reverse Engineering Project).
+      <p class="centered">
+         <img src="res/cprog.png" 
+              title="This logo hasn't changed since then...">
       </p>
       <p>
-         The GameBoy Advance had an incredible homebrew community, and I'm glad to have
-         been a part of it.
+         I taught myself C from resources like cprogramming.com, and I learned
+         about console programming from The PERN Project (Nintendo Reverse
+         Engineering Project) by
+         <a href="https://github.com/dovoto">@dovoto</a>.
+      </p>
+      <p>
+         The GameBoy Advance had an incredible homebrew community, and I'm glad
+         to have been a part of it.
       </p>
    </section>
 
    <section>
       <p>
-         In early 2004, a company reached out to #gbadev (EFNet) with an interest to
-         buy indie games for publishing. The deadline was one month, and I worked
-         non-stop to port my PC game to the GameBoy Advance.
+         In early 2004, a company reached out to #gbadev (EFNet) with an
+         interest to buy indie games for publishing. The deadline was one month,
+         and I worked non-stop to port my PC game to the GameBoy Advance.
       </p>
       <p>
          It wasn't easy, but I got it done, and they accepted it.
@@ -108,7 +117,8 @@
          In 2003, after finishing several small games, I had created Jetpack 4,
          which was a four-player (via split-screen and gamepads) sidescroller
          with open-ended gameplay. Fly around, blow stuff up, build, and hurt
-         each other. It was developed in Visual Basic using DirectDraw for graphics.
+         each other. It was developed in Visual Basic using DirectDraw for
+         graphics.
       </p>
       <p class="centered">
          <img src="res/jp4_1.jpg" title="Blowing up a bulk of C4." class="zoomable"><!--
@@ -152,8 +162,8 @@
    </section>
    <section>
       <p>
-         The game features 50 levels, all designed in my easy to use graphical level
-         editor. Knowing Visual Basic really comes in handy.
+         The game features 50 levels, all designed in my easy to use graphical
+         level editor. Knowing Visual Basic really comes in handy.
       </p>
 
       <p class="centered">
@@ -162,48 +172,55 @@
    </section>
    <section>
       <p>
-         A lot of code was hand-optimized in ARM assembly code to maximize performance.
+         A lot of code was hand-optimized in ARM assembly code to maximize
+         performance.
       </p>
       <p class="centered">
          <img src="res/adventurer4.png" title="Assembly is not maintainable." class="zoomable"><!--
       --><img src="res/adventurer5.png" title="This is a bad idea." class="zoomable">
       </p>
       <p class="centered">
-         <a href="https://mukunda.com/projects.html">Source code and game available here.</a>
+         <a href="https://mukunda.com/projects.html">
+            Source code and gameavailable here.
+         </a>
       </p>
    </section>
    <!-- move x86 assemblyi nto here -->
    <section>
       <h2>An Adventure Into Assembly</h2>
       <p>
-         Around this time I started gaining an unhealthy fascination with writing
-         assembly language. The tiny binary sizes were just so cool.
+         Around this time I started gaining an unhealthy fascination with
+         writing assembly language. The tiny binary sizes were just so cool.
       </p>
       <p>
-         By now I've
-         seen a lot of different flavors, including Z80, 6502, 65816, 68K, SPC-700,
-         ARM, and x86. Those are 8-bit, 16-bit, and 32-bit+ computers.
+         By now I've seen a lot of different flavors, including Z80, 6502,
+         65816, 68K, SPC-700, ARM, and x86. Those are 8-bit, 16-bit, and
+         32-bit+ computers.
       </p>
    </section>
    <section>
       <p>
          In 2007, I installed MS-DOS on my 
-         <a href="https://twitter.com/_mukunda/status/1259456079370608640">Pentium 4 laptop</a>
-         and then proceeded to write C and x86 assembly in edit.exe (to taste the authentic
-         early 90s developer experience).
+         <a href="https://twitter.com/_mukunda/status/1259456079370608640">
+            Pentium 4 laptop
+         </a>
+         and then proceeded to write C and x86 assembly in edit.exe (to taste
+         the authentic early 90s developer experience).
       </p>
       <p>
-         The source code for my x86 projects are unfortunately on a defunct hard drive,
-         but one project was a 3D renderer for DOS with an assembly-optimized rasterizer
-         (complete with perspective correction!).
+         The source code for my x86 projects are unfortunately on a defunct
+         hard drive, but one project was a 3D renderer for DOS with an
+         assembly-optimized rasterizer (complete with perspective correction!).
       </p>
    </section>
    <section>
       
       <p>
-         It wasn't long before I learned that the incredible engineering behind the
-         x86 processor renders hand-coded assembly
-         <a href="https://blog.mukunda.com/what-amazes-you/">basically useless</a>.
+         It wasn't long before I learned that the incredible engineering behind
+         the x86 processor renders hand-coded assembly
+         <a href="https://blog.mukunda.com/what-amazes-you/">
+            basically useless
+         </a>.
       </p>
    </section>
 </template>
@@ -213,7 +230,8 @@
           data-color="12fcff">
    <section>
       <p>
-         A commercial-quality music and sound engine written entirely in ARM assembly code.
+         A commercial-quality music and sound engine written entirely in ARM
+         assembly language.
       </p>
       <iframe src="https://www.youtube.com/embed/QsinToyyXbg?enablejsapi=1"
          id="yt_maxmod"
@@ -225,25 +243,25 @@
    </section>
    <section>
       <p>
-         The above example is running on the Nintendo DS. It features taking advantage
-         of the 16-channel hardware mixer while extending that to 30 channels with
-         software mixing.
+         The above example is running on the Nintendo DS. It features taking
+         advantage of the 16-channel hardware mixer while extending that to 30
+         channels with software mixing.
       </p>
       <p>
-         The library targets both the GameBoy Advance and the Nintendo DS. Check out the
-         <a href="https://maxmod.devkitpro.org/ref/index.html">documentation</a>.
+         The library targets both the GameBoy Advance and the Nintendo DS.
+         Check out the <a href="https://maxmod.devkitpro.org/ref/index.html">
+         documentation</a>.
       </p>
       <p>
-         Being written completely in assembly, the binary size on the GameBoy Advance is
-         only around 10KB.
+         Being written completely in assembly, the binary size on the GameBoy
+         Advance is only around 10KB.
       </p>
    </section>
    <section>
       <h2>Bringing it to Flash</h2>
       <p>
-         After noting my work done on tracker-based
-         sound solutions, an individual contracted me to build something
-         for the Flash platform.
+         After noting my work done on tracker-based sound solutions, an
+         individual contracted me to build something for the Flash platform.
       </p>
       <p>
          I put the latest Flash standard to the test, leveraging the
@@ -259,12 +277,13 @@
    <section>
       <p>
          Directly after writing Maxmod, I employed it in a game I wrote for a
-         <a href="http://www.pdroms.de/">PDRoms</a> competition. The binary nearly
-         fit in 256KB of memory, featuring three levels, action-packed bosses,
-         and deliberate Engrish to tie it all together.
+         <a href="http://www.pdroms.de/">PDRoms</a> competition. The binary
+         nearly fit in 256KB of memory, featuring three levels, action-packed
+         bosses, and deliberate Engrish to tie it all together.
       </p>
       <p class="centered">
-         <a href="https://www.engadget.com/2008-03-19-super-wings-download-this-game-now.html">"Download this game now" - engadget</a>
+         <a href="https://www.engadget.com/2008-03-19-super-wings-download-this-game-now.html">
+         "Download this game now" - engadget</a>
       </p>
       <p class="centered">
 
@@ -296,18 +315,28 @@
    </section>
    <section>
       <p>
-         I created most of the graphics and music myself. coda and xaimus
-         from #mod_shrine (EsperNet) wrote two fantastic boss themes.
+         I created most of the graphics and music myself. coda and xaimus from
+         #mod_shrine (EsperNet) wrote two fantastic boss themes.
       </p>
       <p>
-         Some of the tracks have cues embedded in the channels to
-         synchronize game events.
+         Some of the tracks have cues embedded in the channels to synchronize
+         game events.
       </p>
       <p class="centered">
-         <img src="res/swgfx1.png" title="Don't you love font bitmaps?" class="zoomable" data-pixel><!--
-      --><img src="res/swgfx2.png" title="The bulk of the game graphics in their 4-color glory."  class="zoomable" data-pixel><!--
-      --><img src="res/swmusic1.png" title="The SF8 command triggers a shuriken storm." class="zoomable"><!--
-      --><img src="res/swmusic2.png" title="The SF2 command makes the enemy ship fire a batch of missiles." class="zoomable">
+         <img src="res/swgfx1.png" 
+              title="Don't you love font bitmaps?" 
+              class="zoomable" 
+              data-pixel><!--
+      --><img src="res/swgfx2.png"
+              title="The bulk of the game graphics in their 4-color glory."
+              class="zoomable"
+              data-pixel><!--
+      --><img src="res/swmusic1.png"
+              title="The SF8 command triggers a shuriken storm."
+              class="zoomable"><!--
+      --><img src="res/swmusic2.png"
+              title="The SF2 command makes the enemy ship fire a batch of missiles."
+              class="zoomable">
       </p>
       <p class="centered">
          <a href="https://github.com/mukunda-/superwings">
@@ -320,7 +349,8 @@
 <template id="panel_ewa057" class="panel" data-year="2008" data-title="EXCITING WINTERY ADVENTURE 0.57">
    <section>
       <p>
-         I completely forgot that I wrote this joke for the Drunken Coders Winter 2008 competition, so it deserves a special place here.
+         I completely forgot that I wrote this joke for the Drunken Coders
+         Winter 2008 competition, so it deserves a special place here.
       </p>
       <p class="centered">
          <img src="res/ewa1.png" title="Extreme gameplay.">
@@ -334,8 +364,8 @@
           data-color="72e45b">
    <section>
       <p>
-         I've had my fair share of fun making the Nintendo Entertainment
-         System do very strange things.
+         I've had my fair share of fun making the Nintendo Entertainment System
+         do very strange things.
       </p>
       <p>
          Below is a recording of
@@ -354,21 +384,20 @@
    </section>
    <section>
       <p>
-         The NES does not have hardware to time PCM playback. All it has
-         is one register that you can manually feed a single sample to.
+         The NES does not have hardware to time PCM playback. All it has is one
+         register that you can manually feed a single sample to.
       </p>
       <p>
-         For each block of code in the SuperNSF driver, I needed to keep
-         track of the exact cycle count (yes, counting everything manually)
-         so I could time the software mixer which outputs a single sample at
-         a time.
+         For each block of code in the SuperNSF driver, I needed to keep track
+         of the exact cycle count (yes, counting everything manually) so I could
+         time the software mixer which outputs a single sample at a time.
       </p>
       <p>
          For example (and forgive me for not remembering exact numbers), the NES
-         has a 1.79 MHz computer. Divide that speed by 10,000 for a 10KHz sampling
-         rate, and you have 179 cycles to mix PCM channels, output a single sample,
-         and then process the music sequence. A few uncounted cycles means a pitch shift
-         in the output.
+         has a 1.79 MHz computer. Divide that speed by 10,000 for a 10KHz
+         sampling rate, and you have 179 cycles to mix PCM channels, output a
+         single sample, and then process the music sequence. A few uncounted
+         cycles means a pitch shift in the output.
       </p>
       <p>
          I used an array of no-op instructions to manually insert cycle delays
@@ -380,60 +409,65 @@
          I'm impressed that most emulators are cycle-accurate and support
          SuperNSF.
       </p>
-      <p>Any slight inaccuracy in emulation would result in massive pitch shifts.</p>
+      <p>
+         Any slight inaccuracy in emulation would result in massive pitch
+         shifts.
+      </p>
    </section>
    <section>
       <h2>PCMNSF</h2>
       <p>
-         SuperNSF was based off of some previous tinkering I did with
-         @tumult from #mod_shrine called <a href="https://github.com/mukunda-/pcmnsf">PCMNSF</a>,
-         which was a simpler 4-channel MOD player.
+         SuperNSF was based off of some previous tinkering I did with @tumult
+         from #mod_shrine called
+         <a href="https://github.com/mukunda-/pcmnsf">PCMNSF</a>, which was a
+         simpler 4-channel MOD player.
       </p>
    </section>
    <section>
       <h2>#mod_shrine</h2>
       <p>
          Sometime in 2006, I joined #mod_shrine on EsperNet, a fantastic
-         community that revolves around the greatness of tracker-based
-         music.
+         community that revolves around the greatness of tracker-based music.
       </p>
       <p>
-         I had been fascinated by music and sound drivers for a while
-         and even tried my hand at making music compositions myself.
+         I had been fascinated by music and sound drivers for a while and even
+         tried my hand at making music compositions myself.
       </p>
       <p>
-         #mod_shrine regularly hosts one-hour music competitions, even
-         today, where people create music for an hour using a given
-         sample set and then listen together. I did around 350 of these
-         some ten years ago.
+         #mod_shrine regularly hosts one-hour music competitions, even today,
+         where people create music for an hour using a given sample set and
+         then listen together. I did around 350 of these some ten years ago.
       </p>
       <p>
-         These guys have been a big part of my life, and if you're one of
-         them reading this, you're awesome! We've made music, games, and
-         amazing tools together.
+         These guys have been a big part of my life, and if you're one of them
+         reading this, you're awesome! We've made music, games, and amazing
+         tools together.
       </p>
    </section>
    <section>
       <h2>it2nsf</h2>
       <p>
          A less abusive tool I wrote was
-         <a href="https://github.com/mukunda-/it2nsf">it2nsf</a>.
-         It supports MML (music macro language) techniques to create
-         unique instrument sounds while providing a tracker-friendly
-         method for composition.
+         <a href="https://github.com/mukunda-/it2nsf">it2nsf</a>. It supports
+         MML (music macro language) techniques to create unique instrument
+         sounds while providing a tracker-friendly method for composition.
       </p>
       <p>
-         The PC side of things generates samples that emulate the final
-         sound from the NES driver which musicians can use to compose
-         their track easily.
+         The PC side of things generates samples that emulate the final sound
+         from the NES driver which musicians can use to compose their track
+         easily.
       </p>
       <p class="centered">
-         <img src="res/it2nsf1.png" title="A part of the user manual." class="zoomable"><!--
-      --><img src="res/it2nsf2.png" title="Another part of the user manual." class="zoomable">
+         <img src="res/it2nsf1.png"
+              title="A part of the user manual."
+              class="zoomable"><!--
+      --><img src="res/it2nsf2.png"
+              title="Another part of the user manual."
+              class="zoomable">
       </p>
       <p>
-         The NES sound driver is written in 6502 assembly, and the tool
-         side is written in C++.
+         The NES sound driver is written in 6502 assembly, and the tool side is
+         written in C++.
       </p>
    </section>
 
@@ -441,22 +475,28 @@
       <h2>s3m2nsf</h2>
       <p>
          The precursor to it2nsf,
-         <a href="https://github.com/mukunda-/s3m2nsf">s3m2nsf</a> is
-         a simpler version that
-         supports basic waveforms and allows tracker fans to easily
+         <a href="https://github.com/mukunda-/s3m2nsf">s3m2nsf</a> is a simpler
+         version that supports basic waveforms and allows tracker fans to easily
          write music that plays on the NES.
       </p>
       <p>
          The conversion app was coded by the amazing
-         <a href="https://twitter.com/reduzio">@reduz</a>, a member of
-         the #mod_shrine community. I wrote the 6502-based S3M player in
-         assembly code.
+         <a href="https://twitter.com/reduzio">@reduz</a>, a member of the
+         #mod_shrine community. I wrote the 6502-based S3M player in assembly
+         code.
       </p>
       <p class="centered">
-         <img src="res/s3m2nsf1.png" title="I love in-depth txt manuals." class="zoomable"><!--
-      --><img src="res/s3m2nsf2.png" title="Complete with ASCII art." class="zoomable"><!--
-      --><img src="res/s3m2nsf3.png" title="The vibrato effect." class="zoomable"><!--
-      --><img src="res/s3m2nsf4.png" title="Portamento, or pitch-slide code." class="zoomable">
+         <img src="res/s3m2nsf1.png"
+              title="I love in-depth txt manuals."
+              class="zoomable"><!--
+      --><img src="res/s3m2nsf2.png"
+              title="Complete with ASCII art."
+              class="zoomable"><!--
+      --><img src="res/s3m2nsf3.png"
+              title="The vibrato effect." class="zoomable"><!--
+      --><img src="res/s3m2nsf4.png"
+              title="Portamento, or pitch-slide code."
+              class="zoomable">
       </p>
    </section>
 </template>
@@ -469,23 +509,24 @@
          <img src="res/skipp1.png" title="The title screen." class="zoomable" data-pixel>
       </p>
       <p>
-         The 1st place winner of PDRoms competition #4.01. I'm proud to
-         be one of very few developers to create a complete Super Nintendo
-         game from scratch. Everything is written in assembly language.
+         The 1st place winner of PDRoms competition #4.01. I'm proud to be one
+         of very few developers to create a complete Super Nintendo game from
+         scratch. Everything is written in assembly language.
       </p>
       <p>
          I found out recently that someone even wrote a
-         <a href="https://gamefaqs.gamespot.com/snes/181502-super-4-in-1-multicart/faqs/72589">full walkthrough</a>
-         for this game. Very cool, @Lanzz.
+         <a href="https://gamefaqs.gamespot.com/snes/181502-super-4-in-1-multicart/faqs/72589">
+         full walkthrough</a> for this game. Very cool, @Lanzz.
       </p>
    </section>
    <section>
       <p>
          The game featured a
-         <a href="https://www.zophar.net/music/nintendo-snes-spc/skipp-and-friends">complete original soundtrack</a>
-         composed by <a href="https://twitter.com/MrMadbrain">@madbrain</a> and
-         <a href="https://twitter.com/surasshu">@surasshu</a>,
-         two amazing artists that I met in #mod_shrine.
+         <a href="https://www.zophar.net/music/nintendo-snes-spc/skipp-and-friends">
+         complete original soundtrack</a> composed by
+         <a href="https://twitter.com/MrMadbrain">@madbrain</a> and
+         <a href="https://twitter.com/surasshu">@surasshu</a>, two amazing
+         artists that I met in #mod_shrine.
       </p>
       <iframe src="https://www.youtube.com/embed/axQeMVbNauo?enablejsapi=1"
          id="yt_skipp"
@@ -497,72 +538,71 @@
    </section>
    <section>
       <p>
-         The competition deadline was two months, and I didn't have any time leftover.
+         The competition deadline was two months, and I didn't have any time
+         leftover.
       </p>
       <p>
          The first month was spent designing and building
-         <a href="https://github.com/mukunda-/snesmod/">SNESMOD</a>,
-         an Impulse Tracker-based sound and music engine that rivals
-         commercial legends. I used what I learned from making XMSNES
-         (described below) and pushed the boundaries.
+         <a href="https://github.com/mukunda-/snesmod/">SNESMOD</a>, an Impulse
+         Tracker-based sound and music engine that rivals commercial legends. I
+         used what I learned from making XMSNES (described below) and pushed the
+         boundaries.
       </p>
       <p>
-         SNESMOD supports streaming PCM sounds from the SNES cartridge,
-         all nightmarishly implemented
-         on a <a href="https://mukunda.com/stuff/SPCTECH.html">500khz computer</a>.
-         Tooling, documentation, and examples were all extremely limited
+         SNESMOD supports streaming PCM sounds from the SNES cartridge, all
+         nightmarishly implemented
+         on a <a href="https://mukunda.com/stuff/SPCTECH.html">500khz computer
+         </a>. Tooling, documentation, and examples were all extremely limited
          or nil.
       </p>
    </section>
    <section>
       <p>
-         The game had stickmen graphics all the way until the last week
-         before the deadline, but
-         <a href="https://twitter.com/codatrigger">@coda</a>
-         pitched in and did some animation work while I worked on adding
-         all of the levels in a complex map editor I built with Visual
-         Basic.
+         The game had stickmen graphics all the way until the last week before
+         the deadline, but <a href="https://twitter.com/codatrigger">@coda</a>
+         pitched in and did some animation work while I worked on adding all of
+         the levels in a complex map editor I built with Visual Basic.
       </p>
       <p class="centered">
-         <img src="res/skipp_leveleditor.png" class="large zoomable" title="Rapid tool development at its finest.">
+         <img src="res/skipp_leveleditor.png"
+              class="large zoomable" 
+              title="Rapid tool development at its finest.">
       </p>
    </section>
-
    <section>
       <p>
-         Ask me about the story one hour before the deadline, when I
-         decided the game needed a final boss.
+         Ask me about the story one hour before the deadline, when I decided the
+         game needed a final boss.
          <a href="https://en.wikipedia.org/wiki/Cyclone_Aila">Cyclone Aila</a>
          was right outside.
       </p>
    </section>
-
    <section>
       <p>
-         A few years after the release, Piko Interactive contacted me to
-         have Skipp and Friends <a href="https://www.hyperkin.com/snes-super-4-in-1-multicart.html">published on cartridge</a>.
+         A few years after the release, Piko Interactive contacted me to have
+         Skipp and Friends
+         <a href="https://www.hyperkin.com/snes-super-4-in-1-multicart.html">
+         published on cartridge</a>.
       </p>
    </section>
-
    <section>
       <h2>XMSNES</h2>
       <p>
-         XMSNES is an XM module player for the Super Nintendo and the
-         precursor to SNESMOD. What better way to get into SNES
-         programming than writing the hardest things possible?
+         XMSNES is an XM module player for the Super Nintendo and the precursor
+         to SNESMOD. What better way to get into SNES programming than writing
+         the hardest things possible?
       </p>
    </section>
-
    <section>
       <p>
-         Similar to SNESMOD, XMSNES comes with a converter and sound
-         driver that was split across the two processors in the SNES.
+         Similar to SNESMOD, XMSNES comes with a converter and sound driver that
+         was split across the two processors in the SNES.
       </p>
       <p>
-         Below shows a test demo of it, something that required me to
-         rewrite a hardware cartridge hundreds of times (and stick it in the
-         console, and boot it, and test via looking at those byte outputs onscreen)
-         to track some of the bugs during development.
+         Below shows a test demo of it, something that required me to rewrite a
+         hardware cartridge hundreds of times (and stick it in the console, and
+         boot it, and test via looking at those byte outputs onscreen) to track
+         some of the bugs during development.
       </p>
       <p>
          The joys of programming, right?
@@ -580,8 +620,8 @@
           data-color="feff81">
    <section>
       <p>
-         This is a game engine I've been writing in C++. I'll get around
-         to finishing it, one day.
+         This is a game engine I've been writing in C++. I'll get around to
+         finishing it, one day.
       </p>
       <p class="centered">
          <video autoplay muted width="100%" loop controls id="video_archubos">
@@ -591,16 +631,19 @@
    </section>
    <section>
       <p>
-         I've gotten immense practice from working on this (it's how I
-         know how to write this WebGL program with fragment shaders).
-         Below is my testing of mass-scale instanced render methods, and
-         realtime generated clouds.
+         I've gotten immense practice from working on this (it's how I know how
+         to write this WebGL program with fragment shaders). Below is my testing
+         of mass-scale instanced render methods, and realtime generated clouds.
       </p>
       <p class="centered">
-         <img class="large zoomable" src="res/ab15.jpg" title="A huge mountain of instanced cubes.">
+         <img class="large zoomable"
+              src="res/ab15.jpg"
+              title="A huge mountain of instanced cubes.">
       </p>
       <p class="centered">
-         <img class="large zoomable" src="res/ab22.jpg" title="Testing realtime cloud generation techniques (GPU-side).">
+         <img class="large zoomable"
+              src="res/ab22.jpg"
+              title="Testing realtime cloud generation techniques (GPU-side).">
       </p>
    </section>
 </template>
@@ -613,10 +656,9 @@
          I've played my fair share, from first-person shooters to RPGs.
       </p>
       <p>
-         I was one of few demon hunters in the
-         world to tackle early patch (HARD) Inferno with an extremely
-         weak gearset. Nothing but perfect play would allow survival,
-         and I live-streamed a complete clear.
+         I was one of few demon hunters in the world to tackle early patch
+         (HARD) Inferno with an extremely weak gearset. Nothing but perfect play
+         would allow survival, and I live-streamed a complete clear.
       </p>
       <p class="centered">
          <video autoplay controls width="100%" loop muted id="video_diablo">
@@ -626,10 +668,9 @@
    </section>
    <section>
       <p>
-         I have multiple cutting-edge mythic
-         achievements in World of Warcraft. There is nothing like
-         overcoming a difficult encounter
-         with your friends.
+         I have multiple cutting-edge mythic achievements in World of Warcraft. 
+         There is nothing like overcoming a difficult encounter with your
+         friends.
       </p>
       <p class="centered">
          <video controls width="100%" id="video_blackhand">
@@ -651,31 +692,43 @@
    <section>
       <p>
          When Counter-Strike: Global Offensive was released, I became a part of
-         <a href="https://reflex-gamers.com">Reflex Gamers</a>
-         and found a deep fascination in the flexibility of the Source engine.
+         <a href="https://reflex-gamers.com">Reflex Gamers</a> and found a deep
+         fascination in the flexibility of the Source engine.
       </p>
       <p>
          I made a ton of neat and crazy things.
       </p>
       <p class="centered">
-         <img src="res/smmeme.jpg" title="You'd hardly remember you were playing CS:GO.">
+         <img src="res/smmeme.jpg"
+              title="You'd hardly remember you were playing CS:GO.">
       </p>
    </section>
    <section>
       <h2>"RXG Gravity" Map</h2>
       <p>
          This is one of the maps I made, designed for the Arms Race game mode.
-         It has a curious red button that offers some insight on the Source engine's
-         flexibility.
+         It has a curious red button that offers some insight on the Source
+         engine's flexibility.
       </p>
       <p class="centered">
-         <img src="res/csgomap1.jpg" title="RXG Gravity Arms Race map." class="zoomable"><!--
-      --><img src="res/csgomap2.jpg" title="Tested some water effects, too." class="zoomable"><!--
-      --><img src="res/csgomap3.jpg" title="Lighting effects." class="zoomable"><!--
-      --><img src="res/csgomap4.jpg" title="A curious button." class="zoomable"><!--
-      --><img src="res/gravity_overview.png" title="Loading screen." class="large zoomable"><!--
-      --><img src="res/hammer1.jpg" title="Editing the map in Hammer." class="large zoomable">
-
+         <img src="res/csgomap1.jpg"
+              title="RXG Gravity Arms Race map."
+              class="zoomable"><!--
+      --><img src="res/csgomap2.jpg"
+              title="Tested some water effects, too." 
+              class="zoomable"><!--
+      --><img src="res/csgomap3.jpg"
+              title="Lighting effects."
+              class="zoomable"><!--
+      --><img src="res/csgomap4.jpg"
+              title="A curious button."
+              class="zoomable"><!--
+      --><img src="res/gravity_overview.png"
+              title="Loading screen."
+              class="large zoomable"><!--
+      --><img src="res/hammer1.jpg"
+              title="Editing the map in Hammer." 
+              class="large zoomable">
       </p>
    </section>
    <section>
@@ -715,9 +768,9 @@
    <section>
       <h2>Game-server Plugins</h2>
       <p>
-         I coded <a href="https://github.com/mukunda-/rxg-plugins">a lot of customizations</a>
-         for the game-servers we hosted in our community. The Source engine is super fun to
-         experiment with.
+         I coded <a href="https://github.com/mukunda-/rxg-plugins">a lot of
+         customizations</a> for the game-servers we hosted in our community.
+         The Source engine is super fun to experiment with.
       </p>
       <p class="centered">
          <video controls width="100%" id="video_dominoes">
@@ -729,8 +782,8 @@
       <h2>ServerTools</h2>
       <p>
          To manage our growing plugin list and server files,
-         I wrote a <a href="https://github.com/mukunda-/servertools">handful of tools</a>
-         to help out, complete with a plugin packaging system.
+         I wrote a <a href="https://github.com/mukunda-/servertools">handful of
+         tools</a> to help out, complete with a plugin packaging system.
       </p>
       <p class="centered">
          <img class="large zoomable" src="res/servertools.png">
@@ -744,19 +797,20 @@
    <section>
       <p class="centered">
          <a href="https://kotaku.com/1596972618#!">
-            "You shouldn't interrupt a Counter-Strike player's game of Tetris." - Kotaku
+            "You shouldn't interrupt a Counter-Strike player's game of Tetris."
+            - Kotaku
          </a>
       </p>
       <p class="centered">
          <a href="https://www.pcgamer.com/csgo-super-mareo-bruhs/">
-            "The plugin's coder deserves a barrage of internet
-            high-fives for this feat." - PC Gamer
+            "The plugin's coder deserves a barrage of internet high-fives for
+            this feat." - PC Gamer
          </a>
       </p>
       <p>
-         Real gamers play games inside their games. This mod was covered
-         by several news sites, a unique feat that featured a
-         complete video game console inside of Counter-Strike.
+         Real gamers play games inside their games. This mod was covered by
+         several news sites, a unique feat that featured a complete video game
+         console inside of Counter-Strike.
       </p>
       <iframe src="https://www.youtube.com/embed/5pMQ7oBHdPE?enablejsapi=1"
          id="yt_smes"
@@ -768,8 +822,9 @@
    </section>
    <section>
       <p>
-         This is a video of the early development phase of my Tetris game.
-         I made the office lounge map, too, my personal test environment with a TV.
+         This is a video of the early development phase of my Tetris game. I
+         made the office lounge map, too, my personal test environment with a
+         TV.
       </p>
       <iframe src="https://www.youtube.com/embed/ycbxk5JCH_s?enablejsapi=1"
          id="yt_tetrisearly"
@@ -813,13 +868,14 @@
          allowfullscreen>
       </iframe>
       <p>
-         A smooth scrolling tilemap with clipped edges? The more familar you are with
-         the Source engine, the more impossible this seems.
+         A smooth scrolling tilemap with clipped edges? The more familar you are
+         with the Source engine, the more impossible this seems.
       </p>
       <p>
          The sound effects were ripped from an
-         <a href="https://www.youtube.com/watch?v=u9wp6cz0A1o">amazing video made by Jake "virt" Kaufman</a>,
-         another extremely talented someone I met in #mod_shrine.
+         <a href="https://www.youtube.com/watch?v=u9wp6cz0A1o">amazing video
+         made by Jake "virt" Kaufman</a>, another extremely talented someone I
+         met in #mod_shrine.
       </p>
    </section>
 </template>
@@ -829,27 +885,36 @@
           data-color="ed3434">
    <section>
       <p>
-         In 2014, <a href="https://github.com/WheteThunger">@WhiteThunder</a> and I put
-         together a <a href="https://store.reflex-gamers.com">store site</a> for our community.
-         I built most of the PayPal integration while he worked on a fantastic frontend.
+         In 2014, <a href="https://github.com/WheteThunger">@WhiteThunder</a>
+         and I put together a <a href="https://store.reflex-gamers.com">store
+         site</a> for our community. I built most of the PayPal integration
+         while he worked on a fantastic frontend.
       </p>
       <p class="centered">
-         <img src="res/rxgstore1.png" title="RXG Store landing page." class="large zoomable">
+         <img src="res/rxgstore1.png"
+              title="RXG Store landing page."
+              class="large zoomable">
       </p>
       <p>
-         I designed the interface between the site and our game-servers, and then created
-         several virtual items that can be bought on the store and then used in-game via
+         I designed the interface between the site and our game-servers, and
+         then created several virtual items that can be bought on the store and
+         then used in-game via
          <a href="https://github.com/mukunda-/rxg-plugins">custom plugins</a>.
       </p>
    </section>
    <section>
       <p>
-         One of the items on the menu crashes the server and costs $100.
-         Well worth the price? Yes! According to one of our customer's positive review.
+         One of the items on the menu crashes the server and costs $100. Well
+         worth the price? Yes! According to one of our customer's positive
+         review.
       </p>
       <p class="centered">
-         <img src="res/rxgstore2.png" title="Nuke item description." class="zoomable"><!--
-      --><img src="res/rxgstore3.png" title="Positive customer review." class="zoomable">
+         <img src="res/rxgstore2.png"
+              title="Nuke item description. (Yes, I'm triggered by that bad grammer too.)"
+              class="zoomable"><!--
+      --><img src="res/rxgstore3.png"
+              title="Positive customer review."
+              class="zoomable">
       </p>
    </section>
    <section>
@@ -860,16 +925,18 @@
       </p>
       <p>
          Source games typically have the ability to record gameplay,
-         and I wrote a server modification to automatically transfer those gameplay
-         files to a <a href="http://demos.reflex-gamers.com">publicly viewable repository</a>,
-         complete with meta information.
+         and I wrote a server modification to automatically transfer those
+         gameplay files to a <a href="http://demos.reflex-gamers.com">publicly
+         viewable repository</a>, complete with meta information.
       </p>
       <p class="centered">
-         <img src="res/rxgdemos.png" title="RXG demos repository." class="large zoomable">
+         <img src="res/rxgdemos.png"
+              title="RXG demos repository."
+              class="large zoomable">
       </p>
       <p>
-         The web side is written in PHP, with a sort of REST API exposed to upload
-         and register demos.
+         The web side is written in PHP, with a sort of REST API exposed to
+         upload and register demos.
       </p>
    </section>
 
@@ -883,42 +950,46 @@
          <img src="res/tfrapp.jpg" class="large zoomable" title="The application page.">
       </p>
       <p>
-         I felt like the Google Forms aesthetic was unappealing, so I had some fun implementing
-         this solution.
-      </p>
-   </section>
-
-   <section>
-      <p>The front-end is HTML/CSS and JavaScript + jQuery, with
-         a back-end written in Python and JavaScript, using Google Apps Scripts
-         to generate and modify Google Documents for record keeping.
-      </p>
-      <p class="centered">
-         <img src="res/tfrapp3.jpg" class="large zoomable" title="Google Apps Scripts.">
+         I felt like the Google Forms aesthetic was unappealing, so I had some
+         fun implementing this solution.
       </p>
    </section>
 
    <section>
       <p>
-         It also integrates with Discord to post notifications whenever an application is submitted
-         or changed.
+         The front-end is HTML/CSS and JavaScript + jQuery, with a back-end
+         written in Python and JavaScript, using Google Apps Scripts to generate
+         and modify Google Documents for record keeping.
       </p>
       <p class="centered">
-         <img src="res/tfrapp2.jpg" class="large zoomable" title="Code to build a Discord embed object.">
+         <img src="res/tfrapp3.jpg"
+              class="large zoomable"
+              title="Google Apps Scripts.">
+      </p>
+   </section>
+
+   <section>
+      <p>
+         It also integrates with Discord to post notifications whenever an
+         application is submitted or changed.
+      </p>
+      <p class="centered">
+         <img src="res/tfrapp2.jpg"
+              class="large zoomable"
+              title="Code to build a Discord embed object.">
       </p>
    </section>
    <!--
    <section>
       <h2>Google Groups Discord Integration</h2>
       <p>
-         A notable mention of a tiny project. How to integrate Google Groups with
-         something, when Google Groups doesn't have any flexible notifications API?
-         Simple, I added my webserver as a subscriber, and then parsed the emails
-         that it received, forwarding a formatted
-         sent
-         subscribed my webserver While I was at it, I wrote a bunch of other neat integrations, like linking
-         Google Groups to Discord (by parsing )a handful of Python to integrate
-         Google Groups with Discord
+         A notable mention of a tiny project. How to integrate Google Groups
+         with something, when Google Groups doesn't have any flexible
+         notifications API? Simple, I added my webserver as a subscriber, and
+         then parsed the emails that it received, forwarding a formatted sent
+         subscribed my webserver While I was at it, I wrote a bunch of other
+         neat integrations, like linking Google Groups to Discord (by parsing) a
+         handful of Python to integrate Google Groups with Discord
          And why make it simple? This thing uses a JavaScript and
          Google Apps Script backend to generate Google Documents from the input
          and then notify our Discord when an application is submitted or modified.
@@ -937,26 +1008,28 @@
          <img src="res/javalogo.png" title="Java!">
       </p>
       <p>
-         In late 2014 I opened the Java manual, read it from top to bottom
-         (it took three days), and directly after I was writing robust Java
-         code, complete with proper packaging practices, database work,
-         JavaDoc comments, and safe concurrent programming. How's that for
-         fast learning?
+         In late 2014 I opened the Java manual, read it from top to bottom (it
+         took three days), and directly after I was writing robust Java code,
+         complete with proper packaging practices, database work, JavaDoc
+         comments, and safe concurrent programming. How's that for fast
+         learning?
       </p>
       <p>I actually really like how the Java manual is written.</p>
    </section>
    <section>
       <p>
-         I was working on creating a new experience for Minecraft players,
-         but sadly due to the new legal issues Bukkit faced, I decided to
-         put that project on the shelf.
+         I was working on creating a new experience for Minecraft players, but
+         sadly due to the new legal issues Bukkit faced, I decided to put that
+         project on the shelf.
       </p>
       <p class="centered">
-         <img src="res/java1.png" class="large zoomable" title="Java was fairly pleasing to work with.">
+         <img src="res/java1.png"
+              class="large zoomable"
+              title="Java was fairly pleasing to work with.">
       </p>
       <p>
-         I haven't written Java in a while, but it is certainly up there
-         on likeable languages for me.
+         I haven't written Java in a while, but it is certainly up there on
+         likeable languages for me.
       </p>
    </section>
 </template>
@@ -966,7 +1039,8 @@
           data-color="76c876">
    <section>
       <p>
-         I might be a huge geek, but I have some stories away from computers, too.
+         I might be a huge geek, but I have some stories away from computers,
+         too.
       </p>
       <p>
          Construction is my family's trade, and I live in this home that I built
@@ -1022,43 +1096,47 @@
           data-color="19fcff">
    <section>
       <p>
-         This is a picture of over a thousand players in
-         World of Warcraft gathering after an amazing virtual fair in 2018,
-         the annual Tournament of Ages on Moon Guard.
+         This is a picture of over a thousand players in World of Warcraft
+         gathering after an amazing virtual fair in 2018, the annual Tournament
+         of Ages on Moon Guard.
       </p>
       <p class="centered">
          <img class="large zoomable" src="res/crossrp1.jpg" title="Tournament of Ages 2018 closing ceremony.">
       </p>
       <p>
-         That year was particularly special because my project
-         allowed players of both factions to talk to each other freely,
-         something completely unthinkable before.
+         That year was particularly special because my project allowed players
+         of both factions to talk to each other freely, something completely
+         unthinkable before.
       </p>
    </section>
    <section>
       <p>
          Just before the release of Battle for Azeroth, I created Cross RP,
-         using the newly released "Communities" feature to bridge
-         the language divide between factions, blowing away the gates for
-         cross-faction role-play enthusiasts.
+         using the newly released "Communities" feature to bridge the language
+         divide between factions, blowing away the gates for cross-faction
+         role-play enthusiasts.
       </p>
       <p>
          It had a massive welcoming, with a
-         <a href="https://www.reddit.com/r/wow/comments/95l87e/the_final_staredown_drums_of_war_campaign_finale/">huge event on Argent Dawn-EU</a>
-         being the first to use it.
+         <a href="https://www.reddit.com/r/wow/comments/95l87e/the_final_staredown_drums_of_war_campaign_finale/">
+         huge event on Argent Dawn-EU</a> being the first to use it.
       </p>
       <p class="centered">
-         <img src="res/crossrp3.jpg" title="A happy customer." class="large zoomable">
+         <img src="res/crossrp3.jpg"
+              title="A happy customer."
+              class="large zoomable">
       </p>
    </section>
    <section>
       <p>
-         I would credit a lot of Cross RP's viral adoption
-         to its design principles. Here are some points that were
-         bulleted in the source code at the start.
+         I would credit a lot of Cross RP's viral adoption to its design
+         principles. Here are some points that were bulleted in the source code
+         at the start.
       </p>
       <p class="centered">
-         <img src="res/crossrp2.png" class="large zoomable" title="Cross RP design notes.">
+         <img src="res/crossrp2.png"
+              class="large zoomable"
+              title="Cross RP design notes.">
       </p>
    </section>
    <section>
@@ -1086,43 +1164,43 @@
       <p>
          Some months after the release, Blizzard changed the API Cross RP was
          depending on, permanently breaking it.
-         <a href="https://youtu.be/o7i6np8ExCY?t=462">They stated</a>
-         that it was an unfortunate side effect of addressing security concerns
-         and then introduced the
-         <a href="https://wow.gamepedia.com/Elixir_of_Tongues">Elixir of Tongues</a>
-         to compensate, essentially providing Cross RP's functionality
-         officially. Thanks Blizzard!
+         <a href="https://youtu.be/o7i6np8ExCY?t=462">They stated</a> that it
+         was an unfortunate side effect of addressing security concerns and then
+         introduced the
+         <a href="https://wow.gamepedia.com/Elixir_of_Tongues">Elixir of
+         Tongues</a> to compensate, essentially providing Cross RP's
+         functionality officially. Thanks Blizzard!
       </p>
    </section>
    <section>
       <p>
-         I still had to rework my code to transfer character profile data across the
-         faction divide (basically doing the impossible).
+         I still had to rework my code to transfer character profile data across
+         the faction divide (basically doing the impossible).
       </p>
       <p>
-         I'll spare you the details unless
-         you ask, but I essentially built a peer-to-peer network and protocol, turning some
-         of my userbase into routers to smuggle data across the Battle.net platform.
+         I'll spare you the details unless you ask, but I essentially built a
+         peer-to-peer network and protocol, turning some of my userbase into
+         routers to smuggle data across the Battle.net platform.
       </p>
    </section>
    <section>
       <h2>I Love UI Tinkering</h2>
       <p>
-         I've written <a href="https://www.curseforge.com/members/tammymg/projects">multiple popular addons</a>
-         that their users can't live without, as well as
-         <a href="https://www.reddit.com/r/wow/comments/368v5i/mythiccool_weakauras/">a ton of other UI modifications</a>.
-         I can really appreciate platforms and games that offer this
-         flexibility for developers like myself.
+         I've written <a href="https://www.curseforge.com/members/tammymg/projects">
+         multiple popular addons</a> that their users can't live without, as
+         well as
+         <a href="https://www.reddit.com/r/wow/comments/368v5i/mythiccool_weakauras/">
+         a ton of other UI modifications</a>. I can really appreciate platforms
+         and games that offer this flexibility for developers like myself.
       </p>
       <p>
-         I was the #1 survival hunter in the world for a few days during
-         Emerald Nightmare mythic progression. It was one of the hardest
-         specializations to play, but I designed an
-         <a href="https://wago.io/4JarwDVg7">incredible UI</a> to
-         trivialize it.
+         I was the #1 survival hunter in the world for a few days during Emerald
+         Nightmare mythic progression. It was one of the hardest specializations
+         to play, but I designed an <a href="https://wago.io/4JarwDVg7">
+         incredible UI</a> to trivialize it.
       </p>
       <p class="centered">
-         <video width="100%" controls  id="video_svnewmok">
+         <video width="100%" controls id="video_svnewmok">
             <source src="res/svnewmok.mp4" type="video/mp4">
          </video>
       </p>
@@ -1133,17 +1211,20 @@
           data-color="ff80bf">
    <section>
       <p>
-         It's pretty cool, isn't it? The background is WebGL with custom shaders,
-         all powered by vanilla JavaScript.
+         It's pretty cool, isn't it? The background is WebGL with custom
+         shaders, all powered by vanilla JavaScript.
       </p>
       <p>
-         This isn't using any libraries or frameworks. I wrote it all from scratch.
-         Have a look at the code - I didn't minify or webpack it.
+         This isn't using any libraries or frameworks. I wrote it all from
+         scratch. Have a look at the code - I didn't minify or webpack it.
       </p>
    </section>
    <section>
       <p>
-         The math was <a href="https://math.stackexchange.com/questions/3688837/find-the-rotation-of-a-box-to-project-a-corner-to-a-point-on-a-line">especially tedious</a>. Notice how the cube edges stay aligned with the text scroll?
+         The math was
+         <a href="https://math.stackexchange.com/questions/3688837/find-the-rotation-of-a-box-to-project-a-corner-to-a-point-on-a-line">
+         especially tedious</a>. Notice how the cube edges stay aligned with the
+         text scroll?
       </p>
       <p class="centered">
          <img src="res/math.png" class="large zoomable" title="Notice how the edges of the cube stay aligned with the content when scrolling?">
@@ -1159,8 +1240,8 @@
          It all feels pretty smooth, doesn't it?
       </p>
       <p>
-         Having worked so long with apps and computers, I have a good feel
-         for how things should behave. There's a lot of attention to detail here.
+         Having worked so long with apps and computers, I have a good feel for
+         how things should behave. There's a lot of attention to detail here.
       </p>
    </section>
    <section>
@@ -1181,15 +1262,16 @@
          data-linkcolor="ffb22d">
    <section>
       <p>
-         It's been a long, fun journey, through C, C++, assembly code, JavaScript,
-         Python, PHP, Lua, Basic, HTML, CSS... but I've hardly scratched the surface
-         of the ever-evolving world of technology.
+         It's been a long, fun journey, through C, C++, assembly code,
+         JavaScript, Python, PHP, Lua, Basic, HTML, CSS... but I've hardly
+         scratched the surface of the ever-evolving world of technology.
       </p>
    </section>
    <section>
       <h2>What's Your Story?</h2>
       <p>
-         That's enough about me. What about you? How did you become who you are? I want to know.
+         That's enough about me. What about you? How did you become who you
+         are? I want to know.
       </p>
 
       <p>
@@ -1207,33 +1289,40 @@
    </head>
    <body>
 
+      <!-- The WebGL canvas. -->
       <canvas id="background"></canvas>
 
+      <!-- Copyright text. -->
       <div id="bottomleft" class="hide">© 2020 Mukunda Johnson</div>
 
+      <!-- The content scroller ("panel" display). -->
       <div id="content"></div>
 
+      <!-- Container for the "year/title" big text display. -->
       <div id="bigtext_container">
          <div id="bigtext"></div>
          <div id="bigtext_subtitle"></div>
       </div>
       
+      <!-- Startup splash text. -->
       <div id="splash_text_top" class="splash_text">
          I'm a coder.
       </div>
 
+      <!-- Startup splash text part 2. -->
       <div id="splash_text_bottom" class="splash_text">
          Tap to begin.
       </div>
 
+      <!-- Main background music element. -->
       <audio id="music">
          <source src="res/the_intangible_interdimensional_amity.mp3" type="audio/mp3">
       </audio>
 
-      <div id="music_button">
-         
-      </div>
+      <!-- Music status and pause button. -->
+      <div id="music_button"></div>
 
+      <!-- Music copyright notice. -->
       <div id="music_note">
          <a href="https://ambrosia57.bandcamp.com/track/interdimensional-amity" target="_blank">
             ♫ Interdimensional Amity<br>
@@ -1243,9 +1332,11 @@
          </a>
       </div>
 
+      <!-- Scanlines texture fullscreen overlay. -->
       <div id="scanlines"></div>
 
+      <!-- Hidden element that controls the height of the body to create a
+           scrolling area. -->
       <div id="scroller_height"></div>
-
    </body>
 </html>

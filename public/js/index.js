@@ -15,20 +15,27 @@ import Dots    from "./dots.js";
 import Background from "./background.js";
 ///////////////////////////////////////////////////////////////////////////////
 
-let currentScreenSize = [0, 0];
+let m_currentScreenSize = [0, 0];
 
+// The field of view. This here controls most of it, but in roller.js there is
+// a special lookup table that is generated from an external lua script.
 const FOV = 60.0;
 
-console.log( "%cwondering how this puppy works? 😏", 
-   "background-color:#222; color:white; font-size: 1.4em" );
+{ // A little hello world for you developers out there.
+   let console_style = "background-color:#222; color:white; font-size: 1.4em";
+   console.log( "%cwondering how this puppy works? 😏", console_style );
+   console.log( "%cif you want to talk about anything,"
+               +" you can reach me on twitter @_mukunda", console_style );
+}
 
 //-----------------------------------------------------------------------------
 // Returns the pixel dimensions of the user's client area.
 export function GetDeviceDimensions() {
-   // Hope this works LOL. We don't want to use the clientHeight. We want to
-   // use something that is 100vh tall (which ignores some annoying shrinkages
-   // on mobile).
+   // OK so we don't want to use clientHeight. We want to use something that is
+   // 100vh tall (which ignores some annoying shrinkages on mobile).
+   const background = document.getElementById( "background" );
    return [background.offsetWidth, background.offsetHeight];
+
    //return [Math.max( document.documentElement.clientWidth, window.innerWidth || 0 ),
    //        Math.max( document.documentElement.clientHeight, window.innerHeight || 0 )];
 }
@@ -39,33 +46,26 @@ function ResizeViewport() {
    const [vw, vh] = GetDeviceDimensions();
    console.log( "Resizing viewport:", vw, vh );
    
-   if( vw !== currentScreenSize[0] || vh !== currentScreenSize[1] ) {
-      currentScreenSize = [vw, vh];
+   if( vw !== m_currentScreenSize[0] || vh !== m_currentScreenSize[1] ) {
+      m_currentScreenSize = [vw, vh];
       hc.Context.Resize( vw, vh );
    }
-}
-
-//-----------------------------------------------------------------------------
-function OnResize() {
-
-   ResizeViewport();
-   Roller.SetupContentPadding();
-   Dots.HandleResize();
 }
 
 //-----------------------------------------------------------------------------
 function Render() {
 
    let projMatrix  = Smath.MakeProjectionMatrix(
-            FOV, currentScreenSize[0] / currentScreenSize[1], 0.1, 1000.0 );
+            FOV, m_currentScreenSize[0] / m_currentScreenSize[1], 0.1, 1000.0 );
    let viewMatrix = Camera.GetViewMatrix();
    
-   let projview = Smath.MultiplyMatrices( projMatrix, viewMatrix );
+   // View-Projection matrix.
+   let viewProj = Smath.MultiplyMatrices( projMatrix, viewMatrix );
    
    //hc.gl.clear( hc.gl.COLOR_BUFFER_BIT );
-   Background.Render( projview );
-   Cube.Render( projview, currentScreenSize );
-   Dots.Render( projview );
+   Background.Render( viewProj );
+   Cube.Render( viewProj, m_currentScreenSize );
+   Dots.Render( viewProj );
 
 }
 
@@ -91,7 +91,7 @@ async function Setup() {
    });
 
    window.addEventListener( "resize", e => {
-      OnResize();
+      ResizeViewport();
    });
 
    ResizeViewport();

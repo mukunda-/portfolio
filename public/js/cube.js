@@ -1,4 +1,5 @@
 // Handles the rotating cube.
+// (C) 2020 Mukunda Johnson
 //-----------------------------------------------------------------------------
 import hc                    from "./hc/hc.js";
 import Smath                 from "./smath.js";
@@ -135,22 +136,33 @@ function Render( matProjView, screenSize ) {
    const [cameraEye,cameraTarget,cameraUp] = Camera.Get();
 
    {
-      // Setup angles for background. This whole section is kinda rushed/messy
-      // and I don't really know what's going on.
+      // Setup angles for backdrop rendering. The backdrop is simple color
+      // combinations that are based on the view perspective.
+
+      // Forward = vector from camera to focus.
       let forward = Smath.Normalize( Smath.SubtractVectors(cameraTarget, cameraEye) );
+      // Right-handed cross product.
+      //
+      //   AxB
+      // B  |  A
+      //  \ | /
+      //   \|/
+      ///   x
       let left    = Smath.Normalize( Smath.Cross(cameraUp, forward) );
       let up      = Smath.Normalize( Smath.Cross(forward, left) );
 
       const aspect = GetAspect();
-
+      
+      // Two triangles. Remember that positive X is left here (multiplied by
+      // `left` vector.
       let points = [
-         [ aspect,  1, 1],
-         [ aspect, -1, 1],
-         [-aspect, -1, 1],
+         [ aspect,  1, 1], // up-left
+         [ aspect, -1, 1], // down-left
+         [-aspect, -1, 1], // down-right
 
-         [-aspect, -1, 1],
-         [-aspect,  1, 1],
-         [ aspect,  1, 1],
+         [-aspect, -1, 1], // down-right
+         [-aspect,  1, 1], // up-right
+         [ aspect,  1, 1], // up-left
       ];
 
       let stan = Math.tan(FOV / 2 * Math.PI / 180);
@@ -159,6 +171,9 @@ function Render( matProjView, screenSize ) {
 
       for( const p of points ) {
          let v = [];
+         // Some matrix magic. Basically projecting a plane 1 unit forward with
+         // the height aligning with the field of view, and width aligning with
+         // the field of view times the aspect ratio.
          v[0] = p[0] * left[0] * stan + p[1] * up[0] * stan + p[2] * forward[0];
          v[1] = p[0] * left[1] * stan + p[1] * up[1] * stan + p[2] * forward[1];
          v[2] = p[0] * left[2] * stan + p[1] * up[2] * stan + p[2] * forward[2];
@@ -167,18 +182,24 @@ function Render( matProjView, screenSize ) {
          packer.Push(v );
       }
       
+      // STREAM_DRAW means one-way load and draw once. We update this every
+      // frame, so that's appropriate.
       m_bufferVectors.Load( packer.Buffer(), hc.gl.STREAM_DRAW );
          
       m_bufferVectors.Bind();
       hc.gl.vertexAttribPointer( a_angles, 3, hc.gl.FLOAT, false, 12, 0 );
    }
 
-   // Making a model-view-projection matrix. Model is just the jitter. View
-   // is the camera, and then the projection.
+   // Making a model-view-projection matrix. Model matrix is just the jitter.
+   // View matrix is the camera, and then the projection matrix.
+   const jitterFactor = 0.02;
    let m2 = Smath.MultiplyMatrices(
          matProjView, 
          Smath.RotationMatrixFromYawPitchRoll(
-               m_jitter[0].value*0.02, m_jitter[1].value*0.02, m_jitter[2].value *0.02 )
+               m_jitter[0].value * jitterFactor,
+               m_jitter[1].value * jitterFactor,
+               m_jitter[2].value * jitterFactor
+         )
    );
 
    // Get the camera and then snap it to a single axis. That points out which
@@ -190,6 +211,9 @@ function Render( matProjView, screenSize ) {
       highlight[i] = geometry[i][0] == angle[0] || geometry[i][1] == angle[1] || geometry[i][2] == angle[2];
    }
    
+   // Okay so we're doing our own transforms in here, because the cube is
+   // special. The final points are stored in a uniform array and referenced
+   // all at once FOR EVERY SINGLE FRAGMENT.
    let geometryT = [];
    for( const i in geometry ) {
       let g = geometry[i];

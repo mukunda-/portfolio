@@ -1,132 +1,88 @@
+// (C) 2020 Mukunda Johnson
+// Cube/colors shader.
+///////////////////////////////////////////////////////////////////////////////
 precision mediump float;
 
 const float PI = 3.1415926535897932384626433832795;
 
+// The CPU side transforms the vertexes for us. These are the 8 corners of the
+// cube.
 uniform lowp vec3 points[8];
+
+// Aspect ratio of the screen, width/height.
 uniform float aspect;
 
+// The coordinate of the current fragment we're working on.
 varying lowp vec2 fragmentPoint;
+
+// Vector that points towards the current fragment from the camera eye.
 varying lowp vec3 fragmentAngle;
 
 uniform lowp vec3 color;
 uniform float intensity;
 
-
+//-----------------------------------------------------------------------------
+// Returns the distance between a line segment from `a` to `b` and the point
+// `e`.
+// `a` and `b` are vec3, with the third component being "intensity".
+// 
 vec2 dist( vec3 a, vec3 b, vec2 e ) {
-   // Create vectors, a->b, a->e, b->e
-   /*
-   vec2 AB = b.xy - a.xy;
-   vec2 AE = e - a.xy;
-   vec2 BE = e - b.xy;
-   AB.x *= aspect;
-   AE.x *= aspect;
-   BE.x *= aspect;
-  
-   // Dot products.
-   float AB_BE = (AB.x * BE.x + AB.y * BE.y);
-   float AB_AE = (AB.x * AE.x + AB.y * AE.y);
 
-   if( AB_BE > 0.0 ) {
-      // Past B.
-      float x = BE.x;
-      return vec2( sqrt( x*x + BE.y * BE.y ), b.z );
-   } else if( AB_AE < 0.0 ) {
-      // Past A.
-      float x = AE.x;
-      return vec2( sqrt( x * x + AE.y * AE.y ), a.z );
-   } else {
-      // Perpendicular.
-      float x1 = AB.x;
-      float y1 = AB.y;
-      float x2 = AE.x;
-      float y2 = AE.y;
-      float mod = sqrt(x1 * x1 + y1 * y1);
-      return vec2( abs(x1 * y2 - y1 * x2) / mod, 1.0 );
-   }*/
-/*
-   //stackoverflow is your friend
-   vec2 AE = e - a.xy;
-   //float A = e.x - a.x;
-   //float B = e.y - a.y;
-   vec2 AB = b.xy - a.xy;
-   //float C = b.x - a.x;
-   //float D = b.y - a.y;
-
-   float dot = A * C + B * D;
-   float len_sq = C * C + D * D;
-   float param = -1.0;
-   if( len_sq > 0.00001 ) //in case of 0 length line
-      param = dot / len_sq;
-
-   float xx, yy;
-
-   if( param < 0.0 ) {
-      xx = a.x;
-      yy = a.y;
-   } else if( param > 1.0 ) {
-      xx = b.x;
-      yy = b.y;
-   } else {
-      xx = a.x + param * C;
-      yy = a.y + param * D;
-   }
-
-   float dx = e.x - xx;
-   float dy = e.y - yy;
-   return vec2( sqrt(dx * dx + dy * dy), 1.0 );
-*/
+   // We don't interpolate between these two, just use the minimum intensity.
    float minaz = min( a.z, b.z ); 
-   a.z = minaz;
-   b.z = minaz;
 
    a.x *= aspect;
    b.x *= aspect;
    e.x *= aspect;
-   //stackoverflow is your friend
+
+   // I forgot where I sourced some of this from, but god damn is it magic.
+   // I think it was tagged as community wiki.
    vec2 AE = e - a.xy;
-   //float A = e.x - a.x;
-   //float B = e.y - a.y;
-   vec3 AB = b - a;
-   //float C = b.x - a.x;
-   //float D = b.y - a.y;
+   vec2 AB = b.xy - a.xy;
 
    float dotp = dot( AE, AB.xy );
    float len_sq = AB.x * AB.x + AB.y * AB.y;
    float param = -1.0;
-   if( len_sq > 0.00001 ) //in case of 0 length line
+   if( len_sq > 0.00001 ) // Epsilon.
       param = dotp / len_sq;
 
-   vec3 lp; // line point
+   vec2 lp; // line point - the point on the line segment that is closest to
+            // `e`.
 
    if( param < 0.0 ) {
-      lp = a;
+      lp = a.xy;
    } else if( param > 1.0 ) {
-      lp = b;
+      lp = b.xy;
    } else {
-      lp = a + AB * param;
+      lp = a.xy + AB * param;
    }
 
-   //vec2 distance = e - lp;
-   //float dx = e.x - xx;
-   //float dy = e.y - yy;
-   return vec2( distance( e, lp.xy ), lp.z );
+   return vec2( distance( e, lp.xy ), minaz );
 }
 
+//-----------------------------------------------------------------------------
+// Computes the pixel intensity based on the current fragment position and the
+// given line segment.
 float line_d( vec3 start, vec3 end ) {
    vec2 di = dist( start, end, fragmentPoint.xy );
    float d = di.x;
    float i = di.y;
    
    d *= 1.0;
-   d -= 0.001; // for wider hot beam
+   d -= 0.001; // For a wider HOT beam.
    d = clamp( d, 0.0, 1.0 );
-   d = 1.0-d;
-   return (pow( d, 128.0 ) + pow( d, 8.0 )*0.17) * i;//0.0005, d );
+   d = 1.0 - d;
+
+   // I don't know what this is doing, but it looks cool.
+   // Basically I want a very thin hot line and then a wider glow.
+   return (pow( d, 128.0 ) + pow( d, 8.0 ) * 0.17) * i;
 }
 
+//-----------------------------------------------------------------------------
 void main() {
    float i = 0.0;
    
+   // Nice fullscreen battery juicer.
    i += line_d( points[0], points[1] );
    i += line_d( points[1], points[2] );
    i += line_d( points[2], points[3] );
@@ -143,32 +99,37 @@ void main() {
 
    i *= intensity;
    
-   
-   vec3 add = abs(normalize(fragmentAngle));// * 0.1;
-   add = add * (add.y + 1.0) / 2.0;
-   add.y *= 0.25;
-   add = add * add;
-
-   add = normalize(fragmentAngle);// * 0.1;
+   // OKAY so `i` contains the rendered cube, and now we add some background
+   // colors. These are based on the angles.
+   vec3 add = normalize(fragmentAngle);
    float y = asin(add.y) / (PI / 2.0);
-   //if( add.x == 0.0 ) add.x += 0.00001; // Is this needed?
+   
+   // WARNING: documentation states that if x is 0, it's undefined behavior.
    float h = atan( add.z, add.x ); // returns range -pi to pi
 
+   // The depth is a color based on the pitch, with the floor aiming to look
+   // like some kind of energy well in this mysterious abyss.
    float depthIntensity = max( -y * 0.3, 0.0 );
    vec3 depthsColor = vec3( 0.05, 0.6, 1.0 ) * depthIntensity;
 
+   // Left and right are filled with a subtle red and blue glow.
    float leftColorIntensity = abs(h) / PI;
    float rightColorIntensity = 1.0 - leftColorIntensity;
    float hMult = (1.0 - abs(y)) * 0.15;
-   leftColorIntensity = pow( leftColorIntensity, 1.0) * hMult;
-   rightColorIntensity= pow( rightColorIntensity, 1.0) * hMult;
+   leftColorIntensity *= hMult;
+   rightColorIntensity *= hMult;
    vec3 leftColor = vec3( 1.0, 0.3, 0.2 ) * leftColorIntensity;
    vec3 rightColor = vec3( 0.0, 0.0, 1.0 ) * rightColorIntensity;
 
-   vec3 backgroundShade = leftColor + rightColor + depthsColor;
+   // The computed shade. "upward" should be darkness.
+   vec3 backgroundShade = (leftColor + rightColor + depthsColor);
    
-   //gl_FragColor = vec4( backgroundShade, 1.0);
-   gl_FragColor = vec4( color * i * (1.0 + backgroundShade * 8.0) + backgroundShade, 1.0);
-
-   //gl_FragColor = vec4( color * i * (1.0 + add ) + add * 0.27, 1.0);
+   gl_FragColor = vec4(
+               // The cube lines sort of radiate the light. This looks really
+               // cool.
+      color * i * (1.0 + backgroundShade * 8.0)
+      // And then add the background shade on top of it all.
+      + backgroundShade, 1.0);
 }
+
+///////////////////////////////////////////////////////////////////////////////

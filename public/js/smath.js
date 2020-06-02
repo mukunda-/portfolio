@@ -1,32 +1,26 @@
-// (ShitMath)
+// ShitMath
+// The worst math library in the world. :)
+// Some of this stuff is just copied from sites and manipulated to my needs.
 
+//-----------------------------------------------------------------------------
+// Combine euler angle rotations into a rotation matrix.
 function RotationMatrixFromYawPitchRoll( y, p, r ) {
    const c1 = Math.cos(y), s1 = Math.sin(y),
          c2 = Math.cos(p), s2 = Math.sin(p),
          c3 = Math.cos(r), s3 = Math.sin(r)
 
- 
    return [
       c2, -c3*s2, s2*s3, 0,
       c1*s2, c1*c2*c3 - s1*s3, -c3*s1 - c1*c2*s3, 0,
       s1*s2, c1*s3 + c2*c3*s1, c1*c3 - c2*s1*s3, 0,
       0, 0, 0, 1
-   ]/*
-   return [
-      1, 0, 0, 0,
-      0, 1, 0, 0,
-      0, 0, 1 , 0,
-      0, 0, 0, 1
-   ]*/
-   /*
-   return [
-      ca*cb, sa*cb, -sb, 0,
-      ca*sb*sy - sa*cy, sa*sb*sy + ca+cy, cb*sy, 0,
-      ca*sb*cy + sa*sy,  sa*sb*cy - ca*sy, cb*cy, 0,
-      0, 0, 0, 1
-   ]*/
+   ];
 }
 
+//-----------------------------------------------------------------------------
+// Create a rotation matrix that represents a rotation around an axis vector.
+// Positive is a clockwise rotation if facing the same way as the vector.
+// Angle in radians.
 function RotateAroundAxis( axis, angle ) {
    //http://ksuweb.kennesaw.edu/~plaval//math4490/rotgen.pdf
    let C = Math.cos( angle );
@@ -41,6 +35,8 @@ function RotateAroundAxis( axis, angle ) {
    ];
 }
 
+//-----------------------------------------------------------------------------
+// Transform a 3D vector by a 3x3 matrix. Returns a new array.
 function MultiplyVec3ByMatrix3( vec, matrix ) {
    return [
       matrix[0] * vec[0] + matrix[1] * vec[1] + matrix[2] * vec[2],
@@ -49,6 +45,10 @@ function MultiplyVec3ByMatrix3( vec, matrix ) {
    ];
 }
 
+//-----------------------------------------------------------------------------
+// From MDN, I think. This is for multiplying 3D/4D point by the given 4x4
+// matrix.
+// Oh look, the parameters are inversed from the above function.
 function MultiplyMatrixAndPoint(matrix, point) {
    // Give a simple variable name to each part of the matrix, a column and row number
    let c0r0 = matrix[ 0], c1r0 = matrix[ 1], c2r0 = matrix[ 2], c3r0 = matrix[ 3];
@@ -78,6 +78,9 @@ function MultiplyMatrixAndPoint(matrix, point) {
    return [resultX, resultY, resultZ, resultW];
 }
 
+//-----------------------------------------------------------------------------
+// Probably the most expensive thing in here. Multiply two 4D matrices and
+// return a new result.
 function MultiplyMatrices(matrixA, matrixB) {
    // Slice the second matrix up into rows
    let row0 = [matrixB[ 0], matrixB[ 1], matrixB[ 2], matrixB[ 3]];
@@ -100,6 +103,10 @@ function MultiplyMatrices(matrixA, matrixB) {
    ];
 }
 
+//-----------------------------------------------------------------------------
+// Create a 4x4 projection matrix. `fov` is field of view in degrees. `a` is
+// aspect ratio (width/height), `near`/`far` are the distances to the near and
+//                                              far plane in the view frustum.
 function MakeProjectionMatrix( fov, a, near, far ) {
    fov = fov * Math.PI / 180.0;
    const rtan = 1 / Math.tan( fov / 2 );
@@ -113,6 +120,7 @@ function MakeProjectionMatrix( fov, a, near, far ) {
 }
 
 //-----------------------------------------------------------------------------
+// Returns a new 4x4 identity matrix.
 function IdentityMatrix() {
    return [ 1, 0, 0, 0,
              0, 1, 0, 0,
@@ -121,6 +129,14 @@ function IdentityMatrix() {
 }
 
 //-----------------------------------------------------------------------------
+// Returns the right-handed cross product.
+//
+//   AxB
+// B  |  A
+//  \ | /
+//   \|/
+//    x
+//
 function Cross( a, b ) {
    return [
       a[1] * b[2] - a[2] * b[1],
@@ -130,11 +146,15 @@ function Cross( a, b ) {
 }
 
 //-----------------------------------------------------------------------------
+// Normalizes a vector (divides by length). Returns a fresh copy, doesn't
+// modify original.
 function Normalize( a ) {
-   const len = Math.hypot( a[0], a[1], a[2] ); // should change to handle Nd vectors
+   const len = Math.hypot( a[0], a[1], a[2] );
    if( len > 0.000001 ) {
       return [ a[0] / len, a[1] / len, a[2] / len ];
    } else {
+      // This is a critical error - nothing in the code should be passing a
+      // zero length vector.
       throw "Normalizing zero-length vector.";
       console.warn( "Normalized zero-length vector." );
       return [0, 0, 0];
@@ -142,11 +162,13 @@ function Normalize( a ) {
 }
 
 //-----------------------------------------------------------------------------
+// Returns a new vector that is `a - b`.
 function SubtractVectors( a, b ) {
    return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 }
 
 //-----------------------------------------------------------------------------
+// Computes a "look at" transformation matrix (for the view matrix).
 function LookAt( from, to, sky ) {
    sky = sky || [0, 1, 0];
    let forward = Normalize( SubtractVectors(from, to) );
@@ -165,18 +187,23 @@ function LookAt( from, to, sky ) {
    ];
 }
 
+//-----------------------------------------------------------------------------
+// Copies the contents of source into dest. They should both be the same
+// length.
 function Copy( vectorDest, vectorSource ) {
    for( let i = 0; i < vectorSource.length; i++ ) {
       vectorDest[i] = vectorSource[i];
    }
 }
 
+//-----------------------------------------------------------------------------
+// Computes the distance between two points. `vectorSize` is optional, how many
+// components to use (defaults to vec1.length).
 function Distance( vec1, vec2, vectorSize ) {
    vectorSize = vectorSize || vec1.length;
    let d = 0;
    for( let i = 0; i < vectorSize; i++ ) {
       let a = vec1[i] - vec2[i];
-
       d += a*a;
    }
    return Math.sqrt( d );
@@ -184,7 +211,7 @@ function Distance( vec1, vec2, vectorSize ) {
 
 //-----------------------------------------------------------------------------
 // Snaps a vector to a single axis. `magnitude` is how long it should be
-//  after the snap.
+//  after the snap. This modifies `vector` with the result.
 function Snap( vector, magnitude ) {
    if( magnitude === undefined ) magnitude = 1;
 
@@ -208,12 +235,15 @@ function Snap( vector, magnitude ) {
    }
 }
 
+//-----------------------------------------------------------------------------
+// Returns a value clamped between `min` and `max`.
 function Clamp( a, min, max ) {
    if( a < min ) return min;
    if( a > max ) return max;
    return a;
 }
 
+///////////////////////////////////////////////////////////////////////////////
 export default {
    LookAt, SubtractVectors, IdentityMatrix, Cross, Normalize,
    MultiplyMatrixAndPoint, MultiplyMatrices, MakeProjectionMatrix,

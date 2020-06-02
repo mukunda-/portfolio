@@ -153,7 +153,7 @@ a {
    height:   100%;
    z-index:  10;
 
-   background: url( "scanline.png" ) repeat;
+   background: url( "res/scanline.png" ) repeat;
 
    pointer-events: none;
 }
@@ -453,6 +453,8 @@ a {
    transform:   translateY( -50% );
    opacity:     0;
    transition:  opacity 1s, filter 1.5s;
+   user-select: none;
+   pointer-events: none;
 }
 
 #splash_text_top    { top: 25vh; }
@@ -468,36 +470,41 @@ a {
    filter: blur( 4px );
 }
 
+/* Music copyright notice. */
 #music_note {
-   position:    fixed;
-   text-align:  left;
-   left:        0.5vh;
-   top:         0.5vh;
-   font-size:   3vh;
-   font-family: Squada One;
-   opacity:     0;
-   transition:  opacity 2s;
+   position:       fixed;
+   text-align:     left;
+   left:           0.5vh;
+   top:            0.5vh;
+   font-size:      3vh;
+   font-family:    Squada One;
+   opacity:        0;
+   transition:     opacity 2s;
    pointer-events: none;
-   user-select: none;
+   user-select:    none;
 }
 
+/* Fade-in transition. */
 #music_note.show {
    opacity: 1;
    pointer-events: auto;
 }
 
+/* Hide <a> default style. */
 #music_note a {
-   color:inherit;
-   text-decoration:none;
+   color:           inherit;
+   text-decoration: none;
 }
 
+/* The play/pause button. This also shows the state of the music in general.
+   When it pauses/dims, this will dim too. */
 #music_button {
    position:       fixed;
    text-align:     left;
    left:           0.5vh;
    top:            0.5vh;
-   width: 10vh;
-   height: 10vh;
+   width:          10vh;
+   height:         10vh;
    font-size:      3vh;
    font-family:    Squada One;
    opacity:        0;
@@ -505,18 +512,23 @@ a {
    user-select:    none;
    cursor:         pointer;
    pointer-events: none;
+
+   /* This should be changed to an svg file, whenever I get ahold of one. */
    background:     url("res/music_button.png") center no-repeat;
    background-size: 60%;
 }
 
+/* This is added after some period, and removed again when the background music
+   expires. .show must be combined with .muted to show the dimmed icon. */
 #music_button.show {
-   font-size:   10vh;
-   font-family: Squada One;
-   opacity:     1;
-   display:block;
+   font-size:      10vh;
+   font-family:    Squada One;
+   opacity:        1;
+   display:        block;
    pointer-events: auto;
 }
 
+/* For when the music is paused. */
 #music_button.show.muted {
    opacity: 0.20;
 }
@@ -531,5 +543,4 @@ a {
       opacity: 0;
       transition: opacity 1s;
    }
-   
 }

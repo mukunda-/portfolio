@@ -1,4 +1,5 @@
 // App state controller.
+// (C) 2020 Mukunda Johnson
 //-----------------------------------------------------------------------------
 import Camera     from "./camera.js";
 import Cube       from "./cube.js";

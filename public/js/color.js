@@ -1,5 +1,5 @@
 // Handles coloring the page and exposing color utility functions.
-//
+// (C) 2020 Mukunda Johnson
 import Cube from "./cube.js";
 import Dots from "./dots.js";
 ///////////////////////////////////////////////////////////////////////////////
@@ -52,6 +52,7 @@ function Set( color, linkcolor ) {
    // Backdrop color is 1% of the color value.
    // (Changed my mind, the midnight blue is fine.)
    //hc.gl.clearColor( color[0] * 0.02, color[1] * 0.02, color[2]  * 0.02, 1.0 );
+
    Cube.SetColor( color );
    
    // Todo: change this index to not be hardcoded. Delete and then insert

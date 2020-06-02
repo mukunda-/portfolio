@@ -1,4 +1,5 @@
 // The navigation arrows. This also handles the fullscreen button.
+// (C) 2020 Mukunda Johnson
 ///////////////////////////////////////////////////////////////////////////////
 const m_actions = {}
 

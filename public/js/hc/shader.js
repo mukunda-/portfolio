@@ -11,31 +11,6 @@ import {gl} from "./context.js"
 //     type - "fragment" or "vertex"
 //     code - Shader source code.
 //
-/*
-function ShaderSource( source ) {
-   if( typeof source === "string" ) {
-      source = HC_ReadShaderScript( source );
-   }
-   
-   if( source.type == "fragment" ) {
-      this.shader = gl.createShader( gl.FRAGMENT_SHADER );
-   } else if( source.type == "vertex" ) {
-      this.shader = gl.createShader( gl.VERTEX_SHADER );
-   } else {
-      throw new Error("Invalid shader type.");
-   }
-
-   gl.shaderSource( this.shader, source.code );
-   gl.compileShader( this.shader );
-   
-   if( !gl.getShaderParameter( this.shader, gl.COMPILE_STATUS ) ) {  
-      
-      console.error( "Error compiling shader \"" + source.id + "\":\n" 
-                     + gl.getShaderInfoLog( this.shader ));  
-      throw new Error( "Shader compilation error" );
-   }
-}*/
-
 class ShaderSource {
    constructor( id, content, type ) {
       this.id = id;
