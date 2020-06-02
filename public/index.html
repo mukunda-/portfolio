@@ -6,6 +6,10 @@
       <meta name="robots" content="noindex">
       <meta name="description" content="Mukunda Johnson's 2020 portfolio.">
       <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0">
+      
+      <!-- Make sure we have this badboy early. -->
+      <link rel="preload" href="res/cubemap.jpg" as="image">
+
       <link rel="stylesheet" type="text/css" href="index.css"/>
       <!-- Youtube API -->
       <script src="https://www.youtube.com/iframe_api" type="text/javascript"></script>
@@ -85,8 +89,9 @@
 
    <section>
       <p class="centered">
-         <img src="res/cprog.png" 
-              title="This logo hasn't changed since then...">
+         <img src="res/cprog.png"
+              title="This logo hasn't changed since then..."
+              loading="lazy">
       </p>
       <p>
          I taught myself C from resources like cprogramming.com, and I learned
@@ -121,8 +126,8 @@
          graphics.
       </p>
       <p class="centered">
-         <img src="res/jp4_1.jpg" title="Blowing up a bulk of C4." class="zoomable"><!--
-      --><img src="res/jp4_2.jpg" title="4-player split screen." class="zoomable">
+         <img src="res/jp4_1.jpg" title="Blowing up a bulk of C4." class="zoomable" loading="lazy"><!--
+      --><img src="res/jp4_2.jpg" title="4-player split screen." class="zoomable" loading="lazy">
       </p>
    </section>
    <section>
@@ -132,8 +137,8 @@
          more to play with.
       </p>
       <p class="centered">
-         <img src="res/jp4_3.jpg" title="Blowing someone up." class="zoomable"><!--
-      --><img src="res/jp4_4.jpg" title="Building a wall." class="zoomable">
+         <img src="res/jp4_3.jpg" title="Blowing someone up." class="zoomable" loading="lazy"><!--
+      --><img src="res/jp4_4.jpg" title="Building a wall." class="zoomable" loading="lazy">
       </p>
    </section>
 </template>
@@ -149,16 +154,18 @@
          bricks you can push around or carry to squish enemies or make paths.
       </p>
       <p class="centered">
-         <img src="res/adventurer1.png" title="Splash screen." class="zoomable" data-pixel><!--
-      --><img src="res/adventurer2.png" title="Title screen." class="zoomable" data-pixel><!--
-      --><img src="res/adventurer3.png" title="The last level." class="zoomable" data-pixel><!--
-      --><img src="res/adventurer6.png" title="Carrying a red brick." class="zoomable" data-pixel>
+         <img src="res/adventurer1.png" title="Splash screen." class="zoomable" data-pixel loading="lazy"><!--
+      --><img src="res/adventurer2.png" title="Title screen." class="zoomable" data-pixel loading="lazy"><!--
+      --><img src="res/adventurer3.png" title="The last level." class="zoomable" data-pixel loading="lazy"><!--
+      --><img src="res/adventurer6.png" title="Carrying a red brick." class="zoomable" data-pixel loading="lazy">
       </p>
    </section>
    <section>
-      <video autoplay muted width="100%" loop id="video_adventurer">
-         <source src="res/adventurer.mp4" type="video/mp4">
-      </video>
+      <p class="centered">
+         <video autoplay muted width="100%" loop id="video_adventurer">
+            <source src="res/adventurer.mp4" type="video/mp4">
+         </video>
+      </p>
    </section>
    <section>
       <p>
@@ -167,7 +174,7 @@
       </p>
 
       <p class="centered">
-         <img src="res/adventurer_le.png" class="large zoomable" title="Adventurer level editor.">
+         <img src="res/adventurer_le.png" class="large zoomable" title="Adventurer level editor." loading="lazy">
       </p>
    </section>
    <section>
@@ -176,8 +183,8 @@
          performance.
       </p>
       <p class="centered">
-         <img src="res/adventurer4.png" title="Assembly is not maintainable." class="zoomable"><!--
-      --><img src="res/adventurer5.png" title="This is a bad idea." class="zoomable">
+         <img src="res/adventurer4.png" title="Assembly is not maintainable." class="zoomable" loading="lazy"><!--
+      --><img src="res/adventurer5.png" title="This is a bad idea." class="zoomable" loading="lazy">
       </p>
       <p class="centered">
          <a href="https://mukunda.com/projects.html">
@@ -330,18 +337,18 @@
       <p class="centered">
          <img src="res/swgfx1.png" 
               title="Don't you love font bitmaps?" 
-              class="zoomable" 
+              class="zoomable" loading="lazy"
               data-pixel><!--
       --><img src="res/swgfx2.png"
               title="The bulk of the game graphics in their 4-color glory."
-              class="zoomable"
+              class="zoomable" loading="lazy"
               data-pixel><!--
       --><img src="res/swmusic1.png"
               title="The SF8 command triggers a shuriken storm."
-              class="zoomable"><!--
+              class="zoomable" loading="lazy"><!--
       --><img src="res/swmusic2.png"
               title="The SF2 command makes the enemy ship fire a batch of missiles."
-              class="zoomable">
+              class="zoomable" loading="lazy">
       </p>
       <p class="centered">
          <a href="https://github.com/mukunda-/superwings">
@@ -465,10 +472,10 @@
       <p class="centered">
          <img src="res/it2nsf1.png"
               title="A part of the user manual."
-              class="zoomable"><!--
+              class="zoomable" loading="lazy"><!--
       --><img src="res/it2nsf2.png"
               title="Another part of the user manual."
-              class="zoomable">
+              class="zoomable" loading="lazy">
       </p>
       <p>
          The NES sound driver is written in 6502 assembly, and the tool side is
@@ -493,15 +500,16 @@
       <p class="centered">
          <img src="res/s3m2nsf1.png"
               title="I love in-depth txt manuals."
-              class="zoomable"><!--
+              class="zoomable" loading="lazy"><!--
       --><img src="res/s3m2nsf2.png"
               title="Complete with ASCII art."
-              class="zoomable"><!--
+              class="zoomable" loading="lazy"><!--
       --><img src="res/s3m2nsf3.png"
-              title="The vibrato effect." class="zoomable"><!--
+              title="The vibrato effect."
+              class="zoomable" loading="lazy"><!--
       --><img src="res/s3m2nsf4.png"
               title="Portamento, or pitch-slide code."
-              class="zoomable">
+              class="zoomable" loading="lazy">
       </p>
    </section>
 </template>
@@ -511,7 +519,10 @@
           data-color="d490ff">
    <section>
       <p class="centered">
-         <img src="res/skipp1.png" title="The title screen." class="zoomable" data-pixel>
+         <img src="res/skipp1.png"
+              title="The title screen."
+              class="zoomable" loading="lazy"
+              data-pixel>
       </p>
       <p>
          The 1st place winner of PDRoms competition #4.01. I'm proud to be one
@@ -570,7 +581,7 @@
       </p>
       <p class="centered">
          <img src="res/skipp_leveleditor.png"
-              class="large zoomable" 
+              class="large zoomable" loading="lazy"
               title="Rapid tool development at its finest.">
       </p>
    </section>
@@ -606,7 +617,7 @@
       <p>
          Below shows a test demo of it, something that required me to rewrite a
          hardware cartridge hundreds of times (and stick it in the console, and
-         boot it, and test via looking at those byte outputs onscreen) to track
+         boot it, and test via looking at those byte outputs on-screen) to track
          some of the bugs during development.
       </p>
       <p>
@@ -641,12 +652,12 @@
          of mass-scale instanced render methods, and realtime generated clouds.
       </p>
       <p class="centered">
-         <img class="large zoomable"
-              src="res/ab15.jpg"
+         <img class="large zoomable" loading="lazy"
+              src="res/ab15.jpg" 
               title="A huge mountain of instanced cubes.">
       </p>
       <p class="centered">
-         <img class="large zoomable"
+         <img class="large zoomable" loading="lazy"
               src="res/ab22.jpg"
               title="Testing realtime cloud generation techniques (GPU-side).">
       </p>
@@ -704,7 +715,7 @@
          I made a ton of neat and crazy things.
       </p>
       <p class="centered">
-         <img src="res/smmeme.jpg"
+         <img src="res/smmeme.jpg" loading="lazy"
               title="You'd hardly remember you were playing CS:GO.">
       </p>
    </section>
@@ -716,22 +727,22 @@
          engine's flexibility.
       </p>
       <p class="centered">
-         <img src="res/csgomap1.jpg"
+         <img src="res/csgomap1.jpg" loading="lazy"
               title="RXG Gravity Arms Race map."
               class="zoomable"><!--
-      --><img src="res/csgomap2.jpg"
+      --><img src="res/csgomap2.jpg" loading="lazy"
               title="Tested some water effects, too." 
               class="zoomable"><!--
-      --><img src="res/csgomap3.jpg"
+      --><img src="res/csgomap3.jpg" loading="lazy"
               title="Lighting effects."
               class="zoomable"><!--
-      --><img src="res/csgomap4.jpg"
+      --><img src="res/csgomap4.jpg" loading="lazy"
               title="A curious button."
               class="zoomable"><!--
-      --><img src="res/gravity_overview.png"
+      --><img src="res/gravity_overview.jpg" loading="lazy"
               title="Loading screen."
               class="large zoomable"><!--
-      --><img src="res/hammer1.jpg"
+      --><img src="res/hammer1.jpg" loading="lazy"
               title="Editing the map in Hammer." 
               class="large zoomable">
       </p>
@@ -791,7 +802,7 @@
          tools</a> to help out, complete with a plugin packaging system.
       </p>
       <p class="centered">
-         <img class="large zoomable" src="res/servertools.png">
+         <img class="large zoomable" loading="lazy" src="res/servertools.png">
       </p>
    </section>
 </template>
@@ -851,7 +862,10 @@
          allowfullscreen>
       </iframe>
       <p class="centered">
-         <img src="res/tetriscart.png" class="large zoomable" title="The original SNES model and accessories are created by 'KNUCKLES'. I just retextured them.">
+         <img src="res/tetriscart.png"
+               loading="lazy"
+               class="large zoomable"
+               title="The original SNES model and accessories are created by 'KNUCKLES'. I just retextured them.">
       </p>
    </section>
    <section>
@@ -896,7 +910,7 @@
          while he worked on a fantastic frontend.
       </p>
       <p class="centered">
-         <img src="res/rxgstore1.png"
+         <img src="res/rxgstore1.png" loading="lazy"
               title="RXG Store landing page."
               class="large zoomable">
       </p>
@@ -914,10 +928,10 @@
          review.
       </p>
       <p class="centered">
-         <img src="res/rxgstore2.png"
+         <img src="res/rxgstore2.png" loading="lazy"
               title="Nuke item description. (Yes, I'm triggered by that bad grammer too.)"
               class="zoomable"><!--
-      --><img src="res/rxgstore3.png"
+      --><img src="res/rxgstore3.png" loading="lazy"
               title="Positive customer review."
               class="zoomable">
       </p>
@@ -935,7 +949,7 @@
          viewable repository</a>, complete with meta information.
       </p>
       <p class="centered">
-         <img src="res/rxgdemos.png"
+         <img src="res/rxgdemos.png" loading="lazy"
               title="RXG demos repository."
               class="large zoomable">
       </p>
@@ -952,7 +966,8 @@
          application site.
       </p>
       <p class="centered">
-         <img src="res/tfrapp.jpg" class="large zoomable" title="The application page.">
+         <img src="res/tfrapp.jpg" loading="lazy"
+              class="large zoomable" title="The application page.">
       </p>
       <p>
          I felt like the Google Forms aesthetic was unappealing, so I had some
@@ -967,7 +982,7 @@
          and modify Google Documents for record keeping.
       </p>
       <p class="centered">
-         <img src="res/tfrapp3.jpg"
+         <img src="res/tfrapp3.jpg" loading="lazy"
               class="large zoomable"
               title="Google Apps Scripts.">
       </p>
@@ -979,7 +994,7 @@
          application is submitted or changed.
       </p>
       <p class="centered">
-         <img src="res/tfrapp2.jpg"
+         <img src="res/tfrapp2.jpg" loading="lazy"
               class="large zoomable"
               title="Code to build a Discord embed object.">
       </p>
@@ -1010,7 +1025,7 @@
           data-color="ededed">
    <section>
       <p class="centered">
-         <img src="res/javalogo.png" title="Java!">
+         <img src="res/javalogo.png" loading="lazy" title="Java!">
       </p>
       <p>
          In late 2014 I opened the Java manual, read it from top to bottom (it
@@ -1028,7 +1043,7 @@
          project on the shelf.
       </p>
       <p class="centered">
-         <img src="res/java1.png"
+         <img src="res/java1.png" loading="lazy"
               class="large zoomable"
               title="Java was fairly pleasing to work with.">
       </p>
@@ -1052,40 +1067,40 @@
          with my family. The entire thing.
       </p>
       <p class="centered">
-         <img src="res/home/1.jpg" title="Plotting." class="zoomable"><!--
-      --><img src="res/home/2.jpg" title="Steel being planted." class="zoomable"><!--
-      --><img src="res/home/3.jpg" title="My dirty hand." class="zoomable"><!--
-      --><img src="res/home/4.jpg" title="Forms for concrete." class="zoomable">
+         <img src="res/home/1.jpg" loading="lazy" title="Plotting." class="zoomable"><!--
+      --><img src="res/home/2.jpg" loading="lazy" title="Steel being planted." class="zoomable"><!--
+      --><img src="res/home/3.jpg" loading="lazy" title="My dirty hand." class="zoomable"><!--
+      --><img src="res/home/4.jpg" loading="lazy" title="Forms for concrete." class="zoomable">
       </p>
    </section>
    <section>
       <p class="centered">
-         <img src="res/home/5.jpg" title="Pouring the concrete." class="zoomable"><!--
-      --><img src="res/home/6.jpg" title="The finished forms." class="zoomable"><!--
-      --><img src="res/home/7.jpg" title="Post slab-pouring." class="zoomable"><!--
-      --><img src="res/home/8.jpg" title="Framing." class="zoomable">
+         <img src="res/home/5.jpg" loading="lazy" title="Pouring the concrete." class="zoomable"><!--
+      --><img src="res/home/6.jpg" loading="lazy" title="The finished forms." class="zoomable"><!--
+      --><img src="res/home/7.jpg" loading="lazy" title="Post slab-pouring." class="zoomable"><!--
+      --><img src="res/home/8.jpg" loading="lazy" title="Framing." class="zoomable">
       </p>
    </section>
    <section>
       <p class="centered">
-         <img src="res/home/9.jpg" title="Scared of heights?" class="zoomable"><!--
-      --><img src="res/home/10.jpg" title="Crane and rafters." class="zoomable"><!--
-      --><img src="res/home/11.jpg" title="A long day." class="zoomable"><!--
-      --><img src="res/home/12.jpg" title="Sheathing." class="zoomable">
+         <img src="res/home/9.jpg" loading="lazy" title="Scared of heights?" class="zoomable"><!--
+      --><img src="res/home/10.jpg" loading="lazy" title="Crane and rafters." class="zoomable"><!--
+      --><img src="res/home/11.jpg" loading="lazy" title="A long day." class="zoomable"><!--
+      --><img src="res/home/12.jpg" loading="lazy" title="Sheathing." class="zoomable">
       </p>
    </section>
    <section>
       <p class="centered">
-         <img src="res/home/13.jpg" title="Roofing." class="zoomable"><!--
-      --><img src="res/home/14.jpg" title="Shingles." class="zoomable"><!--
-      --><img src="res/home/15.jpg" title="Siding." class="zoomable"><!--
-      --><img src="res/home/16.jpg" title="A simple design." class="zoomable">
+         <img src="res/home/13.jpg" loading="lazy" title="Roofing." class="zoomable"><!--
+      --><img src="res/home/14.jpg" loading="lazy" title="Shingles." class="zoomable"><!--
+      --><img src="res/home/15.jpg" loading="lazy" title="Siding." class="zoomable"><!--
+      --><img src="res/home/16.jpg" loading="lazy" title="A simple design." class="zoomable">
       </p>
    </section>
    <section>
       <p class="centered">
-         <img src="res/home/17.jpg" title="Early kitchen." class="zoomable"><!--
-      --><img src="res/home/18.jpg" title="Living space." class="zoomable">
+         <img src="res/home/17.jpg" loading="lazy" title="Early kitchen." class="zoomable"><!--
+      --><img src="res/home/18.jpg" loading="lazy" title="Living space." class="zoomable">
       </p>
    </section>
    <section>
@@ -1106,7 +1121,9 @@
          of Ages on Moon Guard.
       </p>
       <p class="centered">
-         <img class="large zoomable" src="res/crossrp1.jpg" title="Tournament of Ages 2018 closing ceremony.">
+         <img class="large zoomable" loading="lazy"
+              src="res/crossrp1.jpg"
+              title="Tournament of Ages 2018 closing ceremony.">
       </p>
       <p>
          That year was particularly special because my project allowed players
@@ -1127,7 +1144,7 @@
          huge event on Argent Dawn-EU</a> being the first to use it.
       </p>
       <p class="centered">
-         <img src="res/crossrp3.jpg"
+         <img src="res/crossrp3.jpg" loading="lazy"
               title="A happy customer."
               class="large zoomable">
       </p>
@@ -1139,7 +1156,7 @@
          at the start.
       </p>
       <p class="centered">
-         <img src="res/crossrp2.png"
+         <img src="res/crossrp2.png" loading="lazy"
               class="large zoomable"
               title="Cross RP design notes.">
       </p>
@@ -1234,7 +1251,7 @@
          text scroll?
       </p>
       <p class="centered">
-         <img src="res/math.png" class="large zoomable"
+         <img src="res/math.png" class="large zoomable" loading="lazy"
               title="Notice how the edges of the cube stay aligned with the content when scrolling?">
       </p>
       <p class="centered">
@@ -1258,7 +1275,9 @@
          It painstakingly works fairly well on mobile, too.
       </p>
       <p class="centered">
-         <img src="res/portfoliodev1.png" class="large zoomable" title="Remote debugging Android on PC.">
+         <img src="res/portfoliodev1.png" loading="lazy"
+              class="large zoomable"
+              title="Remote debugging Android on PC.">
       </p>
       <p>
          iOS/Safari might be a little wonky...

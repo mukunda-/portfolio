@@ -12,10 +12,17 @@ let m_buffer;
 
 //-----------------------------------------------------------------------------
 async function Setup() {
-   m_texture = new hc.Texture( "res/cubemap.jpg", hc.RGB, () => {} );
+   // This is actually my first promise, I think. Yay.
+   let myFirstPromise = new Promise( (resolve, reject) => {
+      m_texture = new hc.Texture( "res/cubemap.jpg", hc.RGB, () => {
+         resolve();
+      });
+      
+   });
 
    m_shader = new hc.Shader();
    await Promise.all([
+      myFirstPromise,
       m_shader.AttachFromURL( "shaders/basic.v.glsl", "vertex" ),
       m_shader.AttachFromURL( "shaders/basic.f.glsl", "fragment" )
    ]);

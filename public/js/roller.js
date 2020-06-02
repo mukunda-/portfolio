@@ -418,6 +418,11 @@ function StartPanelDisplay() {
             Zoomer.ShowImage( img );
          });
       }
+      img.setAttribute( "loading", "eager" );
+      // Force load.
+      /*
+      const load = new Image();
+      load.src = img.src;*/
    }
 
    // Reset content position from the last fadeout.
