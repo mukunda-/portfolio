@@ -75,8 +75,8 @@ let m_touchingSwivel = false;
 let m_touchingSwivelTime = 0;
 let m_swivelTouchSwing = 0;
 
-// Fixed music multiplier. 55% seems like a good balance.
-const MUSIC_VOLUME = 0.55;
+// Fixed music multiplier. 60% seems like a good balance.
+const MUSIC_VOLUME = 0.6;
 
 // We don't dim the music, just mute it.
 //const MUSIC_DIM_VOLUME = 0.00;
